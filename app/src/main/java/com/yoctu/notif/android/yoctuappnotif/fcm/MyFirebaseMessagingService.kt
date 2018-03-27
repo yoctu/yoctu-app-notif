@@ -18,8 +18,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService(){
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         super.onMessageReceived(remoteMessage)
 
-        Log.d("d"," --- message received --- ")
-        /*if(remoteMessage!!.data!!.size > 0 ) {
+        Log.d(TAG," --- message received --- ")
+        if(remoteMessage!!.data!!.size > 0 ) {
             val maps = remoteMessage.data
             Log.d(TAG,remoteMessage.notification!!.title
                     .plus(" ")
@@ -28,6 +28,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService(){
                     .plus(maps.get("key")))
         } else if(remoteMessage.notification!!.body != null) {
             Log.d(TAG,remoteMessage.notification!!.title.plus(" ").plus(remoteMessage.notification!!.body))
-        }*/
+        }
     }
 }
