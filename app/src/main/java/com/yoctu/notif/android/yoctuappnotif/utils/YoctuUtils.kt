@@ -20,7 +20,8 @@ import com.yoctu.notif.android.yoctulibrary.models.ViewType
 
 object YoctuUtils {
 
-    fun checkConnectivity(){}
+    val TAG_DEBUG = "debug"
+    val TAG_ERROR = "E"
 
     /**
      * @param supportManger
