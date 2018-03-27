@@ -1,6 +1,7 @@
 package com.yoctu.notif.android.yoctulibrary.repository
 
 import com.yoctu.notif.android.yoctulibrary.models.User
+import com.yoctu.notif.android.yoctulibrary.models.ViewType
 import io.reactivex.Observer
 
 /**
@@ -45,4 +46,16 @@ interface Repository {
      * This function allows to remove a user
      */
     fun deleteUser()
+
+    /**
+     * Save the list of toppics
+     *
+     * @param list
+     */
+    fun saveToppics(list: ArrayList<ViewType>)
+
+    /**
+     * @return list of toppics
+     */
+    fun getToppics(): ArrayList<ViewType> ?
 }
