@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <!-- Google default web client ID -->
@@ -8,19 +9,19 @@
 
 
     <!-- dialog connectivity -->
-    <string name="dialog_connectivity_title">Network state</string>
-    <string name="dialog_connectivity_txt">You are not connected.\n Do you want to connect ? </string>
-    <string name="dialog_connectivity_enable">enable</string>
-    <string name="dialog_connectivity_cancel">cancel</string>
-    <string name="dialog_connectivity_refused_to_enable">You have decided to don\'t connect to network</string>
+    <string name="dialog_connectivity_title">État du réseau</string>
+    <string name="dialog_connectivity_txt">Vous n\'êtes pas connecté.\n Voulez-vous vous connecter ? </string>
+    <string name="dialog_connectivity_enable">activer</string>
+    <string name="dialog_connectivity_cancel">annuler</string>
+    <string name="dialog_connectivity_refused_to_enable">Vous avez décidé de ne pas vous connecter !</string>
 
-    <string name="app_txt_connection_disable">Your network state is poor!!</string>
+    <string name="app_txt_connection_disable">L\'état de votre réseau est faible !</string>
 
     <!-- login fragment -->
-    <string name="login_fragment_empty_list">There are not channels !</string>
-    <string name="login_fragment_register">Save my toppics</string>
-    <string name="login_fragment_there_are_not_chosen">You have to choose a channel</string>
-    <string name="login_fragment_text_loading_data">Loading data from server...</string>
-    <string name="login_fragment_text_google_sign_in">Sign in with Google</string>
+    <string name="login_fragment_empty_list">Il n\'y a pas encore de toppics !</string>
+    <string name="login_fragment_register">Enregistrer mes toppics</string>
+    <string name="login_fragment_there_are_not_chosen">Vous devez choisir au moins un toppics</string>
+    <string name="login_fragment_text_loading_data">Chargement des données à partir du server...</string>
+    <string name="login_fragment_text_google_sign_in">Connexion à Google</string>
 
 </resources>
