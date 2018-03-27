@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Google default web client ID -->
+    <string name="my_default_web_client_id">791157279130-cg8vmf3alqpme3lg47sq7o0m9ehaf9cb.apps.googleusercontent.com</string>
+
+    <!-- FCM channel id -->
+    <string name="notification_channel_id">yoctu_notification</string>
+
+
+    <!-- dialog connectivity -->
+    <string name="dialog_connectivity_title">État du réseau</string>
+    <string name="dialog_connectivity_txt">Vous n\'êtes pas connecté.\n Voulez-vous vous connecter ? </string>
+    <string name="dialog_connectivity_enable">activer</string>
+    <string name="dialog_connectivity_cancel">annuler</string>
+    <string name="dialog_connectivity_refused_to_enable">Vous avez décidé de ne pas vous connecter !</string>
+
+    <string name="app_txt_connection_disable">L\'état de votre réseau est faible !</string>
+
+    <!-- login fragment -->
+    <string name="login_fragment_empty_list">Il n\'y a pas encore de toppics !</string>
+    <string name="login_fragment_register">Enregistrer mes toppics</string>
+    <string name="login_fragment_there_are_not_chosen">Vous devez choisir au moins un toppics</string>
+    <string name="login_fragment_text_loading_data">Chargement des données à partir du server...</string>
+    <string name="login_fragment_text_google_sign_in">Connexion à Google</string>
+
+</resources>
