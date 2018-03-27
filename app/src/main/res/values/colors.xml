@@ -3,6 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimaryNoActionBar">#1565C0</color>
+    <color name="colorPrimaryDarkNoActionBar">#0D47A1</color>
 
     <!-- basis -->
     <color name="colorWhite">#ffffff</color>
@@ -10,4 +12,5 @@
     <color name="colorChecked">#1A237E</color>
     <color name="colorNotChecked">#E0E0E0</color>
     <color name="colorBlueOne">#1A237E</color>
+    <color name="colorGrey">#F5F5F5</color>
 </resources>
