@@ -25,6 +25,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.notification.NotificationActivity"
+            android:theme="@style/AppNoActionBar" />
+
         <!-- Firebase -->
         <service android:name=".fcm.MyFirebaseMessagingService">
             <intent-filter>
