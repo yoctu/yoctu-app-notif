@@ -10,6 +10,10 @@ import com.yoctu.notif.android.yoctuappnotif.repository.YoctuRepository
 import com.yoctu.notif.android.yoctuappnotif.ui.login.LoginContract
 import com.yoctu.notif.android.yoctuappnotif.ui.login.LoginFragment
 import com.yoctu.notif.android.yoctuappnotif.ui.login.LoginPresenter
+import com.yoctu.notif.android.yoctuappnotif.ui.notification.NotificationActivity
+import com.yoctu.notif.android.yoctuappnotif.ui.notification.NotificationContract
+import com.yoctu.notif.android.yoctuappnotif.ui.notification.NotificationFragment
+import com.yoctu.notif.android.yoctuappnotif.ui.notification.NotificationPresenter
 import com.yoctu.notif.android.yoctulibrary.repository.manager.ManagerSharedPreferences
 import com.yoctu.notif.android.yoctulibrary.repository.retrofit.YoctuService
 import retrofit2.Retrofit
@@ -27,6 +31,9 @@ object YoctuModule {
         // ** log in **
         bind<LoginContract.Presenter>() with multiton { context: Context -> LoginPresenter(context) }
         bind<LoginFragment>() with singleton { LoginFragment() }
+        // ** notification **
+        bind<NotificationContract.Presenter>() with multiton { context: Context -> NotificationPresenter(context) }
+        bind<NotificationFragment>() with singleton { NotificationFragment() }
 
         //managers
         bind<ManageGoogleSignin>() with multiton { context: Context -> ManageGoogleSignin(context) }
