@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.with
+import com.google.firebase.messaging.FirebaseMessaging
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
 import com.yoctu.notif.android.yoctuappnotif.repository.YoctuRepository
 import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
@@ -35,11 +36,36 @@ class LoginPresenter(context: Context) :
         repository.getChannels(this)
     }
 
-    override fun saveChannels(chosen: ArrayList<ViewType>) {
+    /**
+     * check if there is an old list of toppics to unsubscribe and delete it
+     * save the new list
+     *
+     * @param chosen
+     */
+    private fun manageChannels(chosen: ArrayList<ViewType>) {
+        //if if there is old list
+        val olToppics = repository.getToppics()
+        if(olToppics != null) {
+            olToppics.forEach { olToppic ->
+                olToppic as Channel
+                //FirebaseMessaging.getInstance().unsubscribeFromTopic(olToppic.name)
+            }
+            repository.deleteChannels()
+        }
         chosen.forEach { t: ViewType? ->
             t as Channel
             Log.d(YoctuUtils.TAG_DEBUG,"channel is ".plus(t.name))
+            //TODO subscribe toppic
+            //FirebaseMessaging.getInstance().subscribeToTopic(t.name)
         }
+    }
+
+    /**
+     * subscribe to toppic(s) and save in local the list
+     */
+    override fun saveChannels(chosen: ArrayList<ViewType>) {
+        manageChannels(chosen)
+        repository.saveToppics(chosen)
     }
 
     /**
