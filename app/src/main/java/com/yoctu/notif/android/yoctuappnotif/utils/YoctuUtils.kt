@@ -25,6 +25,11 @@ object YoctuUtils {
 
     val CODE_GOOGLE_SIGN_IN = 38
 
+    val KEY_MESSAGE_FCM = "message_fcm"
+    val KEY_TOKEN_FCM = "token_fcm"
+
+    val INTENT_FILTER_FCM = "com.yoctu.notif.android.yoctuappnotif.fcm"
+
     /**
      * @param supportManger
      * @param containerView
