@@ -19,12 +19,11 @@ android {
     buildTypes {
 
         debug {
-            buildConfigField "String", "SERVER_URL", "\"http://notifications.flash-global.net/\""
-            //buildConfigField "String", "SERVER_URL", "\"http://notifications.test.flash.global/\""
+            buildConfigField "String", "SERVER_URL", "\"http://notification.test.flash-global.net/\""
         }
 
         release {
-            buildConfigField "String", "SERVER_URL", "\"https://flash-global.net/api/\""
+            buildConfigField "String", "SERVER_URL", "\"http://notification.test.flash-global.net/\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
