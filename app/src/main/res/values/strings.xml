@@ -22,5 +22,6 @@
     <string name="login_fragment_register">Register</string>
     <string name="login_fragment_there_are_not_chosen">You have to choose a channel</string>
     <string name="login_fragment_text_loading_data">Loading data from server...</string>
+    <string name="login_fragment_text_google_sign_in">Sign in with Google</string>
 
 </resources>
