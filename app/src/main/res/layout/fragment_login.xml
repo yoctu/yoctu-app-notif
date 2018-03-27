@@ -12,6 +12,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:indeterminate="true"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/login_fragment_text_loading_data"/>
 
     <TextView
         android:id="@+id/login_fragment_empty_list"
@@ -34,6 +39,7 @@
         android:background="@drawable/rounded_btn"
         android:gravity="center"
         android:text="@string/login_fragment_register"
-        android:textColor="@color/colorWhite"/>
+        android:textColor="@color/colorWhite"
+        android:visibility="gone"/>
 
 </LinearLayout>
