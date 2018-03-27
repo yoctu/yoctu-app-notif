@@ -10,6 +10,7 @@ import com.yoctu.notif.android.yoctuappnotif.repository.YoctuRepository
 import com.yoctu.notif.android.yoctuappnotif.ui.login.LoginContract
 import com.yoctu.notif.android.yoctuappnotif.ui.login.LoginFragment
 import com.yoctu.notif.android.yoctuappnotif.ui.login.LoginPresenter
+import com.yoctu.notif.android.yoctulibrary.repository.manager.ManagerSharedPreferences
 import com.yoctu.notif.android.yoctulibrary.repository.retrofit.YoctuService
 import retrofit2.Retrofit
 
@@ -24,16 +25,17 @@ object YoctuModule {
 
         //mvp
         // ** log in **
-        bind<LoginContract.Presenter>() with singleton { LoginPresenter() }
+        bind<LoginContract.Presenter>() with multiton { context: Context -> LoginPresenter(context) }
         bind<LoginFragment>() with singleton { LoginFragment() }
 
         //managers
         bind<ManageGoogleSignin>() with multiton { context: Context -> ManageGoogleSignin(context) }
+        bind<ManagerSharedPreferences>() with multiton { context: Context -> ManagerSharedPreferences(context) }
 
         //retrofit
         bind<YoctuService>() with  multiton { retrofit: Retrofit -> retrofit.create(YoctuService::class.java) }
 
         //repository
-        bind<YoctuRepository>() with singleton { YoctuRepository() }
+        bind<YoctuRepository>() with multiton { context: Context -> YoctuRepository(context) }
     }
 }
