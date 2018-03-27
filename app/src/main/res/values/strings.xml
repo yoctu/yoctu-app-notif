@@ -1,3 +1,22 @@
 <resources>
-    <string name="app_name">YoctuAppNotif</string>
+    <string name="app_name">Yoctu</string>
+
+    <!-- FCM channel id -->
+    <string name="notification_channel_id">yoctu_notification</string>
+
+
+    <!-- dialog connectivity -->
+    <string name="dialog_connectivity_title">Network state</string>
+    <string name="dialog_connectivity_txt">You are not connected.\n Do you want to connect ? </string>
+    <string name="dialog_connectivity_enable">enable</string>
+    <string name="dialog_connectivity_cancel">cancel</string>
+    <string name="dialog_connectivity_refused_to_enable">You have decided to don\'t connect to network</string>
+
+    <string name="app_txt_connection_disable">Your network state is poor!!</string>
+
+    <!-- login fragment -->
+    <string name="login_fragment_empty_list">There are not channels !</string>
+    <string name="login_fragment_register">Register</string>
+    <string name="login_fragment_there_are_not_chosen">You have to choose a channel</string>
+
 </resources>

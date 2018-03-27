@@ -3,4 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!-- basis -->
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorChecked">#1A237E</color>
+    <color name="colorNotChecked">#E0E0E0</color>
+    <color name="colorBlueOne">#1A237E</color>
 </resources>
