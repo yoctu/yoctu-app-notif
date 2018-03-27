@@ -58,4 +58,9 @@ interface Repository {
      * @return list of toppics
      */
     fun getToppics(): ArrayList<ViewType> ?
+
+    /**
+     * delete all the chosen toppics
+     */
+    fun deleteChannels()
 }

@@ -5,6 +5,7 @@ import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.with
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
 import com.yoctu.notif.android.yoctulibrary.models.User
+import com.yoctu.notif.android.yoctulibrary.models.ViewType
 import com.yoctu.notif.android.yoctulibrary.repository.Repository
 import com.yoctu.notif.android.yoctulibrary.repository.manager.ManagerSharedPreferences
 import com.yoctu.notif.android.yoctulibrary.repository.retrofit.YoctuService
@@ -55,5 +56,15 @@ class YoctuRepository(context: Context) : Repository {
 
     override fun deleteUser() {
         localManager.deleteUser()
+    }
+
+    override fun saveToppics(list: ArrayList<ViewType>) {
+        localManager.saveChannels(list)
+    }
+
+    override fun getToppics() = localManager.getChannels()
+
+    override fun deleteChannels() {
+        localManager.deleteChannels()
     }
 }
