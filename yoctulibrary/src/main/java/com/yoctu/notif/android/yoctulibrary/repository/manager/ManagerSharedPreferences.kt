@@ -22,7 +22,7 @@ class ManagerSharedPreferences(context: Context) {
         preferencesApplication = mContext.getSharedPreferences(mContext.packageName, Context.MODE_PRIVATE)
     }
 
-    val KEY_USER = "key_user"
+    private val KEY_USER = "key_user"
 
     /**
      * Write user in shared preferences
