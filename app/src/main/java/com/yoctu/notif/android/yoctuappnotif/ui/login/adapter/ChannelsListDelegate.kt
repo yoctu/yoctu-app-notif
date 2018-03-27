@@ -13,7 +13,6 @@ import com.yoctu.notif.android.yoctuappnotif.R
 import com.yoctu.notif.android.yoctuappnotif.ui.adapters.ViewTypeDelegateAdapter
 import com.yoctu.notif.android.yoctulibrary.models.Channel
 import com.yoctu.notif.android.yoctulibrary.models.ViewType
-import kotlinx.android.synthetic.main.dialog_item_channel.view.*
 import java.util.ArrayList
 
 /**
@@ -28,7 +27,7 @@ class ChannelsListDelegate(context: Context): ViewTypeDelegateAdapter {
     private var chosenChannels = ArrayList<ViewType>()
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        return ChannelViewHolder(LayoutInflater.from(mContext).inflate(R.layout.dialog_item_channel,parent,false))
+        return ChannelViewHolder(LayoutInflater.from(mContext).inflate(R.layout.login_item_channel,parent,false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ViewType, position: Int) {
