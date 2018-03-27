@@ -3,9 +3,11 @@ package com.yoctu.notif.android.yoctuappnotif.utils
 import android.app.Dialog
 import android.content.Context
 import android.net.ConnectivityManager
+import android.os.Build
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.Window
 import com.yoctu.notif.android.yoctuappnotif.R
@@ -106,10 +108,34 @@ object YoctuUtils {
     fun fakeChannels() : ArrayList<ViewType> {
 
         var fakeList = ArrayList<ViewType>()
+        fakeList.add(Channel("intern"))
         fakeList.add(Channel("test"))
         fakeList.add(Channel("debug"))
         fakeList.add(Channel("production"))
         return fakeList
     }
+
+    /**
+     * Change the toolbar's color
+     *
+     * @param toolbar
+     * @param colorId
+     */
+    fun changeToolbarColor(toolbar: android.support.v7.widget.Toolbar, colorId : Int) {
+        toolbar.setBackgroundColor(colorId)
+    }
+
+    /**
+     * Change the status bar color
+     *
+     * @param activity
+     * @param colorId
+     */
+    fun changeStatusBarColor(activity: AppCompatActivity, colorId : Int) {
+        var window = activity.window
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            window.statusBarColor = colorId
+    }
+
 
 }
