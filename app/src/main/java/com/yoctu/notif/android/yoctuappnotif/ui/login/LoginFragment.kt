@@ -149,6 +149,7 @@ class LoginFragment :
             var user = loginPresenter!!.getUser()
             if (user != null) { //update
                 user.firebaseToken = token
+                //TODO save usr local + server
                 loginPresenter!!.saveUserInLocal(user)
             } else { //first time
                 loginPresenter!!.askChannels()
@@ -212,10 +213,10 @@ class LoginFragment :
 
     /**
      * populate the list here
-     * show or hide button, text and progress bar
+     * show or hide button and progress bar
      */
     override fun getChannels(list : ArrayList<ViewType>) {
-        login_fragment_text_loading?.let { login_fragment_text_loading.visibility = View.GONE }
+        //login_fragment_text_loading?.let { login_fragment_text_loading.visibility = View.GONE }
 
         recyclerView?.let {
             if(list.size == 0) {
@@ -235,9 +236,10 @@ class LoginFragment :
 
     /**
      * Check if user is not in shared preferences
-     * we launch Google sign in and show google text
+     * we launch Google sign in and show google text + hide progress bar text
      */
     override fun googleSignIn() {
+        login_fragment_text_loading?.let { login_fragment_text_loading.visibility = View.GONE }
         loginPresenter?.let {
             val currentUser = loginPresenter!!.getUser()
             if (currentUser == null) {
@@ -272,6 +274,7 @@ class LoginFragment :
                 login_fragment_text_google_sign_in?.let {
                     login_fragment_text_google_sign_in.visibility = View.GONE
                 }
+                //TODO save usr local + server
                 loginPresenter!!.saveUserInLocal(user)
                 loginPresenter!!.showChannels()
             }
