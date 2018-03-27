@@ -23,6 +23,8 @@ object YoctuUtils {
     val TAG_DEBUG = "debug"
     val TAG_ERROR = "E"
 
+    val CODE_GOOGLE_SIGN_IN = 38
+
     /**
      * @param supportManger
      * @param containerView
