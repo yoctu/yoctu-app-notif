@@ -33,4 +33,16 @@ interface Repository {
      * @param user
      */
     fun saveUser (user: User)
+
+    /**
+     * This function gives a saved user
+     * @return user
+     */
+    fun getUser(): User?
+
+
+    /**
+     * This function allows to remove a user
+     */
+    fun deleteUser()
 }
