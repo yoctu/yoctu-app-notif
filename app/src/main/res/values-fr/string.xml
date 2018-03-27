@@ -20,7 +20,7 @@
     <!-- login fragment -->
     <string name="login_fragment_empty_list">Il n\'y a pas encore de toppics !</string>
     <string name="login_fragment_register">Enregistrer mes toppics</string>
-    <string name="login_fragment_there_are_not_chosen">Vous devez choisir au moins un toppics</string>
+    <string name="login_fragment_there_are_not_chosen">Vous devez choisir au moins un toppic</string>
     <string name="login_fragment_text_loading_data">Chargement des données à partir du server...</string>
     <string name="login_fragment_text_google_sign_in">Connexion à Google</string>
 
