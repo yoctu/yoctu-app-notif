@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/login_fragment_main_linear_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_login_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="@dimen/dimen_4"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <include layout="@layout/default_toolbar" />
+
+    </android.support.v7.widget.Toolbar>
+
 
     <ProgressBar
         android:id="@+id/login_fragment_progress_bar"
@@ -39,7 +51,9 @@
         android:id="@+id/login_fragment_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_10"/>
+        android:layout_marginTop="@dimen/dimen_10"
+        android:layout_marginLeft="@dimen/dimen_15"
+        android:layout_marginRight="@dimen/dimen_15"/>
 
     <TextView
         android:id="@+id/login_fragment_register"
@@ -49,6 +63,21 @@
         android:gravity="center"
         android:text="@string/login_fragment_register"
         android:textColor="@color/colorWhite"
-        android:visibility="gone"/>
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:layout_margin="@dimen/dimen_5"/>
+
+    <!--
+    <TextView
+        android:id="@+id/login_fragment_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/login_fragment_register"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold"
+        android:background="@color/colorPrimaryNoActionBar"
+        android:visibility="visible"/>
+    -->
 
 </LinearLayout>
