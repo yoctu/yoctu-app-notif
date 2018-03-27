@@ -7,6 +7,7 @@ import com.github.salomonbrys.kodein.with
 import com.google.firebase.messaging.FirebaseMessaging
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
 import com.yoctu.notif.android.yoctuappnotif.repository.YoctuRepository
+import com.yoctu.notif.android.yoctuappnotif.ui.notification.NotificationActivity
 import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
 import com.yoctu.notif.android.yoctulibrary.models.Channel
 import com.yoctu.notif.android.yoctulibrary.models.ResponseChannels
@@ -62,10 +63,12 @@ class LoginPresenter(context: Context) :
 
     /**
      * subscribe to toppic(s) and save in local the list
+     * redirect user to notification view
      */
     override fun saveChannels(chosen: ArrayList<ViewType>) {
         manageChannels(chosen)
         repository.saveToppics(chosen)
+        mContext.startActivity(NotificationActivity.newIntent(mContext))
     }
 
     /**
