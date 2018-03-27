@@ -3,6 +3,7 @@ package com.yoctu.notif.android.yoctuappnotif.fcm
 import android.util.Log
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.iid.FirebaseInstanceIdService
+import com.yoctu.notif.android.yoctuappnotif.utils.BroadcastUtils
 
 /**
  * To handle the creation, rotation, and updating of registration tokens.
@@ -19,6 +20,6 @@ class MyFirebaseInstanceIDService : FirebaseInstanceIdService() {
         val token = FirebaseInstanceId.getInstance().token
         Log.d(TAG,"the token is ".plus(token))
 
-        //BroadcastUtils.sendToken(applicationContext,token!!)
+        BroadcastUtils.sendToken(applicationContext,token!!)
     }
 }
