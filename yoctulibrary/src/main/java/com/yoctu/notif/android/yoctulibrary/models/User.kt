@@ -2,6 +2,7 @@ package com.yoctu.notif.android.yoctulibrary.models
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.gson.annotations.Expose
 
 /**
  * Represents a logged User
@@ -11,29 +12,25 @@ import android.os.Parcelable
 
 class User() : Parcelable{
 
-    var lastName : String = ""
-    var firstName : String = ""
+    @Expose
     var email : String = ""
+
     var type : Int = LoginType.TYPE_GOOGLE
+
+    @Expose
     var firebaseToken :String = ""
 
     constructor(parcel: Parcel) : this() {
-        lastName = parcel.readString()
-        firstName = parcel.readString()
         email = parcel.readString()
         type = parcel.readInt()
         firebaseToken = parcel.readString()
     }
 
-    override fun toString() = lastName.plus(" ")
-            .plus(firstName).plus(" ")
-            .plus(email).plus(" - ")
+    override fun toString() = email.plus(" - ")
             .plus(" type is ").plus(type).plus(" - ")
             .plus(firebaseToken)
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(lastName)
-        parcel.writeString(firstName)
         parcel.writeString(email)
         parcel.writeInt(type)
         parcel.writeString(firebaseToken)
