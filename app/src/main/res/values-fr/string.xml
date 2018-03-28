@@ -32,4 +32,8 @@
     <string name="notif_item_title">Titre :</string>
     <string name="notif_item_text">Texte :</string>
 
+    <!-- menu notification -->
+    <string name="menu_notification_sign_out">Déconnexion</string>
+    <string name="menu_notification_channels">Channels</string>
+
 </resources>
