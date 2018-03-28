@@ -71,14 +71,14 @@ class NotificationFragment:
     }
 
     /**
-     * bind view here and check if user is not logged to redeirect he to login
+     * bind view here
      */
     override fun onResume() {
         super.onResume()
 
         notificationPresenter?.let {
             notificationPresenter!!.takeView(this)
-            notificationPresenter!!.logged()
+            //notificationPresenter!!.logged()
         }
     }
 

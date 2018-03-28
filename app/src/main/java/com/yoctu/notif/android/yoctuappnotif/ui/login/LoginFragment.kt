@@ -18,10 +18,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.with
+import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.iid.FirebaseInstanceId
 import com.yoctu.notif.android.yoctuappnotif.R
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
@@ -106,7 +108,6 @@ class LoginFragment :
         //manageConnectivity()
         /*if (askSignIn) {
             askSignIn = false
-            FirebaseAuth.getInstance().signOut()
             launchGoogleSignIn()
         }*/
     }
@@ -121,11 +122,6 @@ class LoginFragment :
         //loginPresenter!!.takeView(this)
     }
 
-
-    override fun onStop() {
-        super.onStop()
-        askSignIn = true
-    }
 
     private fun manageToolbar() {
         toolbar_login_fragment?.let {
@@ -355,15 +351,20 @@ class LoginFragment :
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        Log.d(YoctuUtils.TAG_DEBUG,"in activity result ")
-
         if(requestCode == YoctuUtils.CODE_GOOGLE_SIGN_IN && resultCode == Activity.RESULT_OK) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             handleGoogleSignInResult(task)
         }
     }
 
-
+    override fun onStop() {
+        super.onStop()
+        askSignIn = true
+        /*FirebaseAuth.getInstance().signOut()
+        managerGoogleSignIn!!.getInstanceGoogleApiClient(activity)
+        Auth.GoogleSignInApi.signOut(managerGoogleSignIn!!.mGoogleApiClient).setResultCallback { status -> }
+        */
+    }
 
     override fun onDestroy() {
         super.onDestroy()
