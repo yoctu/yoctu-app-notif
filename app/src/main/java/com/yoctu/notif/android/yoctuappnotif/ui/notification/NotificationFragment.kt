@@ -78,7 +78,7 @@ class NotificationFragment:
 
         notificationPresenter?.let {
             notificationPresenter!!.takeView(this)
-            //notificationPresenter!!.logged()
+            notificationPresenter!!.logged()
         }
     }
 
@@ -156,6 +156,14 @@ class NotificationFragment:
     }
 
     override fun getToken(token: String) {}
+
+    override fun notLogged() {
+        notification_fragment_empty_list?.let { notification_fragment_empty_list.visibility = View.GONE }
+        notification_fragment_recycler_view.let { notification_fragment_recycler_view.visibility = View.GONE }
+
+        notification_fragment_container_img?.let { notification_fragment_container_img.visibility = View.VISIBLE }
+        notification_fragment_not_logged?.let { notification_fragment_not_logged.visibility = View.VISIBLE }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)

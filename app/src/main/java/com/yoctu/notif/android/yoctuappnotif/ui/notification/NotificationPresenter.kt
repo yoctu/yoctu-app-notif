@@ -39,7 +39,8 @@ class NotificationPresenter(context: Context):
 
     override fun logged() {
         if(repository.getUser() == null) {
-            gotoLogin()
+            //gotoLogin()
+            mView?.let { mView!!.notLogged() }
         }
     }
 

@@ -44,6 +44,15 @@
         android:text="@string/login_fragment_empty_list"
         android:visibility="gone"/>
 
+    <TextView
+        android:id="@+id/notification_fragment_not_logged"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/dimen_10"
+        android:text="@string/login_not_logged"
+        android:visibility="gone"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/notification_fragment_recycler_view"
         android:layout_width="match_parent"

@@ -36,4 +36,7 @@
     <string name="menu_notification_sign_out">Sign out</string>
     <string name="menu_notification_channels">Channels</string>
 
+    <!-- not logged-->
+    <string name="login_not_logged">You have to log in to see topics</string>
+
 </resources>

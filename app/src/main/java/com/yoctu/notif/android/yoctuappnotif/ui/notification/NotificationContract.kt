@@ -13,6 +13,7 @@ interface NotificationContract {
 
     interface View : BaseView<Presenter> {
         fun populateRecyclerView()
+        fun notLogged()
     }
     interface Presenter : BasePresenter<View> {
         fun getMessages(): ArrayList<ViewType>
