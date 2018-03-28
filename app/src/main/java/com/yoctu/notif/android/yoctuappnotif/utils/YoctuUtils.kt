@@ -10,9 +10,14 @@ import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.Window
+import com.google.gson.Gson
 import com.yoctu.notif.android.yoctuappnotif.R
 import com.yoctu.notif.android.yoctulibrary.models.Channel
+import com.yoctu.notif.android.yoctulibrary.models.Notification
 import com.yoctu.notif.android.yoctulibrary.models.ViewType
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.logging.SimpleFormatter
 
 /**
  * Util methods for the project
@@ -135,6 +140,25 @@ object YoctuUtils {
         var window = activity.window
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             window.statusBarColor = colorId
+    }
+
+    /**
+     * Transform object in String via Gson
+     *
+     * @param v represents any object to convert in string
+     */
+    fun createJsonFromObject(v : Any) : String {
+        var gson = Gson()
+        return gson.toJson(v)
+    }
+
+    /**
+     * @param str
+     * @return a notification from a String via Gson
+     */
+    fun getNotificationFromJson (str : String) : Notification {
+        var gson = Gson()
+        return gson.fromJson(str,Notification::class.java)
     }
 
 
