@@ -14,6 +14,7 @@ import com.yoctu.notif.android.yoctuappnotif.ui.notification.NotificationActivit
 import com.yoctu.notif.android.yoctuappnotif.ui.notification.NotificationContract
 import com.yoctu.notif.android.yoctuappnotif.ui.notification.NotificationFragment
 import com.yoctu.notif.android.yoctuappnotif.ui.notification.NotificationPresenter
+import com.yoctu.notif.android.yoctulibrary.realm.LocalDB
 import com.yoctu.notif.android.yoctulibrary.repository.manager.ManagerSharedPreferences
 import com.yoctu.notif.android.yoctulibrary.repository.retrofit.YoctuService
 import retrofit2.Retrofit
@@ -44,5 +45,8 @@ object YoctuModule {
 
         //repository
         bind<YoctuRepository>() with multiton { context: Context -> YoctuRepository(context) }
+
+        //database
+        bind<LocalDB>() with  multiton { context: Context -> LocalDB(context) }
     }
 }
