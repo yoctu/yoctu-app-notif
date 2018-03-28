@@ -5,7 +5,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "yoctu.notif.android.yoctuappnotif"
+        applicationId "com.yoctu.notif.android.yoctuappnotif"
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1

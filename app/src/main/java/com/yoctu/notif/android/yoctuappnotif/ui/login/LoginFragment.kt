@@ -186,7 +186,7 @@ class LoginFragment :
     private fun manageRecyclerView() {
         recyclerView = login_fragment_recycler_view
         recyclerView?.let {
-            adapter = YoctuAdapter(activity!!)
+            adapter = YoctuAdapter(activity)
             var layoutManager : RecyclerView.LayoutManager = LinearLayoutManager(activity!!)
             recyclerView.layoutManager = layoutManager
             recyclerView.adapter = adapter
@@ -200,12 +200,12 @@ class LoginFragment :
         val buttonEnable = dialog!!.findViewById<TextView>(R.id.dialog_connectivity_enable)
         val buttonCancel = dialog!!.findViewById<TextView>(R.id.dialog_connectivity_cancel)
         buttonEnable?.let {
-            buttonEnable.setOnClickListener { v ->
+            buttonEnable.setOnClickListener { _ ->
                 YoctuUtils.closeDialog(dialog!!)
                 IntentUtils.openWifiSettings(activity!!)
             }
             buttonCancel?.let {
-                buttonCancel.setOnClickListener { v -> YoctuUtils.closeDialog(dialog!!) }
+                buttonCancel.setOnClickListener { _ -> YoctuUtils.closeDialog(dialog!!) }
             }
         }
     }

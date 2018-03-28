@@ -63,7 +63,7 @@ object YoctuUtils {
         var connected = true
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val netInfo = connectivityManager.activeNetworkInfo
-        if(netInfo == null)
+        if (netInfo == null)
             connected = false
         else
             connected = netInfo.isConnected

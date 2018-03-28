@@ -80,50 +80,6 @@
           "status": 2
         }
       }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:791157279130:android:a8e9cbd3722c7b19",
-        "android_client_info": {
-          "package_name": "yoctu.notif.android.yoctuappnotif"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "791157279130-ti4hbg6fcnkbm940loqer2gsoa5t3ohu.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "yoctu.notif.android.yoctuappnotif",
-            "certificate_hash": "f18d1427a25aa76e4a9ae2c77712dd879f0582bb"
-          }
-        },
-        {
-          "client_id": "791157279130-cg8vmf3alqpme3lg47sq7o0m9ehaf9cb.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyA3ckM7wG20qQhNDEaKA3mXGYAsi6iOYfg"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "791157279130-cg8vmf3alqpme3lg47sq7o0m9ehaf9cb.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
     }
   ],
   "configuration_version": "1"
