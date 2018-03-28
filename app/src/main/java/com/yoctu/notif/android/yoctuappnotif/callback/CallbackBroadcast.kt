@@ -1,7 +1,7 @@
 package com.yoctu.notif.android.yoctuappnotif.callback
 
 /**
- * This callback allows the communication with the fragment/activity
+ * This callbackLoginFragment allows the communication with the fragment/activity
  *
  * Created on 27.03.18.
  */
