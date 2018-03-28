@@ -17,5 +17,8 @@ interface NotificationContract {
     interface Presenter : BasePresenter<View> {
         fun getMessages(): ArrayList<ViewType>
         fun saveMessage(notification: Notification)
+        fun googleSignOut()
+        fun redirectToChannels()
+        fun logged()
     }
 }

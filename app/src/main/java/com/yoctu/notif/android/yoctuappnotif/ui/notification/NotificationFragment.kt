@@ -9,9 +9,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.with
 import com.yoctu.notif.android.yoctuappnotif.R
@@ -33,6 +31,10 @@ class NotificationFragment:
         NotificationContract.View,
         CallbackBroadcast {
 
+    companion object {
+        fun newInstance() = NotificationFragment()
+    }
+
     private var notificationPresenter : NotificationContract.Presenter? = null
     private lateinit var toolbar : Toolbar
     private lateinit var recyclerView : RecyclerView
@@ -40,6 +42,8 @@ class NotificationFragment:
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -61,10 +65,16 @@ class NotificationFragment:
         manageBroadcast()
     }
 
+    /**
+     * bind view here and check if user is not logged to redeirect he to login
+     */
     override fun onResume() {
         super.onResume()
 
-        notificationPresenter?.let { notificationPresenter!!.takeView(this) }
+        notificationPresenter?.let {
+            notificationPresenter!!.takeView(this)
+            notificationPresenter!!.logged()
+        }
     }
 
     private fun manageToolbar() {
@@ -133,6 +143,7 @@ class NotificationFragment:
      */
     override fun getMessage(message: String) {
         val obj = YoctuUtils.getNotificationFromJson(message)
+        Log.d(YoctuUtils.TAG_DEBUG,"from fcm message is ".plus(obj.title).plus(" ").plus(obj.body))
         NotificationUtils.createNotification(activity,obj.title,obj.body)
         notificationPresenter?.let {
             notificationPresenter!!.saveMessage(obj)
@@ -140,6 +151,24 @@ class NotificationFragment:
     }
 
     override fun getToken(token: String) {}
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        inflater!!.inflate(R.menu.menu_notification,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item!!.itemId) {
+            R.id.menu_notif_sign_out -> {
+                notificationPresenter?.let { notificationPresenter!!.googleSignOut() }
+            }
+            R.id.menu_notif_channels -> {
+                notificationPresenter?.let { notificationPresenter!!.redirectToChannels() }
+            }
+        }
+        return true
+    }
 
     override fun onStop() {
         super.onStop()

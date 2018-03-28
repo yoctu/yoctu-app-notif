@@ -68,6 +68,10 @@ class LoginPresenter(context: Context) :
         }
     }
 
+    override fun gotoNotifications() {
+        mContext.startActivity(NotificationActivity.newIntent(mContext))
+    }
+
     /**
      * subscribe to toppic(s) and save in local the list
      * redirect user to notification view
@@ -75,7 +79,8 @@ class LoginPresenter(context: Context) :
     override fun saveChannels(chosen: ArrayList<ViewType>) {
         manageChannels(chosen)
         repository.saveToppics(chosen)
-        mContext.startActivity(NotificationActivity.newIntent(mContext))
+        Log.d(YoctuUtils.TAG_DEBUG,"**** register channels got to noti ")
+        gotoNotifications()
     }
 
     /**

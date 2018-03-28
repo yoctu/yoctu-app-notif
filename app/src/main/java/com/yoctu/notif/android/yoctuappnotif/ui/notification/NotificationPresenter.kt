@@ -4,8 +4,10 @@ import android.content.Context
 import android.util.Log
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.with
+import com.google.firebase.auth.FirebaseAuth
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
 import com.yoctu.notif.android.yoctuappnotif.repository.YoctuRepository
+import com.yoctu.notif.android.yoctuappnotif.ui.login.LoginActivity
 import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
 import com.yoctu.notif.android.yoctulibrary.models.Notification
 import com.yoctu.notif.android.yoctulibrary.models.ViewType
@@ -31,13 +33,38 @@ class NotificationPresenter(context: Context):
         mView = view
     }
 
+    private fun gotoLogin() {
+        LoginActivity.newIntent(mContext,true)
+    }
+
+    override fun logged() {
+        if(repository.getUser() == null) {
+            gotoLogin()
+        }
+    }
+
     override fun getMessages() = repository.getNotifications()
 
     override fun saveMessage(notification: Notification) {
         repository.saveNotification(notification,this)
-        repository.getNotifications().forEach { t: ViewType? ->
-            t as Notification
-            Log.d(YoctuUtils.TAG_DEBUG,t.toString())  }
+    }
+
+
+    /**
+     * sign out + delete user in shared preference
+     */
+    override fun googleSignOut() {
+        FirebaseAuth.getInstance().signOut()
+        repository.deleteUser()
+        gotoLogin()
+    }
+
+    /**
+     * delete chosen channels in shared preferences
+     */
+    override fun redirectToChannels() {
+        repository.deleteChannels()
+        LoginActivity.newIntent(mContext)
     }
 
     override fun dropView() {
@@ -54,7 +81,7 @@ class NotificationPresenter(context: Context):
 
     override fun onNext(result: Any) {
         if (result is String) { //notify the adapter
-            Log.d(YoctuUtils.TAG_DEBUG,"response is ".plus(result))
+            Log.d(YoctuUtils.TAG_DEBUG," response from db is ".plus(result))
             mView?.let {
                 mView!!.populateRecyclerView()
             }

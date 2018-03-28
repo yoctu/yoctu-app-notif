@@ -24,5 +24,6 @@ interface LoginContract {
         fun saveUserInLocal(user: User)
         fun getUser(): User?
         fun getToppics(): ArrayList<ViewType>?
+        fun gotoNotifications()
     }
 }

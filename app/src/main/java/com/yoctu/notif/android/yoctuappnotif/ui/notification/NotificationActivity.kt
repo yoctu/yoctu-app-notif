@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import com.github.salomonbrys.kodein.instance
 import com.yoctu.notif.android.yoctuappnotif.R
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
@@ -26,7 +27,7 @@ class NotificationActivity: AppCompatActivity() {
 
         var notifFragment : NotificationFragment? = YoctuUtils.getFragment(supportFragmentManager, R.id.notification_container_fragment) as? NotificationFragment
         if (notifFragment == null) {
-            notifFragment = YoctuApplication.kodein.instance()
+            notifFragment = NotificationFragment.newInstance() //notifFragment = YoctuApplication.kodein.instance()
             YoctuUtils.addFragment(
                     supportFragmentManager,
                     notifFragment,
@@ -36,5 +37,10 @@ class NotificationActivity: AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Log.d(YoctuUtils.TAG_DEBUG," back press in notification ")
     }
 }
