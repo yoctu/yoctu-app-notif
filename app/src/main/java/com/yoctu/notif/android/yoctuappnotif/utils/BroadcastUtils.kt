@@ -1,7 +1,6 @@
 package com.yoctu.notif.android.yoctuappnotif.utils
 
 import android.content.BroadcastReceiver
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.support.v4.content.LocalBroadcastManager
@@ -15,31 +14,45 @@ import com.yoctu.notif.android.yoctuappnotif.callback.CallbackBroadcast
  */
 object BroadcastUtils {
 
-    var callback : CallbackBroadcast? = null
+    var callbackLoginFragment : CallbackBroadcast? = null
+    var callbackNotifFragment : CallbackBroadcast? = null
 
     /**
      * Local broad cats for FCM
+     * send token to login view
+     * send message to notification view
      */
     val mNotificationReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             val message_fcm = intent?.getStringExtra(YoctuUtils.KEY_MESSAGE_FCM)
             val token_fcm = intent?.getStringExtra(YoctuUtils.KEY_TOKEN_FCM)
 
-            if(!message_fcm.isNullOrEmpty())
-                callback?.getMessage(message_fcm!!)
+            if (!message_fcm.isNullOrEmpty())
+                callbackNotifFragment?.getMessage(message_fcm!!)
 
-            if(!token_fcm.isNullOrEmpty())
-                callback?.getToken(token_fcm!!)
+
+            if (!token_fcm.isNullOrEmpty())
+                callbackLoginFragment?.getToken(token_fcm!!)
+
 
             Log.d(YoctuUtils.TAG_DEBUG," --- local broadcast receiver ---")
         }
     }
 
     /**
-     * Register login fragment as a callback
+     * Register login fragment as a callbackLoginFragment
+     * @param callbackBroadcast
      */
     fun registerLoginFragment(callbackBroadcast: CallbackBroadcast) {
-        callback = callbackBroadcast
+        callbackLoginFragment = callbackBroadcast
+    }
+
+    /**
+     * Register notification fragment as a callbackLoginFragment
+     * @param callbackBroadcast
+     */
+    fun registerNotifFragment(callbackBroadcast: CallbackBroadcast) {
+        callbackNotifFragment = callbackBroadcast
     }
 
 
