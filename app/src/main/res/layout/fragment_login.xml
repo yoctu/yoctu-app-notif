@@ -79,5 +79,16 @@
         android:background="@color/colorPrimaryNoActionBar"
         android:visibility="visible"/>
     -->
+    <FrameLayout
+        android:id="@+id/login_fragment_sign_in_btn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/login_sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+    </FrameLayout>
 </LinearLayout>
