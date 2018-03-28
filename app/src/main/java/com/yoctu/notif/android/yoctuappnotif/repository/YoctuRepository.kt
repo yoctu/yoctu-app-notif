@@ -8,6 +8,7 @@ import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
 import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
 import com.yoctu.notif.android.yoctulibrary.LibraryUtils
 import com.yoctu.notif.android.yoctulibrary.models.Notification
+import com.yoctu.notif.android.yoctulibrary.models.ParamBodyDeviceID
 import com.yoctu.notif.android.yoctulibrary.models.User
 import com.yoctu.notif.android.yoctulibrary.models.ViewType
 import com.yoctu.notif.android.yoctulibrary.realm.LocalDB
@@ -44,7 +45,12 @@ class YoctuRepository(context: Context) : Repository {
     }
 
     //TODO
-    override fun saveDeviceId(email: String, token: String, observer: Observer<Any>) {}
+    override fun saveDeviceId(email: String, token: String, observer: Observer<Any>) {
+        request.sendDeviceId(ParamBodyDeviceID(email,token))
+                /*.subscribeOn(Schedulers.newThread()) //observable
+                .observeOn(AndroidSchedulers.mainThread()) //observer
+                .subscribe(observer)*/
+    }
 
     override fun saveUser(user: User) {
         localManager.saveUser(user)

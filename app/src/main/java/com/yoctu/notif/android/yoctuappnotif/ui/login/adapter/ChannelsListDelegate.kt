@@ -56,12 +56,12 @@ class ChannelsListDelegate(context: Context): ViewTypeDelegateAdapter {
             currentItem.checked = false
             currentViewHolder.viewCheck.setImageResource(R.drawable.ic_not_checked)
             val resp = chosenChannels.remove(currentItem)
-            Log.d("debug",currentItem.name.plus(" is removed ? ").plus(resp).plus(" - ").plus(chosenChannels.size))
+            //Log.d("debug",currentItem.name.plus(" is removed ? ").plus(resp).plus(" - ").plus(chosenChannels.size))
         } else {
             currentItem.checked = true
             currentViewHolder.viewCheck.setImageResource(R.drawable.ic_checked)
             chosenChannels.add(currentItem)
-            Log.d("debug",currentItem.name.plus(" added ").plus(chosenChannels.size))
+            //Log.d("debug",currentItem.name.plus(" added ").plus(chosenChannels.size))
         }
     }
 

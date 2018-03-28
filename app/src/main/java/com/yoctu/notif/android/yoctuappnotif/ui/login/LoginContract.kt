@@ -22,6 +22,7 @@ interface LoginContract {
         fun saveChannels(chosen : ArrayList<ViewType>)
         fun showChannels()
         fun saveUserInLocal(user: User)
+        fun sendDeviceId()
         fun getUser(): User?
         fun getToppics(): ArrayList<ViewType>?
         fun gotoNotifications()

@@ -25,6 +25,11 @@ class ParamBodyDeviceID() : Parcelable{
         deviceId = parcel.readString()
     }
 
+    constructor(email: String, deviceId: String) : this() {
+        this.email = email
+        this.deviceId = deviceId
+    }
+
     override fun toString() = email.plus(" - ").plus(deviceId)
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(email)

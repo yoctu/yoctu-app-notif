@@ -97,6 +97,10 @@ class LoginPresenter(context: Context) :
         repository.saveUser(user)
     }
 
+    override fun sendDeviceId() {
+        repository.saveDeviceId(getUser()!!.email, getUser()!!.firebaseToken,this)
+    }
+
     override fun getUser() = repository.getUser()
 
     override fun takeView(view: LoginContract.View) {

@@ -189,6 +189,7 @@ class LoginFragment :
                 user.firebaseToken = token
                 //TODO save usr local + server
                 loginPresenter!!.saveUserInLocal(user)
+                //loginPresenter!!.sendDeviceId()
             } else { //first time
                 loginPresenter!!.askChannels()
             }
@@ -334,6 +335,7 @@ class LoginFragment :
                 }
                 //TODO save usr local + server
                 loginPresenter!!.saveUserInLocal(user)
+                //loginPresenter!!.sendDeviceId()
                 if (mustRedirectToNoti) {
                     mustRedirectToNoti = false
                     loginPresenter!!.gotoNotifications()
@@ -360,10 +362,10 @@ class LoginFragment :
     override fun onStop() {
         super.onStop()
         askSignIn = true
-        /*FirebaseAuth.getInstance().signOut()
+        FirebaseAuth.getInstance().signOut()
         managerGoogleSignIn!!.getInstanceGoogleApiClient(activity)
         Auth.GoogleSignInApi.signOut(managerGoogleSignIn!!.mGoogleApiClient).setResultCallback { status -> }
-        */
+
     }
 
     override fun onDestroy() {
