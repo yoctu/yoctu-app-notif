@@ -5,7 +5,10 @@ import com.github.salomonbrys.kodein.Kodein
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.yoctu.notif.android.yoctuappnotif.dependencies.YoctuModule
 import com.yoctu.notif.android.yoctulibrary.BuildConfig
+import com.yoctu.notif.android.yoctulibrary.LibraryUtils
 import com.yoctu.notif.android.yoctulibrary.repository.interceptor.YoctuInterceptor
+import io.realm.Realm
+import io.realm.RealmConfiguration
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -24,6 +27,7 @@ class YoctuApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         initialiseRepository()
+        LibraryUtils.configureRealm(applicationContext)
     }
 
     /**
@@ -50,4 +54,5 @@ class YoctuApplication : Application() {
             .Builder()
             .addInterceptor(YoctuInterceptor())
             .build()
+
 }
