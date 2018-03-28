@@ -1,5 +1,6 @@
 package com.yoctu.notif.android.yoctulibrary.repository
 
+import com.yoctu.notif.android.yoctulibrary.models.Notification
 import com.yoctu.notif.android.yoctulibrary.models.User
 import com.yoctu.notif.android.yoctulibrary.models.ViewType
 import io.reactivex.Observer
@@ -63,4 +64,16 @@ interface Repository {
      * delete all the chosen toppics
      */
     fun deleteChannels()
+
+    /**
+     * save a notification in local database
+     * @param notification
+     * @param observer
+     */
+    fun saveNotification(notification: Notification, observer: Observer<Any>)
+
+    /**
+     * @return list of Notifications
+     */
+    fun getNotifications(): ArrayList<ViewType>
 }
