@@ -1,10 +1,14 @@
 package com.yoctu.notif.android.yoctuappnotif.managers
 
+import android.app.Activity
 import android.content.Context
+import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.GoogleApiClient
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.yoctu.notif.android.yoctuappnotif.R
 
 /**
@@ -17,6 +21,7 @@ class ManageGoogleSignin(context : Context) {
     private var gso : GoogleSignInOptions
     private var mContext : Context
     private var mGoogleSignInClient : GoogleSignInClient
+    var mGoogleApiClient : GoogleApiClient? = null
     init {
         mContext = context
         mAuth = FirebaseAuth.getInstance()
@@ -26,13 +31,31 @@ class ManageGoogleSignin(context : Context) {
                 .requestEmail()
                 .build()
         mGoogleSignInClient = GoogleSignIn.getClient(mContext,gso)
+
+        mGoogleApiClient = GoogleApiClient
+                .Builder(mContext)
+                .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
+                .build()
+        mGoogleApiClient!!.connect()
+
     }
 
     fun getCurrentUser() = mAuth.currentUser
 
     fun getGoogleSignInIntent() = mGoogleSignInClient.signInIntent
 
-    fun googleSignOut() {
-        FirebaseAuth.getInstance().signOut()
+    fun getInstanceGoogleApiClient(activity: Activity)  {
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = GoogleApiClient
+                    .Builder(mContext)
+                    .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
+                    .build()
+        }
+
+        if (!mGoogleApiClient!!.isConnected) {
+            mGoogleApiClient!!.connect()
+        }
     }
+
+
 }

@@ -51,10 +51,10 @@ class NotificationPresenter(context: Context):
 
 
     /**
-     * sign out + delete user in shared preference
+     * delete user in shared preference
+     * redirect to login view
      */
     override fun googleSignOut() {
-        FirebaseAuth.getInstance().signOut()
         repository.deleteUser()
         gotoLogin()
     }

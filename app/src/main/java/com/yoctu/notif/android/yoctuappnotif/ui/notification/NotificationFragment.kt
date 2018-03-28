@@ -12,9 +12,12 @@ import android.util.Log
 import android.view.*
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.with
+import com.google.android.gms.auth.api.Auth
+import com.google.firebase.auth.FirebaseAuth
 import com.yoctu.notif.android.yoctuappnotif.R
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
 import com.yoctu.notif.android.yoctuappnotif.callback.CallbackBroadcast
+import com.yoctu.notif.android.yoctuappnotif.managers.ManageGoogleSignin
 import com.yoctu.notif.android.yoctuappnotif.ui.adapters.YoctuAdapter
 import com.yoctu.notif.android.yoctuappnotif.utils.BroadcastUtils
 import com.yoctu.notif.android.yoctuappnotif.utils.NotificationUtils
@@ -39,6 +42,7 @@ class NotificationFragment:
     private lateinit var toolbar : Toolbar
     private lateinit var recyclerView : RecyclerView
     private lateinit var adapter : YoctuAdapter
+    private var managerGoogleSignIn : ManageGoogleSignin? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +58,7 @@ class NotificationFragment:
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        managerGoogleSignIn = YoctuApplication.kodein.with(activity).instance()
         notificationPresenter = YoctuApplication.kodein.with(activity).instance()
         manageToolbar()
         initializeRecyclerView()
@@ -161,7 +166,14 @@ class NotificationFragment:
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.itemId) {
             R.id.menu_notif_sign_out -> {
-                notificationPresenter?.let { notificationPresenter!!.googleSignOut() }
+                managerGoogleSignIn?.let {
+                    FirebaseAuth.getInstance().signOut()
+                    managerGoogleSignIn!!.getInstanceGoogleApiClient(activity)
+                    Auth.GoogleSignInApi.signOut(managerGoogleSignIn!!.mGoogleApiClient).setResultCallback {
+                        status ->
+                        notificationPresenter?.let { notificationPresenter!!.googleSignOut() }
+                    }
+                }
             }
             R.id.menu_notif_channels -> {
                 notificationPresenter?.let { notificationPresenter!!.redirectToChannels() }
