@@ -5,6 +5,7 @@ import android.support.v4.util.SparseArrayCompat
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.yoctu.notif.android.yoctuappnotif.ui.login.adapter.ChannelsListDelegate
+import com.yoctu.notif.android.yoctuappnotif.ui.notification.adapter.AdapterNotifDelegeate
 import com.yoctu.notif.android.yoctulibrary.models.ConstantsViewType
 import com.yoctu.notif.android.yoctulibrary.models.ViewType
 
@@ -23,6 +24,7 @@ class YoctuAdapter(context : Context): RecyclerView.Adapter<RecyclerView.ViewHol
         adapterChannelListDelegate = ChannelsListDelegate(mContext)
 
         delegateAdapters.put(ConstantsViewType.VIEW_TYPE_CHANNEL,adapterChannelListDelegate)
+        delegateAdapters.put(ConstantsViewType.VIEW_TYPE_NOTIFICATION,AdapterNotifDelegeate(mContext))
     }
 
 
