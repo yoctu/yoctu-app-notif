@@ -100,7 +100,7 @@ class LoginFragment :
 
     /**
      * This function allows to register to local broadcast receiver
-     * and register the activity as call back
+     * and register the fragment as call back
      */
     private fun manageBroadcast() {
         LocalBroadcastManager.getInstance(activity)
@@ -141,6 +141,8 @@ class LoginFragment :
      * Get token from FCM
      * case : - first time (user not existed)
      *        - update (user exits)
+     *
+     * @param token
      */
     override fun getToken(token: String) {
         deviceId = token

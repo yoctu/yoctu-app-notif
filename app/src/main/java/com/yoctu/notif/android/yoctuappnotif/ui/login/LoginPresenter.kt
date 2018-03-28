@@ -38,6 +38,13 @@ class LoginPresenter(context: Context) :
     }
 
     /**
+     * Channels saved in shared preferences
+     *
+     * @return list of toppics
+     */
+    override fun getToppics() = repository.getToppics()
+
+    /**
      * check if there is an old list of toppics to unsubscribe and delete it
      * save the new list
      *
@@ -45,7 +52,7 @@ class LoginPresenter(context: Context) :
      */
     private fun manageChannels(chosen: ArrayList<ViewType>) {
         //if if there is old list
-        val olToppics = repository.getToppics()
+        val olToppics = getToppics()
         if(olToppics != null) {
             olToppics.forEach { olToppic ->
                 olToppic as Channel
