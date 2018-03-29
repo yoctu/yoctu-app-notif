@@ -2,7 +2,7 @@
 <resources>
     <!--<string name="app_name">Yoctu</string>-->
 
-    <!-- Google default web client ID -->
+    <!-- getLocalGoogleEmailAddressogle default web client ID -->
     <string name="my_default_web_client_id">791157279130-cg8vmf3alqpme3lg47sq7o0m9ehaf9cb.apps.googleusercontent.com</string>
 
     <!-- FCM channel id -->
@@ -38,5 +38,6 @@
 
     <!-- not logged-->
     <string name="login_not_logged">Vous devez vous connecter pour voir la liste des messages</string>
+    
 
 </resources>

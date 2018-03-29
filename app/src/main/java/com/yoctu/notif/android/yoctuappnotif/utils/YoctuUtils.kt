@@ -1,5 +1,6 @@
 package com.yoctu.notif.android.yoctuappnotif.utils
 
+import android.accounts.AccountManager
 import android.app.Dialog
 import android.content.Context
 import android.net.ConnectivityManager
@@ -8,6 +9,8 @@ import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
+import android.util.Patterns
 import android.view.View
 import android.view.Window
 import com.google.gson.Gson
@@ -18,6 +21,8 @@ import com.yoctu.notif.android.yoctulibrary.models.ViewType
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.logging.SimpleFormatter
+import java.util.regex.Pattern
+import kotlin.collections.ArrayList
 
 /**
  * Util methods for the project
@@ -36,6 +41,9 @@ object YoctuUtils {
     val KEY_TOKEN_FCM = "token_fcm"
 
     val INTENT_FILTER_FCM = "com.yoctu.notif.android.yoctuappnotif.fcm"
+
+    val TYPE_GOOGLE = "com.google"
+    val CODE_GET_ACCOUNTS = 98
 
     /**
      * @param supportManger
@@ -160,6 +168,5 @@ object YoctuUtils {
         var gson = Gson()
         return gson.fromJson(str,Notification::class.java)
     }
-
 
 }

@@ -2,7 +2,7 @@
 <resources>
     <!--<string name="app_name">Yoctu</string>-->
 
-    <!-- Google default web client ID -->
+    <!-- getLocalGoogleEmailAddressogle default web client ID -->
     <string name="my_default_web_client_id">791157279130-cg8vmf3alqpme3lg47sq7o0m9ehaf9cb.apps.googleusercontent.com</string>
 
     <!-- FCM channel id -->
@@ -18,13 +18,6 @@
 
     <string name="app_txt_connection_disable">L\'état de votre réseau est faible !</string>
 
-    <!-- login fragment -->
-    <string name="login_fragment_empty_list">Il n\'y a pas encore de toppics !</string>
-    <string name="login_fragment_register">Enregistrer mes toppics</string>
-    <string name="login_fragment_there_are_not_chosen">Vous devez choisir au moins un toppic</string>
-    <string name="login_fragment_text_loading_data">Chargement des données à partir du server...</string>
-    <string name="login_fragment_text_google_sign_in">Connexion à Google</string>
-
     <!-- notification -->
     <string name="notif_fragment_text_loading">Chargement des messages...</string>
     <string name="notif_fragment_title_view">Notifications</string>
@@ -38,5 +31,6 @@
 
     <!-- not logged-->
     <string name="login_not_logged">Vous devez vous connecter pour voir la liste des messages</string>
+
 
 </resources>
