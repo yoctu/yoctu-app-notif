@@ -127,7 +127,7 @@ class ManagerSharedPreferences(context: Context) {
      */
     fun deleteChannels() {
         var editor = preferencesApplication.edit()
-        editor.remove(KEY_CHANNELS).commit()
+        editor.remove(KEY_CHANNELS).apply()
     }
 
     /**
