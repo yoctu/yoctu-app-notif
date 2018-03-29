@@ -72,6 +72,12 @@ dependencies {
     //fcm
     implementation "com.google.firebase:firebase-messaging:11.8.0"
 
+    //material design
+    implementation "com.android.support:design:26.1.0"
+
+    //firebase ui auth
+    compile 'com.firebaseui:firebase-ui-auth:3.2.2'
+
 }
 repositories {
     mavenCentral()
