@@ -44,7 +44,7 @@ class YoctuRepository(context: Context) : Repository {
 
     }
 
-    //TODO
+
     override fun saveDeviceId(email: String, token: String, observer: Observer<Any>) {
         request.sendDeviceId(ParamBodyDeviceID(email,token))
                 /*.subscribeOn(Schedulers.newThread()) //observable
@@ -68,6 +68,8 @@ class YoctuRepository(context: Context) : Repository {
 
     override fun getToppics() = localManager.getChannels()
 
+    override fun getListToppicsName() = localManager.getChannelsName()
+
     override fun deleteChannels() {
         localManager.deleteChannels()
     }
@@ -77,4 +79,16 @@ class YoctuRepository(context: Context) : Repository {
     }
 
     override fun getNotifications() = database.getMessages()
+
+    override fun saveEmail(email: String) {
+        localManager.saveEmail(email)
+    }
+
+    override fun getEmail() = localManager.getEmail()
+
+    override fun changeToppics(change: Boolean) {
+        localManager.changeToppics(change)
+    }
+
+    override fun getChangeToppics() = localManager.getWantChangeToppics()
 }
