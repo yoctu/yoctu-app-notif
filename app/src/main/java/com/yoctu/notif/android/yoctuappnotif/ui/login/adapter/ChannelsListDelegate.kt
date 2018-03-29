@@ -9,7 +9,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.github.salomonbrys.kodein.instance
+import com.github.salomonbrys.kodein.with
 import com.yoctu.notif.android.yoctuappnotif.R
+import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
+import com.yoctu.notif.android.yoctuappnotif.repository.YoctuRepository
 import com.yoctu.notif.android.yoctuappnotif.ui.adapters.ViewTypeDelegateAdapter
 import com.yoctu.notif.android.yoctulibrary.models.Channel
 import com.yoctu.notif.android.yoctulibrary.models.ViewType
@@ -24,9 +28,14 @@ class ChannelsListDelegate(context: Context): ViewTypeDelegateAdapter {
     init {
         mContext = context
     }
+    // user's choices
     private var chosenChannels = ArrayList<ViewType>()
+    // list from shared preferences
+    private var currentChannels = ArrayList<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+        val repository : YoctuRepository = YoctuApplication.kodein.with(mContext).instance()
+        currentChannels = repository.getListToppicsName()!!
         return ChannelViewHolder(LayoutInflater.from(mContext).inflate(R.layout.login_item_channel,parent,false))
     }
 
@@ -38,6 +47,9 @@ class ChannelsListDelegate(context: Context): ViewTypeDelegateAdapter {
             holder.viewCheck.setImageResource(R.drawable.ic_checked)
         else
             holder.viewCheck.setImageResource(R.drawable.ic_not_checked)
+        //check from shread preferences
+        if(currentChannels != null && currentChannels.size > 0)
+            manageItems(item,holder)
 
         holder.textChannel.text = item.name
         holder.mainContent.setOnClickListener { _ ->
@@ -66,6 +78,21 @@ class ChannelsListDelegate(context: Context): ViewTypeDelegateAdapter {
     }
 
     fun getChosenChannels() = chosenChannels
+
+    /**
+     * Set item's checked to good value from channels into shared preferences
+     * This method is important because each time that user goes to view, the list is reload !
+     * save channel in @chosenChannels
+     *
+     * @param currentItem
+     * @param currentViewHolder
+     */
+    private fun manageItems(currentItem : Channel, currentViewHolder : ChannelViewHolder) {
+        if (currentChannels != null && currentChannels.contains(currentItem.name)) {
+            currentViewHolder.viewCheck.setImageResource(R.drawable.ic_checked)
+            chosenChannels.add(currentItem)
+        }
+    }
 
     class ChannelViewHolder (view : View): RecyclerView.ViewHolder(view) {
         var viewCheck : ImageView
