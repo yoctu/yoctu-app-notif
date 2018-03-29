@@ -38,10 +38,8 @@ class NotificationPresenter(context: Context):
     }
 
     override fun logged() {
-        if(repository.getUser() == null) {
-            //gotoLogin()
+        if (repository.getUser() == null)
             mView?.let { mView!!.notLogged() }
-        }
     }
 
     override fun getMessages() = repository.getNotifications()
@@ -61,10 +59,10 @@ class NotificationPresenter(context: Context):
     }
 
     /**
-     * delete chosen channels in shared preferences
+     * redirect user to toppics view to choose other toppics
      */
     override fun redirectToChannels() {
-        repository.deleteChannels()
+        repository.changeToppics(true)
         LoginActivity.newIntent(mContext)
     }
 

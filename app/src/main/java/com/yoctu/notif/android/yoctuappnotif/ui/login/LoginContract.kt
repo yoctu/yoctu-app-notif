@@ -26,5 +26,7 @@ interface LoginContract {
         fun getUser(): User?
         fun getToppics(): ArrayList<ViewType>?
         fun gotoNotifications()
+        fun changeToppics(): Boolean
+        fun setChangeToppics(newValue: Boolean)
     }
 }

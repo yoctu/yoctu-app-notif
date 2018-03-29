@@ -16,13 +16,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.firebase.ui.auth.AuthUI
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.with
-import com.google.android.gms.auth.api.Auth
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.iid.FirebaseInstanceId
 import com.yoctu.notif.android.yoctuappnotif.R
@@ -55,8 +51,8 @@ class LoginFragment :
     private lateinit var toolbar : Toolbar
     //indicates if user taps on sign out
     private var isSignout : Boolean = false
+    //when user clicks on sign in button
     private var mustRedirectToNoti = false
-    private var askSignIn = false
 
     companion object {
         fun newInstance(signout : Boolean) : LoginFragment {
@@ -76,19 +72,20 @@ class LoginFragment :
 
         retainInstance = true
 
-        if(arguments!= null && arguments.containsKey(LoginActivity.KEY_SIGN_OUT)) {
-            isSignout = arguments.getBoolean(LoginActivity.KEY_SIGN_OUT)
-            arguments.remove(LoginActivity.KEY_SIGN_OUT)
+        if(arguments!= null && arguments!!.containsKey(LoginActivity.KEY_SIGN_OUT)) {
+            isSignout = arguments!!.getBoolean(LoginActivity.KEY_SIGN_OUT)
+            arguments!!.remove(LoginActivity.KEY_SIGN_OUT)
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v = inflater!!.inflate(R.layout.fragment_login,container,false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val v = inflater.inflate(R.layout.fragment_login,container,false)
         return v
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        super.onViewCreated(view!!, savedInstanceState)
 
         manageToolbar()
 
@@ -103,23 +100,12 @@ class LoginFragment :
     override fun onStart() {
         super.onStart()
 
-
         manageBroadcast()
-        //manageConnectivity()
-        /*if (askSignIn) {
-            askSignIn = false
-            launchGoogleSignIn()
-        }*/
     }
 
-    /**
-     * Uses to binds the view with its presenter !
-     */
     override fun onResume() {
         super.onResume()
 
-        //binds the view
-        //loginPresenter!!.takeView(this)
     }
 
 
@@ -138,7 +124,7 @@ class LoginFragment :
      * and register the fragment as call back
      */
     private fun manageBroadcast() {
-        LocalBroadcastManager.getInstance(activity)
+        LocalBroadcastManager.getInstance(activity!!)
                 .registerReceiver(BroadcastUtils.mNotificationReceiver,
                         IntentFilter(YoctuUtils.INTENT_FILTER_FCM))
 
@@ -207,7 +193,7 @@ class LoginFragment :
     }
 
     /**
-     * Manage events on views into the fragment
+     * Manage events on views into the fragment : register button
      * manage button google sign in
      */
     private fun manageViews() {
@@ -234,7 +220,7 @@ class LoginFragment :
     private fun manageRecyclerView() {
         recyclerView = login_fragment_recycler_view
         recyclerView?.let {
-            adapter = YoctuAdapter(activity)
+            adapter = YoctuAdapter(activity!!)
             var layoutManager : RecyclerView.LayoutManager = LinearLayoutManager(activity!!)
             recyclerView.layoutManager = layoutManager
             recyclerView.adapter = adapter
@@ -264,7 +250,6 @@ class LoginFragment :
      * show or hide button and progress bar
      */
     override fun getChannels(list : ArrayList<ViewType>) {
-        //login_fragment_text_loading?.let { login_fragment_text_loading.visibility = View.GONE }
 
         recyclerView?.let {
             if(list.size == 0) {
@@ -284,7 +269,7 @@ class LoginFragment :
 
     /**
      * Check if user is not in shared preferences
-     * we launch Google sign in and show google text + hide progress bar text
+     * we launch getLocalGoogleEmailAddress sign in and show google text + hide progress bar text
      * check if there is a sign out
      *
      * called after get channels and by google sign in button
@@ -314,21 +299,24 @@ class LoginFragment :
      * This function allows launch intent for google sign in
      */
     private fun launchGoogleSignIn() {
-        startActivityForResult(managerGoogleSignIn!!.getGoogleSignInIntent(),YoctuUtils.CODE_GOOGLE_SIGN_IN)
+        startActivityForResult(
+                AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setAvailableProviders(managerGoogleSignIn!!.providers)
+                        .build(),
+                YoctuUtils.CODE_GOOGLE_SIGN_IN)
     }
 
-    /**
-     * This function allows to get account from Google + hide google text
-     * if there was a sign out, reset @isSignout to False and redirect user to notifications
-     */
-    private fun handleGoogleSignInResult(completedTask: Task<GoogleSignInAccount>) {
-        try {
-            askSignIn = true
-            val account = completedTask.getResult(ApiException::class.java)
-            val user = User()
-            user.email = account.email!!
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == YoctuUtils.CODE_GOOGLE_SIGN_IN && resultCode == Activity.RESULT_OK) {
+            val googleUser = FirebaseAuth.getInstance().currentUser
+            var user = User()
+            user.email = googleUser!!.email!!
             user.firebaseToken = deviceId!!
-            Log.d(YoctuUtils.TAG_DEBUG, "user from google ".plus(user))
+            Log.d(YoctuUtils.TAG_DEBUG, " ** user created : ".plus(user))
             loginPresenter?.let {
                 login_fragment_text_google_sign_in?.let {
                     login_fragment_text_google_sign_in.visibility = View.GONE
@@ -339,33 +327,17 @@ class LoginFragment :
                 if (mustRedirectToNoti) {
                     mustRedirectToNoti = false
                     loginPresenter!!.gotoNotifications()
+                    login_sign_in_button?.let { login_sign_in_button.visibility = View.VISIBLE }
                 } else {
                     loginPresenter!!.showChannels()
                 }
             }
-        } catch (e: ApiException) {
-            e.printStackTrace()
-            Log.e(YoctuUtils.TAG_ERROR, e.message)
+
         }
 
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if(requestCode == YoctuUtils.CODE_GOOGLE_SIGN_IN && resultCode == Activity.RESULT_OK) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            handleGoogleSignInResult(task)
+        if (resultCode == Activity.RESULT_OK && requestCode == YoctuUtils.CODE_GET_ACCOUNTS) {
+            googleSignIn()
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        askSignIn = true
-        FirebaseAuth.getInstance().signOut()
-        managerGoogleSignIn!!.getInstanceGoogleApiClient(activity)
-        Auth.GoogleSignInApi.signOut(managerGoogleSignIn!!.mGoogleApiClient).setResultCallback { status -> }
-
     }
 
     override fun onDestroy() {

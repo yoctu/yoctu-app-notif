@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.Log
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.with
-import com.google.firebase.messaging.FirebaseMessaging
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
 import com.yoctu.notif.android.yoctuappnotif.repository.YoctuRepository
 import com.yoctu.notif.android.yoctuappnotif.ui.notification.NotificationActivity
@@ -56,6 +55,7 @@ class LoginPresenter(context: Context) :
         if(olToppics != null) {
             olToppics.forEach { olToppic ->
                 olToppic as Channel
+                //TODO unsubscribe toppics
                 //FirebaseMessaging.getInstance().unsubscribeFromTopic(olToppic.name)
             }
             repository.deleteChannels()
@@ -79,7 +79,7 @@ class LoginPresenter(context: Context) :
     override fun saveChannels(chosen: ArrayList<ViewType>) {
         manageChannels(chosen)
         repository.saveToppics(chosen)
-        Log.d(YoctuUtils.TAG_DEBUG,"**** register channels got to noti ")
+        Log.d(YoctuUtils.TAG_DEBUG,"**** register channels(".plus(chosen.size).plus(") ").plus("got to notif *** "))
         gotoNotifications()
     }
 
@@ -102,6 +102,12 @@ class LoginPresenter(context: Context) :
     }
 
     override fun getUser() = repository.getUser()
+
+    override fun changeToppics() = repository.getChangeToppics()
+
+    override fun setChangeToppics(newValue: Boolean) {
+        repository.changeToppics(newValue)
+    }
 
     override fun takeView(view: LoginContract.View) {
         mView = view

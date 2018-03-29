@@ -21,7 +21,6 @@ class LoginActivity : AppCompatActivity() {
     companion object {
         val KEY_SIGN_OUT = "key_sign_out"
         fun newIntent(context: Context) {
-            //context.startActivity(Intent(context,LoginActivity::class.java))
             var intent = Intent(context,LoginActivity::class.java)
             intent.putExtra(KEY_SIGN_OUT, false)
             context.startActivity(intent)
@@ -36,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
     private var loginPresenter : LoginContract.Presenter? = null
     private var signOut = false
+    //private var currentIntent: Intent? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,8 +43,15 @@ class LoginActivity : AppCompatActivity() {
         onNewIntent(intent)
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d(YoctuUtils.TAG_DEBUG," *** in on resume *** ")
+        //onNewIntent(intent)
+    }
+
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
+        Log.d(YoctuUtils.TAG_DEBUG," *** in on new intent login *** ")
 
         loginPresenter = YoctuApplication.kodein.with(this).instance()
 
@@ -68,13 +75,16 @@ class LoginActivity : AppCompatActivity() {
         } else {
             loginPresenter?.let {
                 val currentUser = loginPresenter!!.getUser()
-                val currentToppics = loginPresenter!!.getToppics()
+                val changeToppics = loginPresenter!!.changeToppics()
 
-                Log.d(YoctuUtils.TAG_DEBUG,"tests are : ".plus(currentUser == null).plus(" - ").plus(currentUser != null && currentToppics == null))
-                if ( (currentUser == null) || (currentUser != null && currentToppics == null) ) { //first time OR no currentToppics
-                    Log.d(YoctuUtils.TAG_DEBUG,"display login fragment")
+                Log.d(YoctuUtils.TAG_DEBUG,"tests are : ".plus(currentUser == null).plus(" - ").plus(currentUser != null && changeToppics))
+                if ( (currentUser == null) || (currentUser != null && changeToppics) ) { //first time OR want change toppics
+                    if(changeToppics)
+                        loginPresenter!!.setChangeToppics(false)
+
                     displayLoginFragment()
-                } else if (currentUser != null && currentToppics != null) {
+                } else if (currentUser != null && !changeToppics) {
+                    finish()
                     startActivity(NotificationActivity.newIntent(this))
                 }
             }
@@ -82,14 +92,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun displayLoginFragment() {
-        //var loginFragment : LoginFragment? = YoctuUtils.getFragment(supportFragmentManager,R.id.login_container_fragment) as? LoginFragment
-        //if(loginFragment == null) {
             val loginFragment = LoginFragment.newInstance() //loginFragment = YoctuApplication.kodein.instance()
             YoctuUtils.addFragment(
                     supportFragmentManager,
                     loginFragment,
                     R.id.login_container_fragment)
-        //}
     }
 
     override fun onBackPressed() {

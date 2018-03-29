@@ -50,12 +50,12 @@ class NotificationFragment:
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v = inflater!!.inflate(R.layout.fragment_notification,container,false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val v = inflater.inflate(R.layout.fragment_notification,container,false)
         return v
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         managerGoogleSignIn = YoctuApplication.kodein.with(activity).instance()
@@ -89,7 +89,7 @@ class NotificationFragment:
 
             YoctuUtils.changeToolbarColor(toolbar,activity!!.resources.getColor(R.color.colorPrimaryNoActionBar))
             toolbar_standard_title?.let {
-                toolbar_standard_title.text = activity.getString(R.string.notif_fragment_title_view)
+                toolbar_standard_title.text = (activity as AppCompatActivity).getString(R.string.notif_fragment_title_view)
             }
         }
     }
@@ -99,7 +99,7 @@ class NotificationFragment:
      * and register the fragment as call back
      */
     private fun manageBroadcast() {
-        LocalBroadcastManager.getInstance(activity)
+        LocalBroadcastManager.getInstance(activity!!)
                 .registerReceiver(BroadcastUtils.mNotificationReceiver,
                         IntentFilter(YoctuUtils.INTENT_FILTER_FCM))
 
@@ -115,7 +115,7 @@ class NotificationFragment:
         recyclerView?.let {
             var layoutManager : RecyclerView.LayoutManager = LinearLayoutManager(activity!!)
             recyclerView.layoutManager = layoutManager
-            adapter = YoctuAdapter(activity)
+            adapter = YoctuAdapter(activity!!)
             recyclerView.adapter = adapter
 
             populateRecyclerView()
@@ -149,7 +149,7 @@ class NotificationFragment:
     override fun getMessage(message: String) {
         val obj = YoctuUtils.getNotificationFromJson(message)
         Log.d(YoctuUtils.TAG_DEBUG,"from fcm message is ".plus(obj.title).plus(" ").plus(obj.body))
-        NotificationUtils.createNotification(activity,obj.title,obj.body)
+        NotificationUtils.createNotification(activity!!,obj.title,obj.body)
         notificationPresenter?.let {
             notificationPresenter!!.saveMessage(obj)
         }
@@ -176,7 +176,7 @@ class NotificationFragment:
             R.id.menu_notif_sign_out -> {
                 managerGoogleSignIn?.let {
                     FirebaseAuth.getInstance().signOut()
-                    managerGoogleSignIn!!.getInstanceGoogleApiClient(activity)
+                    managerGoogleSignIn!!.getInstanceGoogleApiClient(activity!!)
                     Auth.GoogleSignInApi.signOut(managerGoogleSignIn!!.mGoogleApiClient).setResultCallback {
                         status ->
                         notificationPresenter?.let { notificationPresenter!!.googleSignOut() }
@@ -192,7 +192,7 @@ class NotificationFragment:
 
     override fun onStop() {
         super.onStop()
-        LocalBroadcastManager.getInstance(activity)
+        LocalBroadcastManager.getInstance(activity!!)
                 .unregisterReceiver(BroadcastUtils.mNotificationReceiver)
 
     }
