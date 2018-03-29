@@ -8,6 +8,10 @@ import android.os.Build
 import android.support.v4.app.NotificationCompat
 import android.support.v4.app.NotificationManagerCompat
 import com.yoctu.notif.android.yoctuappnotif.R
+import android.app.PendingIntent
+import android.content.Intent
+import com.yoctu.notif.android.yoctuappnotif.ui.login.LoginActivity
+
 
 /**
  * Created on 28.03.18.
@@ -56,9 +60,23 @@ object NotificationUtils {
                     .setSmallIcon(R.drawable.ic_launcher_foreground)
                     .setContentTitle(title)
                     .setContentText(text)
+                .setContentIntent(createPendinInten(context))
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
         val notificationManager = NotificationManagerCompat.from(context)
         notificationManager.notify(notificationID,mBuilder.build())
+    }
+
+    /**
+     * This function create an action when user taps on notification
+     * redirect user to Login activity
+     *
+     * @param context
+     * @return PendingIntent
+     */
+    private fun createPendinInten(context: Context) : PendingIntent {
+        val intent = Intent(context, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        return PendingIntent.getActivity(context, 0, intent, 0)
     }
 }

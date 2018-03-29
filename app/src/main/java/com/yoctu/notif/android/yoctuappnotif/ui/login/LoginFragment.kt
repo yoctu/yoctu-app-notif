@@ -2,6 +2,7 @@ package com.yoctu.notif.android.yoctuappnotif.ui.login
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
@@ -24,6 +25,7 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.yoctu.notif.android.yoctuappnotif.R
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
 import com.yoctu.notif.android.yoctuappnotif.callback.CallbackBroadcast
+import com.yoctu.notif.android.yoctuappnotif.callback.CallbackNavBack
 import com.yoctu.notif.android.yoctuappnotif.managers.ManageGoogleSignin
 import com.yoctu.notif.android.yoctuappnotif.ui.adapters.YoctuAdapter
 import com.yoctu.notif.android.yoctuappnotif.utils.BroadcastUtils
@@ -31,6 +33,7 @@ import com.yoctu.notif.android.yoctuappnotif.utils.IntentUtils
 import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
 import com.yoctu.notif.android.yoctulibrary.models.User
 import com.yoctu.notif.android.yoctulibrary.models.ViewType
+import kotlinx.android.synthetic.main.default_toolbar.*
 import kotlinx.android.synthetic.main.fragment_login.*
 
 /**
@@ -65,7 +68,6 @@ class LoginFragment :
 
         fun newInstance() = LoginFragment()
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -115,6 +117,8 @@ class LoginFragment :
             (activity as AppCompatActivity).setSupportActionBar(toolbar)
 
             YoctuUtils.changeToolbarColor(toolbar,activity!!.resources.getColor(R.color.colorPrimaryNoActionBar))
+
+            toolbar_standard_back_nav?.let { toolbar_standard_back_nav.visibility = View.GONE }
         }
     }
 

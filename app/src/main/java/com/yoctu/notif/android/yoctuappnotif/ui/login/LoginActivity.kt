@@ -19,6 +19,10 @@ class LoginActivity : AppCompatActivity() {
 
     companion object {
         val KEY_SIGN_OUT = "key_sign_out"
+        val KEY_HAS_NOTIFICATION = "key_has_notif"
+        val KEY_NOTIFICATION_TITLE = "key_notif_title"
+        val KEY_NOTIFICATION_TEXT = "key_notif_text"
+
         fun newIntent(context: Context) {
             var intent = Intent(context,LoginActivity::class.java)
             intent.putExtra(KEY_SIGN_OUT, false)
@@ -30,10 +34,20 @@ class LoginActivity : AppCompatActivity() {
             intent.putExtra(KEY_SIGN_OUT, signout)
             context.startActivity(intent)
         }
+
+        fun NotificationIntent(context: Context, title: String, text: String, hasNotification: Boolean = true) {
+            var intent = Intent(context,LoginActivity::class.java)
+            intent.putExtra(KEY_HAS_NOTIFICATION, hasNotification)
+            intent.putExtra(KEY_NOTIFICATION_TITLE, title)
+            intent.putExtra(KEY_NOTIFICATION_TEXT, text)
+            context.startActivity(intent)
+        }
     }
 
     private var loginPresenter : LoginContract.Presenter? = null
     private var signOut = false
+    private var title: String = ""
+    private var text: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,6 +92,15 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(NotificationActivity.newIntent(this))
                 }
             }
+        }
+    }
+
+    //TODO if from background ??
+    private fun mangeNotification() {
+        if(intent != null && intent.hasExtra(KEY_HAS_NOTIFICATION)) {
+            title = intent.getStringExtra(KEY_NOTIFICATION_TITLE)
+            text = intent.getStringExtra(KEY_NOTIFICATION_TEXT)
+            //TODO save in local db
         }
     }
 
