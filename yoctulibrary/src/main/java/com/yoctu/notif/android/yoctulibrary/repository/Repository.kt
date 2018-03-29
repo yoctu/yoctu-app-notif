@@ -61,6 +61,11 @@ interface Repository {
     fun getToppics(): ArrayList<ViewType> ?
 
     /**
+     * @return a list of toppics' name
+     */
+    fun getListToppicsName(): ArrayList<String>?
+
+    /**
      * delete all the chosen toppics
      */
     fun deleteChannels()
@@ -76,4 +81,30 @@ interface Repository {
      * @return list of Notifications
      */
     fun getNotifications(): ArrayList<ViewType>
+
+    /**
+     * This function allows to save an email in shared preferences
+     *
+     * @param email
+     */
+    fun saveEmail(email: String)
+
+    /**
+     * Read an email saved in shared preferences
+     *
+     * @return String
+     */
+    fun getEmail(): String?
+
+    /**
+     * Indicate thta user wanst to change his list of toppics
+     * @param change
+     */
+    fun changeToppics(change: Boolean)
+
+    /**
+     * Indicate if user wants to change list of toppics
+     * @return Boolean
+     */
+    fun getChangeToppics() : Boolean
 }

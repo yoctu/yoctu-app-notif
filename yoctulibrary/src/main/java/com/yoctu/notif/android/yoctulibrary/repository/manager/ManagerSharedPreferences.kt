@@ -9,7 +9,6 @@ import com.yoctu.notif.android.yoctulibrary.LibraryUtils
 import com.yoctu.notif.android.yoctulibrary.models.Channel
 import com.yoctu.notif.android.yoctulibrary.models.User
 import com.yoctu.notif.android.yoctulibrary.models.ViewType
-import java.lang.reflect.Type
 
 /**
  * This class allows to manage Shared preferences
@@ -28,6 +27,8 @@ class ManagerSharedPreferences(context: Context) {
 
     private val KEY_USER = "key_user"
     private val KEY_CHANNELS = "key_channels"
+    private val KEY_EMAIL = "key_saved_email"
+    private val KEY_WANT_CHANGE_TOPPICS = "key_change_toppics"
 
     /**
      * Write user in shared preferences
@@ -105,11 +106,71 @@ class ManagerSharedPreferences(context: Context) {
     }
 
     /**
+     * Give a list of channels' name
+     * @return list of String
+     */
+    fun getChannelsName(): ArrayList<String>? {
+        var names = ArrayList<String>()
+        if (preferencesApplication.contains(KEY_CHANNELS)) {
+            val gson = Gson()
+            val obj = preferencesApplication.getString(KEY_CHANNELS,"")
+            val type = object : TypeToken<ArrayList<Channel>>() {}.type
+            val list : ArrayList<Channel> = gson.fromJson(obj,type)
+            list.forEach { channel: Channel -> names.add(channel.name) }
+            return names
+        }
+        return null
+    }
+
+    /**
      * This method allows to remove channels into shared preferences
      */
     fun deleteChannels() {
         var editor = preferencesApplication.edit()
         editor.remove(KEY_CHANNELS).commit()
+    }
+
+    /**
+     * Save email to use it for futur sign in
+     *
+     * @param email
+     */
+    fun saveEmail(email: String) {
+        var editor = preferencesApplication.edit()
+        editor.putString(KEY_EMAIL,email)
+        editor.commit()
+    }
+
+    /**
+     * Give the email saved in shared preference for sign in
+     * @return String
+     */
+    fun getEmail(): String? {
+        if (preferencesApplication.contains(KEY_EMAIL)) {
+            return preferencesApplication.getString(KEY_EMAIL,"")
+        }
+        return null
+    }
+
+    /**
+     * Set change toppics
+     * @param change
+     */
+    fun changeToppics(change: Boolean ) {
+        var editor = preferencesApplication.edit()
+        editor.putBoolean(KEY_WANT_CHANGE_TOPPICS,change)
+        editor.commit()
+    }
+
+    /**
+     * Indicate if user wants change toppics
+     * @return Boolean
+     */
+    fun getWantChangeToppics(): Boolean {
+        if (preferencesApplication.contains(KEY_WANT_CHANGE_TOPPICS)) {
+            return preferencesApplication.getBoolean(KEY_WANT_CHANGE_TOPPICS,false)
+        }
+        return false
     }
 
 }
