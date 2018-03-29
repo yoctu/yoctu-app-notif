@@ -2,6 +2,7 @@ package com.yoctu.notif.android.yoctuappnotif.managers
 
 import android.app.Activity
 import android.content.Context
+import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -27,7 +28,7 @@ class ManageGoogleSignin(context : Context) {
         mAuth = FirebaseAuth.getInstance()
         gso = GoogleSignInOptions
                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(mContext.getString(R.string.default_web_client_id))
+                .requestIdToken(mContext.getString(R.string.my_default_web_client_id))//.requestIdToken(mContext.getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build()
         mGoogleSignInClient = GoogleSignIn.getClient(mContext,gso)
@@ -39,6 +40,8 @@ class ManageGoogleSignin(context : Context) {
         mGoogleApiClient!!.connect()
 
     }
+
+    var providers = arrayListOf<AuthUI.IdpConfig>(AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build())
 
     fun getCurrentUser() = mAuth.currentUser
 
