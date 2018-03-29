@@ -39,5 +39,6 @@
     <!-- not logged-->
     <string name="login_not_logged">You have to log in to see topics</string>
 
+    <string name="time_at">at</string>
 
 </resources>

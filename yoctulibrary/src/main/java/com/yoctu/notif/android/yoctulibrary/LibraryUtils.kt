@@ -63,7 +63,7 @@ object LibraryUtils {
      */
     fun formatDate(time : Long = Date().time) : String {
         val d = Date(time)
-        val simpleFormat = SimpleDateFormat("dd/MM/yyyy hh:mm")
+        val simpleFormat = SimpleDateFormat("dd/MM/yyyy  -  hh:mm")
         return simpleFormat.format(d)
     }
 }

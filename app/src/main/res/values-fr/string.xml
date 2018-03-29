@@ -39,5 +39,6 @@
     <!-- not logged-->
     <string name="login_not_logged">Vous devez vous connecter pour voir la liste des messages</string>
 
+    <string name="time_at">à</string>
 
 </resources>
