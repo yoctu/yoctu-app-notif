@@ -13,4 +13,5 @@
     <color name="colorNotChecked">#E0E0E0</color>
     <color name="colorBlueOne">#1A237E</color>
     <color name="colorGrey">#F5F5F5</color>
+    <color name="colorGreyTwo">#9E9E9E</color>
 </resources>
