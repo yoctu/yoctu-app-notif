@@ -91,6 +91,12 @@ class NotificationFragment:
             toolbar_standard_title?.let {
                 toolbar_standard_title.text = (activity as AppCompatActivity).getString(R.string.notif_fragment_title_view)
             }
+
+            toolbar_standard_back_nav?.let {
+                toolbar_standard_back_nav.setOnClickListener { _ ->
+
+                }
+            }
         }
     }
 
