@@ -156,7 +156,7 @@ class ManagerSharedPreferences(context: Context) {
      * Set change toppics
      * @param change
      */
-    fun changeToppics(change: Boolean ) {
+    fun changeToppics(change: Boolean) {
         var editor = preferencesApplication.edit()
         editor.putBoolean(KEY_WANT_CHANGE_TOPPICS,change)
         editor.commit()
