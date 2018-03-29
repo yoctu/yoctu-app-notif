@@ -21,6 +21,6 @@ interface YoctuService {
     fun getChannels(): Observable<ResponseChannels>
 
     @Headers("Content-Type: application/json")
-    @POST("/api/notifications")
-    fun sendDeviceId(@Body params : ParamBodyDeviceID)
+    @POST("/api/device-appear")
+    fun sendDeviceId(@Body params : ParamBodyDeviceID): Observable<String>
 }

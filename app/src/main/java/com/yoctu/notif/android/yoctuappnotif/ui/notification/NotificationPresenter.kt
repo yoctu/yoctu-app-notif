@@ -6,6 +6,7 @@ import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.with
 import com.google.firebase.auth.FirebaseAuth
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
+import com.yoctu.notif.android.yoctuappnotif.comparator.ComparatorNotification
 import com.yoctu.notif.android.yoctuappnotif.repository.YoctuRepository
 import com.yoctu.notif.android.yoctuappnotif.ui.login.LoginActivity
 import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
@@ -13,6 +14,8 @@ import com.yoctu.notif.android.yoctulibrary.models.Notification
 import com.yoctu.notif.android.yoctulibrary.models.ViewType
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Created on 27.03.18.
@@ -42,7 +45,11 @@ class NotificationPresenter(context: Context):
             mView?.let { mView!!.notLogged() }
     }
 
-    override fun getMessages() = repository.getNotifications()
+    override fun getMessages(): ArrayList<ViewType> {
+        var list : ArrayList<ViewType> = repository.getNotifications()
+        list.sortWith(ComparatorNotification)
+        return list
+    }
 
     override fun saveMessage(notification: Notification) {
         repository.saveNotification(notification,this)
