@@ -28,7 +28,7 @@ class ManageGoogleSignin(context : Context) {
         mAuth = FirebaseAuth.getInstance()
         gso = GoogleSignInOptions
                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(mContext.getString(R.string.my_default_web_client_id))//.requestIdToken(mContext.getString(R.string.default_web_client_id))
+                .requestIdToken(mContext.getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build()
         mGoogleSignInClient = GoogleSignIn.getClient(mContext,gso)

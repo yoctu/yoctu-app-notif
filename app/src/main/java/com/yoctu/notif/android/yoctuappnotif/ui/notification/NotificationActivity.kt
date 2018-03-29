@@ -27,7 +27,7 @@ class NotificationActivity: AppCompatActivity() {
 
         var notifFragment : NotificationFragment? = YoctuUtils.getFragment(supportFragmentManager, R.id.notification_container_fragment) as? NotificationFragment
         if (notifFragment == null) {
-            notifFragment = NotificationFragment.newInstance() //notifFragment = YoctuApplication.kodein.instance()
+            notifFragment = NotificationFragment.newInstance()
             YoctuUtils.addFragment(
                     supportFragmentManager,
                     notifFragment,
@@ -41,6 +41,5 @@ class NotificationActivity: AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        Log.d(YoctuUtils.TAG_DEBUG," back press in notification ")
     }
 }

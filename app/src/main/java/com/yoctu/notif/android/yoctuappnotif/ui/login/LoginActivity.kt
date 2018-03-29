@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.with
 import com.yoctu.notif.android.yoctuappnotif.R
@@ -35,7 +34,6 @@ class LoginActivity : AppCompatActivity() {
 
     private var loginPresenter : LoginContract.Presenter? = null
     private var signOut = false
-    //private var currentIntent: Intent? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,15 +41,8 @@ class LoginActivity : AppCompatActivity() {
         onNewIntent(intent)
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.d(YoctuUtils.TAG_DEBUG," *** in on resume *** ")
-        //onNewIntent(intent)
-    }
-
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        Log.d(YoctuUtils.TAG_DEBUG," *** in on new intent login *** ")
 
         loginPresenter = YoctuApplication.kodein.with(this).instance()
 
@@ -77,7 +68,6 @@ class LoginActivity : AppCompatActivity() {
                 val currentUser = loginPresenter!!.getUser()
                 val changeToppics = loginPresenter!!.changeToppics()
 
-                Log.d(YoctuUtils.TAG_DEBUG,"tests are : ".plus(currentUser == null).plus(" - ").plus(currentUser != null && changeToppics))
                 if ( (currentUser == null) || (currentUser != null && changeToppics) ) { //first time OR want change toppics
                     if(changeToppics)
                         loginPresenter!!.setChangeToppics(false)
@@ -92,7 +82,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun displayLoginFragment() {
-            val loginFragment = LoginFragment.newInstance() //loginFragment = YoctuApplication.kodein.instance()
+            val loginFragment = LoginFragment.newInstance()
             YoctuUtils.addFragment(
                     supportFragmentManager,
                     loginFragment,
@@ -101,6 +91,5 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        Log.d(YoctuUtils.TAG_DEBUG," back press in login ")
     }
 }
