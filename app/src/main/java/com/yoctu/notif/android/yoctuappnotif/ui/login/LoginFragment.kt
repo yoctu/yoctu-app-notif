@@ -2,7 +2,6 @@ package com.yoctu.notif.android.yoctuappnotif.ui.login
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
@@ -25,7 +24,6 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.yoctu.notif.android.yoctuappnotif.R
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
 import com.yoctu.notif.android.yoctuappnotif.callback.CallbackBroadcast
-import com.yoctu.notif.android.yoctuappnotif.callback.CallbackNavBack
 import com.yoctu.notif.android.yoctuappnotif.managers.ManageGoogleSignin
 import com.yoctu.notif.android.yoctuappnotif.ui.adapters.YoctuAdapter
 import com.yoctu.notif.android.yoctuappnotif.utils.BroadcastUtils
@@ -177,9 +175,8 @@ class LoginFragment :
             var user = loginPresenter!!.getUser()
             if (user != null) { //update
                 user.firebaseToken = token
-                //TODO save usr local + server
                 loginPresenter!!.saveUserInLocal(user)
-                //loginPresenter!!.sendDeviceId()
+                loginPresenter!!.sendDeviceId()
             } else { //first time
                 loginPresenter!!.askChannels()
             }
@@ -325,9 +322,8 @@ class LoginFragment :
                 login_fragment_text_google_sign_in?.let {
                     login_fragment_text_google_sign_in.visibility = View.GONE
                 }
-                //TODO save usr local + server
                 loginPresenter!!.saveUserInLocal(user)
-                //loginPresenter!!.sendDeviceId()
+                loginPresenter!!.sendDeviceId()
                 if (mustRedirectToNoti) {
                     mustRedirectToNoti = false
                     loginPresenter!!.gotoNotifications()

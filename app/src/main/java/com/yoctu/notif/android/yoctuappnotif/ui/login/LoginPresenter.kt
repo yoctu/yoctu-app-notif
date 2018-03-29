@@ -131,6 +131,8 @@ class LoginPresenter(context: Context) :
                 mView!!.googleSignIn()
             }
         }
+        if (response is String)
+            Log.d(YoctuUtils.TAG_DEBUG,"save decive id ".plus(response))
 
     }
 

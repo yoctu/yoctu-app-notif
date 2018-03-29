@@ -47,9 +47,9 @@ class YoctuRepository(context: Context) : Repository {
 
     override fun saveDeviceId(email: String, token: String, observer: Observer<Any>) {
         request.sendDeviceId(ParamBodyDeviceID(email,token))
-                /*.subscribeOn(Schedulers.newThread()) //observable
+                .subscribeOn(Schedulers.newThread()) //observable
                 .observeOn(AndroidSchedulers.mainThread()) //observer
-                .subscribe(observer)*/
+                .subscribe(observer)
     }
 
     override fun saveUser(user: User) {
