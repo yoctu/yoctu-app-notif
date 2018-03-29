@@ -57,12 +57,13 @@ class LoginPresenter(context: Context) :
                 olToppic as Channel
                 //TODO unsubscribe toppics
                 //FirebaseMessaging.getInstance().unsubscribeFromTopic(olToppic.name)
+                Log.d(YoctuUtils.TAG_DEBUG,"remove channel ".plus(olToppic.name))
             }
             repository.deleteChannels()
         }
         chosen.forEach { t: ViewType? ->
             t as Channel
-            Log.d(YoctuUtils.TAG_DEBUG,"channel is ".plus(t.name))
+            Log.d(YoctuUtils.TAG_DEBUG,"add channel ".plus(t.name))
             //TODO subscribe toppic
             //FirebaseMessaging.getInstance().subscribeToTopic(t.name)
         }
