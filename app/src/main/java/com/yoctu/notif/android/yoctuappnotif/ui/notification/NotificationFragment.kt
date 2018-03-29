@@ -1,5 +1,6 @@
 package com.yoctu.notif.android.yoctuappnotif.ui.notification
 
+import android.content.Context
 import android.content.IntentFilter
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -17,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.yoctu.notif.android.yoctuappnotif.R
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
 import com.yoctu.notif.android.yoctuappnotif.callback.CallbackBroadcast
+import com.yoctu.notif.android.yoctuappnotif.callback.CallbackNavBack
 import com.yoctu.notif.android.yoctuappnotif.managers.ManageGoogleSignin
 import com.yoctu.notif.android.yoctuappnotif.ui.adapters.YoctuAdapter
 import com.yoctu.notif.android.yoctuappnotif.utils.BroadcastUtils
@@ -43,6 +45,14 @@ class NotificationFragment:
     private lateinit var recyclerView : RecyclerView
     private lateinit var adapter : YoctuAdapter
     private var managerGoogleSignIn : ManageGoogleSignin? = null
+    private var callbackNav : CallbackNavBack? = null
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+
+        val activity = context as AppCompatActivity
+        callbackNav = activity as CallbackNavBack
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,9 +103,7 @@ class NotificationFragment:
             }
 
             toolbar_standard_back_nav?.let {
-                toolbar_standard_back_nav.setOnClickListener { _ ->
-
-                }
+                callbackNav?.let { toolbar_standard_back_nav.setOnClickListener { _ -> callbackNav!!.goBack() } }
             }
         }
     }

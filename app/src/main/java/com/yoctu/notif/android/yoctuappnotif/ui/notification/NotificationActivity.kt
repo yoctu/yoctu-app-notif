@@ -8,13 +8,16 @@ import android.util.Log
 import com.github.salomonbrys.kodein.instance
 import com.yoctu.notif.android.yoctuappnotif.R
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
+import com.yoctu.notif.android.yoctuappnotif.callback.CallbackNavBack
 import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
 
 /**
  * Created on 27.03.18.
  */
 
-class NotificationActivity: AppCompatActivity() {
+class NotificationActivity:
+        AppCompatActivity(),
+        CallbackNavBack {
 
     companion object {
         fun newIntent(context: Context) = Intent(context, NotificationActivity::class.java)
@@ -41,5 +44,9 @@ class NotificationActivity: AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
+    }
+
+    override fun goBack() {
+        onBackPressed()
     }
 }
