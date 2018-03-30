@@ -204,12 +204,12 @@ class NotificationFragment:
         return true
     }
 
-    override fun onStop() {
+    /*override fun onStop() {
         super.onStop()
         LocalBroadcastManager.getInstance(activity!!)
                 .unregisterReceiver(BroadcastUtils.mNotificationReceiver)
 
-    }
+    }*/
 
     override fun onDestroy() {
         super.onDestroy()
