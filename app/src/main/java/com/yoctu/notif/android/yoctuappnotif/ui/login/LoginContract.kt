@@ -3,6 +3,7 @@ package com.yoctu.notif.android.yoctuappnotif.ui.login
 import com.yoctu.notif.android.yoctuappnotif.BasePresenter
 import com.yoctu.notif.android.yoctuappnotif.BaseView
 import com.yoctu.notif.android.yoctulibrary.models.Channel
+import com.yoctu.notif.android.yoctulibrary.models.Notification
 import com.yoctu.notif.android.yoctulibrary.models.User
 import com.yoctu.notif.android.yoctulibrary.models.ViewType
 
@@ -28,5 +29,6 @@ interface LoginContract {
         fun gotoNotifications()
         fun changeToppics(): Boolean
         fun setChangeToppics(newValue: Boolean)
+        fun saveMessage(notification: Notification)
     }
 }

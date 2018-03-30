@@ -8,10 +8,7 @@ import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
 import com.yoctu.notif.android.yoctuappnotif.repository.YoctuRepository
 import com.yoctu.notif.android.yoctuappnotif.ui.notification.NotificationActivity
 import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
-import com.yoctu.notif.android.yoctulibrary.models.Channel
-import com.yoctu.notif.android.yoctulibrary.models.ResponseChannels
-import com.yoctu.notif.android.yoctulibrary.models.User
-import com.yoctu.notif.android.yoctulibrary.models.ViewType
+import com.yoctu.notif.android.yoctulibrary.models.*
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
@@ -108,6 +105,10 @@ class LoginPresenter(context: Context) :
 
     override fun setChangeToppics(newValue: Boolean) {
         repository.changeToppics(newValue)
+    }
+
+    override fun saveMessage(notification: Notification) {
+        repository.saveNotification(notification,this)
     }
 
     override fun takeView(view: LoginContract.View) {
