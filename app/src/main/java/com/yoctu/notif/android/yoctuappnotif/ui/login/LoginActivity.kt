@@ -81,8 +81,9 @@ class LoginActivity : AppCompatActivity() {
             loginPresenter?.let {
                 val currentUser = loginPresenter!!.getUser()
                 val changeToppics = loginPresenter!!.changeToppics()
+                val listToppics = loginPresenter!!.getToppics()
 
-                if ( (currentUser == null) || (currentUser != null && changeToppics) ) { //first time OR want change toppics
+                if ( (currentUser == null) || (currentUser != null && (changeToppics || listToppics == null)) ) { //first time OR (want change toppics OR not yet chosen)
                     if(changeToppics)
                         loginPresenter!!.setChangeToppics(false)
 
