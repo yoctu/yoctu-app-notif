@@ -103,6 +103,7 @@ class NotificationFragment:
             }
 
             toolbar_standard_back_nav?.let {
+                toolbar_standard_back_nav.visibility = View.GONE
                 callbackNav?.let { toolbar_standard_back_nav.setOnClickListener { _ -> callbackNav!!.goBack() } }
             }
         }
