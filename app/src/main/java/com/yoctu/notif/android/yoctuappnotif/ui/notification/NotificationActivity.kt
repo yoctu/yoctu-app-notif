@@ -43,7 +43,7 @@ class NotificationActivity:
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+        //super.onBackPressed()
     }
 
     override fun goBack() {
