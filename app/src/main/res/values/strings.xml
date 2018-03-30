@@ -15,6 +15,8 @@
     <string name="dialog_connectivity_enable">activer</string>
     <string name="dialog_connectivity_cancel">annuler</string>
     <string name="dialog_connectivity_refused_to_enable">Vous avez décidé de ne pas vous connecter !</string>
+    <string name="login_fragment_title_toppics">Toppics</string>
+    <string name="login_fragment_title_sign_in">Connexion</string>
 
     <string name="app_txt_connection_disable">L\'état de votre réseau est faible !</string>
 
