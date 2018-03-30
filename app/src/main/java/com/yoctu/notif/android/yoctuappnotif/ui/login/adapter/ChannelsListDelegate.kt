@@ -38,7 +38,6 @@ class ChannelsListDelegate(context: Context): ViewTypeDelegateAdapter {
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val repository : YoctuRepository = YoctuApplication.kodein.with(mContext).instance()
-        Log.d(YoctuUtils.TAG_DEBUG," ".plus(repository == null).plus(repository.getListToppicsName() == null).plus(" ---- "))
         currentChannels = repository.getListToppicsName()
         return ChannelViewHolder(LayoutInflater.from(mContext).inflate(R.layout.login_item_channel,parent,false))
     }
