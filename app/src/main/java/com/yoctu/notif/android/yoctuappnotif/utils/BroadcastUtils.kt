@@ -16,6 +16,7 @@ object BroadcastUtils {
 
     var callbackLoginFragment : CallbackBroadcast? = null
     var callbackNotifFragment : CallbackBroadcast? = null
+    var callbackNotifLoginFragment : CallbackBroadcast? = null
 
     /**
      * Local broad cats for FCM
@@ -27,8 +28,10 @@ object BroadcastUtils {
             val message_fcm = intent?.getStringExtra(YoctuUtils.KEY_MESSAGE_FCM)
             val token_fcm = intent?.getStringExtra(YoctuUtils.KEY_TOKEN_FCM)
 
-            if (!message_fcm.isNullOrEmpty())
+            if (!message_fcm.isNullOrEmpty()) {
                 callbackNotifFragment?.getMessage(message_fcm!!)
+                callbackNotifLoginFragment?.getMessage(message_fcm!!)
+            }
 
 
             if (!token_fcm.isNullOrEmpty())
@@ -53,6 +56,14 @@ object BroadcastUtils {
      */
     fun registerNotifFragment(callbackBroadcast: CallbackBroadcast) {
         callbackNotifFragment = callbackBroadcast
+    }
+
+    /**
+     * Register login fragment as a callbackNotifLoginFragment to receive notification
+     * @param callbackBroadcast
+     */
+    fun registerNotifLoginFragment(callbackBroadcast: CallbackBroadcast) {
+        callbackNotifLoginFragment = callbackBroadcast
     }
 
 
