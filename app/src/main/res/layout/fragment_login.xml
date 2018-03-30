@@ -57,15 +57,15 @@
 
     <TextView
         android:id="@+id/login_fragment_register"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_btn"
-        android:gravity="center"
+        android:layout_gravity="center"
         android:text="@string/login_fragment_register"
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
         android:visibility="gone"
-        android:layout_margin="@dimen/dimen_5"/>
+        android:layout_marginTop="@dimen/dimen_20"/>
 
     <!--
     <TextView
