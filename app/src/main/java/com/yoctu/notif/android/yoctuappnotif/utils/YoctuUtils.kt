@@ -123,8 +123,10 @@ object YoctuUtils {
         var fakeList = ArrayList<ViewType>()
         fakeList.add(Channel("intern"))
         fakeList.add(Channel("test"))
+        fakeList.add(Channel("Adneom"))
         fakeList.add(Channel("debug"))
         fakeList.add(Channel("production"))
+        fakeList.add(Channel("flash"))
         return fakeList
     }
 
