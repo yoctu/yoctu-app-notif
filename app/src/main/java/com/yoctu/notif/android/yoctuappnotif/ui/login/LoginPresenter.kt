@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.with
+import com.google.firebase.messaging.FirebaseMessaging
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
 import com.yoctu.notif.android.yoctuappnotif.repository.YoctuRepository
 import com.yoctu.notif.android.yoctuappnotif.ui.notification.NotificationActivity
@@ -52,17 +53,15 @@ class LoginPresenter(context: Context) :
         if(olToppics != null) {
             olToppics.forEach { olToppic ->
                 olToppic as Channel
-                //TODO unsubscribe toppics
-                //FirebaseMessaging.getInstance().unsubscribeFromTopic(olToppic.name)
-                Log.d(YoctuUtils.TAG_DEBUG,"remove channel ".plus(olToppic.name))
+                FirebaseMessaging.getInstance().unsubscribeFromTopic(olToppic.name)
+                //Log.d(YoctuUtils.TAG_DEBUG,"remove channel ".plus(olToppic.name))
             }
             repository.deleteChannels()
         }
         chosen.forEach { t: ViewType? ->
             t as Channel
-            Log.d(YoctuUtils.TAG_DEBUG,"add channel ".plus(t.name))
-            //TODO subscribe toppic
-            //FirebaseMessaging.getInstance().subscribeToTopic(t.name)
+           // Log.d(YoctuUtils.TAG_DEBUG,"add channel ".plus(t.name))
+            FirebaseMessaging.getInstance().subscribeToTopic(t.name)
         }
     }
 

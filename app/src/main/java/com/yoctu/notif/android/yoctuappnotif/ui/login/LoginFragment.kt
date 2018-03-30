@@ -364,7 +364,7 @@ class LoginFragment :
                     login_fragment_text_google_sign_in.visibility = View.GONE
                 }
                 loginPresenter!!.saveUserInLocal(user)
-                //loginPresenter!!.sendDeviceId()
+                loginPresenter!!.sendDeviceId()
                 if (mustRedirectToNoti) {
                     mustRedirectToNoti = false
                     loginPresenter!!.gotoNotifications()
