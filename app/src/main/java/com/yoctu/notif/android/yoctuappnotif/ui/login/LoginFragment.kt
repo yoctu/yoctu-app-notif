@@ -2,6 +2,7 @@ package com.yoctu.notif.android.yoctuappnotif.ui.login
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
@@ -24,6 +25,7 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.yoctu.notif.android.yoctuappnotif.R
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
 import com.yoctu.notif.android.yoctuappnotif.callback.CallbackBroadcast
+import com.yoctu.notif.android.yoctuappnotif.callback.CallbackNavBack
 import com.yoctu.notif.android.yoctuappnotif.managers.ManageGoogleSignin
 import com.yoctu.notif.android.yoctuappnotif.ui.adapters.YoctuAdapter
 import com.yoctu.notif.android.yoctuappnotif.utils.BroadcastUtils
@@ -67,6 +69,14 @@ class LoginFragment :
 
         fun newInstance() = LoginFragment()
     }
+    private var callbackNav : CallbackNavBack? = null
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+
+        val activity = context as AppCompatActivity
+        callbackNav = activity as CallbackNavBack
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -108,7 +118,9 @@ class LoginFragment :
         super.onResume()
     }
 
-
+    /**
+     * Manage toolbar : tilte and back navigation
+     */
     private fun manageToolbar() {
         toolbar_login_fragment?.let {
             toolbar = toolbar_login_fragment
@@ -116,7 +128,13 @@ class LoginFragment :
 
             YoctuUtils.changeToolbarColor(toolbar,activity!!.resources.getColor(R.color.colorPrimaryNoActionBar))
 
-            toolbar_standard_back_nav?.let { toolbar_standard_back_nav.visibility = View.GONE }
+            toolbar_standard_back_nav?.let {
+                toolbar_standard_back_nav.visibility = View.GONE
+                toolbar_standard_back_nav.setOnClickListener { _ ->
+                    callbackNav?.let { callbackNav!!.goBack() }
+                }
+            }
+
         }
     }
 
@@ -226,6 +244,7 @@ class LoginFragment :
                 googleSignIn()
             }
         }
+
     }
 
     private fun manageRecyclerView() {
@@ -264,10 +283,10 @@ class LoginFragment :
 
         recyclerView?.let {
             if(list.size == 0) {
-                login_fragment_empty_list.visibility = View.VISIBLE
+                login_fragment_empty_list?.let { login_fragment_empty_list.visibility = View.VISIBLE }
                 login_fragment_register?.let { login_fragment_register.visibility = View.GONE }
             } else {
-                login_fragment_empty_list.visibility = View.GONE
+                login_fragment_empty_list?.let { login_fragment_empty_list.visibility = View.GONE }
                 adapter?.let { adapter.addItems(list) }
                 login_fragment_register?.let { login_fragment_register.visibility = View.VISIBLE }
             }
@@ -291,6 +310,12 @@ class LoginFragment :
         if (isSignout) {
             login_fragment_progress_bar?.let { login_fragment_progress_bar.visibility = View.GONE }
             login_fragment_sign_in_btn?.let { login_fragment_sign_in_btn.visibility = View.VISIBLE }
+            /*toolbar?.let {
+                toolbar_standard_back_nav?.let { toolbar_standard_back_nav.visibility = View.GONE }
+                activity?.let {
+                    toolbar_standard_title?.let { toolbar_standard_title.text = activity!!.getString(R.string.login_fragment_title_sign_in) }
+                }
+            }*/
         } else {
             loginPresenter?.let {
                 val currentUser = loginPresenter!!.getUser()
@@ -300,6 +325,12 @@ class LoginFragment :
                     }
                     launchGoogleSignIn()
                 } else { //show channels
+                    /*toolbar?.let {
+                        toolbar_standard_back_nav?.let { toolbar_standard_back_nav.visibility = View.VISIBLE }
+                        activity?.let {
+                            toolbar_standard_title?.let { toolbar_standard_title.text = activity!!.getString(R.string.login_fragment_title_toppics) }
+                        }
+                    }*/
                     loginPresenter!!.showChannels()
                 }
             }

@@ -8,6 +8,7 @@ import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.with
 import com.yoctu.notif.android.yoctuappnotif.R
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
+import com.yoctu.notif.android.yoctuappnotif.callback.CallbackNavBack
 import com.yoctu.notif.android.yoctuappnotif.ui.notification.NotificationActivity
 import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
 
@@ -15,7 +16,9 @@ import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
  * Created on 26.03.18.
  */
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity :
+        AppCompatActivity(),
+        CallbackNavBack {
 
     companion object {
         val KEY_SIGN_OUT = "key_sign_out"
@@ -121,5 +124,9 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
+    }
+
+    override fun goBack() {
+        onBackPressed()
     }
 }
