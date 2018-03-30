@@ -29,7 +29,7 @@
 
     <!-- menu notification -->
     <string name="menu_notification_sign_out">Déconnexion</string>
-    <string name="menu_notification_channels">Channels</string>
+    <string name="menu_notification_channels">Mes toppics</string>
 
     <!-- not logged-->
     <string name="login_not_logged">Vous devez vous connecter pour voir la liste des messages</string>
