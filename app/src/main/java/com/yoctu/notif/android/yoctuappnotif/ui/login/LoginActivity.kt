@@ -52,6 +52,12 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //onNewIntent(intent)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
         onNewIntent(intent)
     }
 
