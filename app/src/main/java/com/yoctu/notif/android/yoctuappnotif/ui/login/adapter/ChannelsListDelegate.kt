@@ -32,13 +32,14 @@ class ChannelsListDelegate(context: Context): ViewTypeDelegateAdapter {
     // user's choices
     private var chosenChannels = ArrayList<ViewType>()
     // list from shared preferences
-    private var currentChannels = ArrayList<String>()
+    private var currentChannels: ArrayList<String>? = null//= ArrayList<String>()
     private var typeNames = 1
     private var typeChoice = 2
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val repository : YoctuRepository = YoctuApplication.kodein.with(mContext).instance()
-        currentChannels = repository.getListToppicsName()!!
+        Log.d(YoctuUtils.TAG_DEBUG," ".plus(repository == null).plus(repository.getListToppicsName() == null).plus(" ---- "))
+        currentChannels = repository.getListToppicsName()
         return ChannelViewHolder(LayoutInflater.from(mContext).inflate(R.layout.login_item_channel,parent,false))
     }
 
@@ -51,7 +52,7 @@ class ChannelsListDelegate(context: Context): ViewTypeDelegateAdapter {
         else
             holder.viewCheck.setImageResource(R.drawable.ic_not_checked)
         //check from shared preferences
-        if(currentChannels != null && currentChannels.size > 0)
+        if(currentChannels != null && currentChannels!!.size > 0)
             manageItems(item,holder)
 
         holder.textChannel.text = item.name
@@ -91,7 +92,7 @@ class ChannelsListDelegate(context: Context): ViewTypeDelegateAdapter {
      * @param currentViewHolder
      */
     private fun manageItems(currentItem : Channel, currentViewHolder : ChannelViewHolder) {
-        if (currentChannels != null && currentChannels.contains(currentItem.name)) {
+        if (currentChannels != null && currentChannels!!.contains(currentItem.name)) {
             currentItem.checked = true
             currentViewHolder.viewCheck.setImageResource(R.drawable.ic_checked)
             chosenChannels.add(currentItem)
@@ -120,14 +121,14 @@ class ChannelsListDelegate(context: Context): ViewTypeDelegateAdapter {
         var found = false
         var saveInd = i
         var size = chosenChannels.size
-        if(type == typeNames)
-            size = currentChannels.size
+        if(type == typeNames && currentChannels != null)
+            size = currentChannels!!.size
 
         while(i < size && !found) {
             saveInd = i
             when(type) {
                 typeNames -> {
-                    found = currentChannels[i].equals(currentItem.name)
+                    found =  currentChannels != null && currentChannels!![i].equals(currentItem.name)
                 }
                 typeChoice -> {
                     found = (chosenChannels[i] as Channel).name.equals(currentItem.name)
@@ -137,7 +138,7 @@ class ChannelsListDelegate(context: Context): ViewTypeDelegateAdapter {
         }
         if (found) {
             when(type) {
-                typeNames -> currentChannels.removeAt(saveInd)
+                typeNames -> currentChannels?.let { currentChannels!!.removeAt(saveInd) }
                 typeChoice -> chosenChannels.removeAt(saveInd)
             }
         }
