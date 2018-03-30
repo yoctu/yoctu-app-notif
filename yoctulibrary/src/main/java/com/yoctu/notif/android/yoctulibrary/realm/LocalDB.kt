@@ -63,22 +63,42 @@ class LocalDB(context: Context) {
      */
     private fun insertNotification(notification: Notification): Observable<Any> {
         return Observable.create { emitter: ObservableEmitter<Any> ->
-            try {
-                yoctuRealm.beginTransaction()
-                var noti : Notification = yoctuRealm.createObject(Notification::class.java)
-                noti.body = notification.body
-                noti.title = notification.title
-                noti.time = Date().time
-                yoctuRealm.copyToRealm(noti)
-                yoctuRealm.commitTransaction()
-                emitter.onNext("saved")
+            if(readNotification(notification) == null) {
+                try {
+                    yoctuRealm.beginTransaction()
+                    var noti : Notification = yoctuRealm.createObject(Notification::class.java)
+                    noti.body = notification.body
+                    noti.title = notification.title
+                    noti.time = Date().time
+                    yoctuRealm.copyToRealm(noti)
+                    yoctuRealm.commitTransaction()
+                    emitter.onNext("saved")
+                    emitter.onComplete()
+                }catch (e : IllegalArgumentException) {
+                    e.printStackTrace()
+                    emitter.onError(Throwable(e.message))
+                }
+            } else {
+                emitter.onNext(notification.title.plus(" already saved "))
                 emitter.onComplete()
-            }catch (e : IllegalArgumentException) {
-                e.printStackTrace()
-                emitter.onError(Throwable(e.message))
             }
         }
     }
+
+    /**
+     * Gives a notification which matches with the parameter
+     * check title and body
+     *
+     * @param notification
+     * @return Notification
+     */
+    private fun readNotification(notification: Notification) =
+            yoctuRealm
+            .where<Notification>()
+            .equalTo("title",notification.title)
+            .equalTo("body",notification.body)
+            .findFirst()
+
 
     fun getMessages() = ArrayList<ViewType>(yoctuRealm.where(Notification::class.java).findAll().toList())
 }
