@@ -29,8 +29,8 @@ object BroadcastUtils {
             val token_fcm = intent?.getStringExtra(YoctuUtils.KEY_TOKEN_FCM)
 
             if (!message_fcm.isNullOrEmpty()) {
-                callbackNotifFragment?.getMessage(message_fcm!!)
-                callbackNotifLoginFragment?.getMessage(message_fcm!!)
+                callbackNotifFragment?.let { callbackNotifFragment?.getMessage(message_fcm!!) }
+                callbackNotifLoginFragment?.let { callbackNotifLoginFragment?.getMessage(message_fcm!!) }
             }
 
 
