@@ -56,12 +56,14 @@ object NotificationUtils {
     fun createNotification(context: Context, title : String, text : String) {
         createChannel(context)
 
-        var mBuilder = NotificationCompat.Builder(context, context.getString(R.string.notification_channel_id))
-                    .setSmallIcon(R.drawable.ic_launcher_foreground)
-                    .setContentTitle(title)
-                    .setContentText(text)
-                .setContentIntent(createPendinInten(context))
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        var mBuilder =
+                NotificationCompat.Builder(context, context.getString(R.string.notification_channel_id))
+                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setContentTitle(title)
+                        .setContentText(text)
+                        .setContentIntent(createPendinInten(context)) //tap action
+                        .setAutoCancel(true)  //remove itself
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
         val notificationManager = NotificationManagerCompat.from(context)
         notificationManager.notify(notificationID,mBuilder.build())
