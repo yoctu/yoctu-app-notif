@@ -28,6 +28,7 @@ import com.yoctu.notif.android.yoctuappnotif.managers.ManageGoogleSignin
 import com.yoctu.notif.android.yoctuappnotif.ui.adapters.YoctuAdapter
 import com.yoctu.notif.android.yoctuappnotif.utils.BroadcastUtils
 import com.yoctu.notif.android.yoctuappnotif.utils.IntentUtils
+import com.yoctu.notif.android.yoctuappnotif.utils.NotificationUtils
 import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
 import com.yoctu.notif.android.yoctulibrary.models.User
 import com.yoctu.notif.android.yoctulibrary.models.ViewType
@@ -105,7 +106,6 @@ class LoginFragment :
 
     override fun onResume() {
         super.onResume()
-
     }
 
 
@@ -131,6 +131,7 @@ class LoginFragment :
                         IntentFilter(YoctuUtils.INTENT_FILTER_FCM))
 
         BroadcastUtils.registerLoginFragment(this)
+        BroadcastUtils.registerNotifLoginFragment(this)
     }
 
 
@@ -159,7 +160,16 @@ class LoginFragment :
         }
     }
 
-    override fun getMessage(message: String) {}
+    override fun getMessage(message: String) {
+        val obj = YoctuUtils.getNotificationFromJson(message)
+        Log.d(YoctuUtils.TAG_DEBUG," FCM message(login) ".plus(obj.title).plus(" ").plus(obj.body))
+        activity?.let {
+            NotificationUtils.createNotification(activity!!,obj.title,obj.body)
+            loginPresenter?.let {
+                loginPresenter!!.saveMessage(obj)
+            }
+        }
+    }
 
     /**
      * Get token from FCM
@@ -323,7 +333,7 @@ class LoginFragment :
                     login_fragment_text_google_sign_in.visibility = View.GONE
                 }
                 loginPresenter!!.saveUserInLocal(user)
-                loginPresenter!!.sendDeviceId()
+                //loginPresenter!!.sendDeviceId()
                 if (mustRedirectToNoti) {
                     mustRedirectToNoti = false
                     loginPresenter!!.gotoNotifications()
