@@ -46,22 +46,22 @@ class LoginFragment :
         LoginContract.View,
         CallbackBroadcast {
 
-    private var loginPresenter : LoginContract.Presenter? = null
-    private var dialog : Dialog? = null
-    private lateinit var recyclerView : RecyclerView
-    private lateinit var adapter : YoctuAdapter
-    private var managerGoogleSignIn : ManageGoogleSignin? = null
-    private var deviceId : String? = null
-    private lateinit var toolbar : Toolbar
+    private var loginPresenter: LoginContract.Presenter? = null
+    private var dialog: Dialog? = null
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: YoctuAdapter
+    private var managerGoogleSignIn: ManageGoogleSignin? = null
+    private var deviceId: String? = null
+    private lateinit var toolbar: Toolbar
     //indicates if user taps on sign out
-    private var isSignout : Boolean = false
+    private var isSignout: Boolean = false
     //when user clicks on sign in button
     private var mustRedirectToNoti = false
 
     companion object {
-        fun newInstance(signout : Boolean) : LoginFragment {
+        fun newInstance(signout: Boolean): LoginFragment {
             var args = Bundle()
-            args.putBoolean(LoginActivity.KEY_SIGN_OUT,signout)
+            args.putBoolean(LoginActivity.KEY_SIGN_OUT, signout)
             var frg = LoginFragment()
             frg.arguments = args
             return frg
@@ -69,7 +69,8 @@ class LoginFragment :
 
         fun newInstance() = LoginFragment()
     }
-    private var callbackNav : CallbackNavBack? = null
+
+    private var callbackNav: CallbackNavBack? = null
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -83,14 +84,14 @@ class LoginFragment :
 
         retainInstance = true
 
-        if(arguments!= null && arguments!!.containsKey(LoginActivity.KEY_SIGN_OUT)) {
+        if (arguments != null && arguments!!.containsKey(LoginActivity.KEY_SIGN_OUT)) {
             isSignout = arguments!!.getBoolean(LoginActivity.KEY_SIGN_OUT)
             arguments!!.remove(LoginActivity.KEY_SIGN_OUT)
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.fragment_login,container,false)
+        val v = inflater.inflate(R.layout.fragment_login, container, false)
         return v
     }
 
@@ -126,7 +127,7 @@ class LoginFragment :
             toolbar = toolbar_login_fragment
             (activity as AppCompatActivity).setSupportActionBar(toolbar)
 
-            YoctuUtils.changeToolbarColor(toolbar,activity!!.resources.getColor(R.color.colorPrimaryNoActionBar))
+            YoctuUtils.changeToolbarColor(toolbar, activity!!.resources.getColor(R.color.colorPrimaryNoActionBar))
 
             toolbar_standard_back_nav?.let {
                 toolbar_standard_back_nav.visibility = View.GONE
@@ -167,8 +168,8 @@ class LoginFragment :
             }
         } else {
             login_fragment_main_linear_layout?.let {
-                YoctuUtils.displaySnackBar(login_fragment_main_linear_layout,activity!!.getString(R.string.app_txt_connection_disable))
-                if(dialog == null) {
+                YoctuUtils.displaySnackBar(login_fragment_main_linear_layout, activity!!.getString(R.string.app_txt_connection_disable))
+                if (dialog == null) {
                     dialog = YoctuUtils.dialogConnectivity(activity!!)
                     manageDialog()
                 }
@@ -180,9 +181,9 @@ class LoginFragment :
 
     override fun getMessage(message: String) {
         val obj = YoctuUtils.getNotificationFromJson(message)
-        Log.d(YoctuUtils.TAG_DEBUG," FCM message(login) ".plus(obj.title).plus(" ").plus(obj.body))
+        Log.d(YoctuUtils.TAG_DEBUG, " FCM message(login) ".plus(obj.title).plus(" ").plus(obj.body))
         activity?.let {
-            NotificationUtils.createNotification(activity!!,obj.title,obj.body)
+            NotificationUtils.createNotification(activity!!, obj.title, obj.body)
             loginPresenter?.let {
                 loginPresenter!!.saveMessage(obj)
             }
@@ -228,9 +229,10 @@ class LoginFragment :
     private fun manageViews() {
         login_fragment_register?.let {
             login_fragment_register.setOnClickListener { _ ->
-                adapter.let {// register channels
-                    if(adapter.getChosenChannels().size == 0)
-                        YoctuUtils.displaySnackBar(login_fragment_register,activity!!.getString(R.string.login_fragment_there_are_not_chosen))
+                adapter.let {
+                    // register channels
+                    if (adapter.getChosenChannels().size == 0)
+                        YoctuUtils.displaySnackBar(login_fragment_register, activity!!.getString(R.string.login_fragment_there_are_not_chosen))
                     else
                         loginPresenter?.let { loginPresenter!!.saveChannels(adapter.getChosenChannels()) }
                 }
@@ -251,7 +253,7 @@ class LoginFragment :
         recyclerView = login_fragment_recycler_view
         recyclerView?.let {
             adapter = YoctuAdapter(activity!!)
-            var layoutManager : RecyclerView.LayoutManager = LinearLayoutManager(activity!!)
+            var layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(activity!!)
             recyclerView.layoutManager = layoutManager
             recyclerView.adapter = adapter
         }
@@ -279,10 +281,10 @@ class LoginFragment :
      * populate the list here
      * show or hide button and progress bar
      */
-    override fun getChannels(list : ArrayList<ViewType>) {
+    override fun getChannels(list: ArrayList<ViewType>) {
 
         recyclerView?.let {
-            if(list.size == 0) {
+            if (list.size == 0) {
                 login_fragment_empty_list?.let { login_fragment_empty_list.visibility = View.VISIBLE }
                 login_fragment_register?.let { login_fragment_register.visibility = View.GONE }
             } else {
@@ -310,27 +312,16 @@ class LoginFragment :
         if (isSignout) {
             login_fragment_progress_bar?.let { login_fragment_progress_bar.visibility = View.GONE }
             login_fragment_sign_in_btn?.let { login_fragment_sign_in_btn.visibility = View.VISIBLE }
-            /*toolbar?.let {
-                toolbar_standard_back_nav?.let { toolbar_standard_back_nav.visibility = View.GONE }
-                activity?.let {
-                    toolbar_standard_title?.let { toolbar_standard_title.text = activity!!.getString(R.string.login_fragment_title_sign_in) }
-                }
-            }*/
         } else {
             loginPresenter?.let {
                 val currentUser = loginPresenter!!.getUser()
                 if (currentUser == null) {
-                    login_fragment_text_google_sign_in?.let {
+                    /*login_fragment_text_google_sign_in?.let {
                         login_fragment_text_google_sign_in.visibility = View.VISIBLE
-                    }
+                    }*/
+                    login_fragment_progress_bar?.let { login_fragment_progress_bar.visibility = View.GONE }
                     launchGoogleSignIn()
                 } else { //show channels
-                    /*toolbar?.let {
-                        toolbar_standard_back_nav?.let { toolbar_standard_back_nav.visibility = View.VISIBLE }
-                        activity?.let {
-                            toolbar_standard_title?.let { toolbar_standard_title.text = activity!!.getString(R.string.login_fragment_title_toppics) }
-                        }
-                    }*/
                     loginPresenter!!.showChannels()
                 }
             }
@@ -353,7 +344,7 @@ class LoginFragment :
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == YoctuUtils.CODE_GOOGLE_SIGN_IN && resultCode == Activity.RESULT_OK) {
+        if (requestCode == YoctuUtils.CODE_GOOGLE_SIGN_IN && resultCode == Activity.RESULT_OK) {
             val googleUser = FirebaseAuth.getInstance().currentUser
             var user = User()
             user.email = googleUser!!.email!!
