@@ -71,13 +71,14 @@ class NotificationFragment:
         managerGoogleSignIn = YoctuApplication.kodein.with(activity).instance()
         notificationPresenter = YoctuApplication.kodein.with(activity).instance()
         manageToolbar()
-        initializeRecyclerView()
+        //initializeRecyclerView()
     }
 
     override fun onStart() {
         super.onStart()
 
         manageBroadcast()
+        initializeRecyclerView()
     }
 
     /**
