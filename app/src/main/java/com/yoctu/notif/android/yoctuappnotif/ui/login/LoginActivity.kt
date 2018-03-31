@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.with
 import com.yoctu.notif.android.yoctuappnotif.R
@@ -11,6 +12,7 @@ import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
 import com.yoctu.notif.android.yoctuappnotif.callback.CallbackNavBack
 import com.yoctu.notif.android.yoctuappnotif.ui.notification.NotificationActivity
 import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
+import com.yoctu.notif.android.yoctulibrary.models.Notification
 
 /**
  * Created on 26.03.18.
@@ -25,6 +27,8 @@ class LoginActivity :
         val KEY_HAS_NOTIFICATION = "key_has_notif"
         val KEY_NOTIFICATION_TITLE = "key_notif_title"
         val KEY_NOTIFICATION_TEXT = "key_notif_text"
+        val KEY_DATA_TITLE = "title"
+        val KEY_DATA_BODY = "body"
 
         fun newIntent(context: Context) {
             var intent = Intent(context,LoginActivity::class.java)
@@ -69,6 +73,14 @@ class LoginActivity :
 
         loginPresenter = YoctuApplication.kodein.with(this).instance()
 
+        //notification when app is in background
+        if (intent != null && intent.hasExtra(KEY_DATA_TITLE) && intent.hasExtra(KEY_DATA_BODY)) {
+            loginPresenter?.let {
+                loginPresenter!!.saveMessage(Notification(intent.getStringExtra(KEY_DATA_TITLE),intent.getStringExtra(KEY_DATA_BODY)))
+            }
+        }
+
+        //manage sign out
         if (intent != null && intent.hasExtra(KEY_SIGN_OUT)) {
             signOut = intent!!.getBooleanExtra(KEY_SIGN_OUT,false)
             intent.removeExtra(KEY_SIGN_OUT)
