@@ -28,6 +28,11 @@ open class Notification() :
         time = parcel.readLong()
     }
 
+    constructor(title: String, body: String): this() {
+        this.title = title
+        this.body = body
+    }
+
     override fun getViewType() = ConstantsViewType.VIEW_TYPE_NOTIFICATION
 
     fun formatTime() = LibraryUtils.formatDate(this.time)
