@@ -27,6 +27,7 @@ class LoginPresenter(context: Context) :
     }
 
     private var mView : LoginContract.View? = null
+    private var toppics: ArrayList<ViewType>? = null
 
     private var repository : YoctuRepository = YoctuApplication.kodein.with(mContext).instance()
 
@@ -86,7 +87,8 @@ class LoginPresenter(context: Context) :
     override fun showChannels() {
         mView?.let {
             mView!!.hideProgressBar()
-            mView!!.getChannels(YoctuUtils.fakeChannels())
+            //mView!!.getChannels(YoctuUtils.fakeChannels())
+            mView!!.getChannels(toppics!!)
         }
     }
 
@@ -127,6 +129,7 @@ class LoginPresenter(context: Context) :
     override fun onNext(response: Any) {
         if(response is ResponseChannels) { // ask google sign in
             Log.d(YoctuUtils.TAG_DEBUG, " response channel is ".plus(response.data == null).plus(" ").plus(response.data!!.size))
+            toppics = ArrayList<ViewType>(response.data)
             mView?.let {
                 mView!!.googleSignIn()
             }
