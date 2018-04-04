@@ -21,13 +21,13 @@ open class Notification() :
     var title : String = ""
     var body : String = ""
     var time : Long = 0
-    var topic: String = ""
+    //var topic: String = ""
 
     constructor(parcel: Parcel) : this() {
         title = parcel.readString()
         body = parcel.readString()
         time = parcel.readLong()
-        topic = parcel.readString()
+        //topic = parcel.readString()
     }
 
     constructor(title: String, body: String): this() {
@@ -38,7 +38,7 @@ open class Notification() :
     constructor(title: String, body: String, topic: String): this() {
         this.title = title
         this.body = body
-        this.topic = topic
+        //this.topic = topic
     }
 
     override fun getViewType() = ConstantsViewType.VIEW_TYPE_NOTIFICATION
@@ -48,14 +48,14 @@ open class Notification() :
     override fun toString() = title
             .plus(" - ")
             .plus(body)
-            .plus(" ")
-            .plus(topic)
+            //.plus(" ")
+            //.plus(topic)
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(title)
         parcel.writeString(body)
         parcel.writeLong(time)
-        parcel.writeString(topic)
+        //parcel.writeString(topic)
     }
 
     override fun describeContents(): Int {
