@@ -13,6 +13,7 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.realm.Realm
+import io.realm.RealmConfiguration
 import io.realm.kotlin.where
 import java.lang.IllegalArgumentException
 import java.util.*
@@ -29,6 +30,8 @@ class LocalDB(context: Context) {
     var mContext: Context
     init {
         mContext = context
+        //val config = RealmConfiguration.Builder().schemaVersion(1).build()
+        //Realm.setDefaultConfiguration(config)
         yoctuRealm = Realm.getDefaultInstance()
         Log.d(LibraryUtils.TAG_DEBUG," ----- database created ----- ")
     }
@@ -42,6 +45,12 @@ class LocalDB(context: Context) {
             yoctuRealm.close()
             Log.d(LibraryUtils.TAG_DEBUG," ------ database closed ----- ")
         }
+    }
+
+    fun deleteTopics() {
+        val results = yoctuRealm.where<Notification>().findAll()
+        if (results.size >= limit)
+            yoctuRealm.executeTransaction { realm ->  results.deleteAllFromRealm()}
     }
 
     /**
@@ -74,7 +83,7 @@ class LocalDB(context: Context) {
                     yoctuRealm.commitTransaction()
                     emitter.onNext("saved")
                     emitter.onComplete()
-                }catch (e : IllegalArgumentException) {
+                }catch (e : Throwable) {
                     e.printStackTrace()
                     emitter.onError(Throwable(e.message))
                 }

@@ -91,4 +91,8 @@ class YoctuRepository(context: Context) : Repository {
     }
 
     override fun getChangeToppics() = localManager.getWantChangeToppics()
+
+    override fun deleteTopics() {
+        database.deleteTopics()
+    }
 }

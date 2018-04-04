@@ -107,4 +107,9 @@ interface Repository {
      * @return Boolean
      */
     fun getChangeToppics() : Boolean
+
+    /**
+     * Delete all topics
+     */
+    fun deleteTopics()
 }
