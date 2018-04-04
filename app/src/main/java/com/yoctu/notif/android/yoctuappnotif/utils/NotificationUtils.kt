@@ -58,9 +58,9 @@ object NotificationUtils {
 
         var mBuilder =
                 NotificationCompat.Builder(context, context.getString(R.string.notification_channel_id))
-                        .setSmallIcon(R.drawable.ic_launcher)
                         .setContentTitle(title)
                         .setContentText(text)
+                        .setSmallIcon(R.drawable.ic_yoctu_notif_3)
                         .setContentIntent(createPendinInten(context)) //tap action
                         .setAutoCancel(true)  //remove itself
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
