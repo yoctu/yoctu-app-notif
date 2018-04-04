@@ -17,6 +17,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService(){
 
 
     private val TAG = "Firebase"
+    private val KEY_TITLE = "title"
+    private val KEY_MESSAGE = "body"
+    private val KEY_TOPIC = "topic"
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         super.onMessageReceived(remoteMessage)
@@ -29,7 +32,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService(){
                     .plus(" ")
                     .plus(remoteMessage.notification!!.body)
                     .plus(remoteMessage.data)
-                    .plus(maps.get("key")))
+                    .plus(maps.get(KEY_TITLE))
+                    .plus(" ")
+                    .plus(maps.get(KEY_MESSAGE)))
             noti.title = remoteMessage.notification!!.title!!
             noti.body =remoteMessage.notification!!.body!!
         } else if(remoteMessage.notification!!.body != null) {
