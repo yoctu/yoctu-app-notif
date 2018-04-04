@@ -146,13 +146,13 @@ class NotificationFragment:
         notificationPresenter?.let {
             val list = notificationPresenter!!.getMessages()
             if(list.size > 0) {
-                notification_fragment_container_img?.let { notification_fragment_container_img.visibility = View.GONE }
+                //notification_fragment_container_img?.let { notification_fragment_container_img.visibility = View.GONE }
                 notification_fragment_empty_list?.let { notification_fragment_empty_list.visibility = View.GONE }
                 recyclerView.visibility = View.VISIBLE
                 adapter.addItems(notificationPresenter!!.getMessages())
             } else {
                 notification_fragment_empty_list?.let { notification_fragment_empty_list.visibility = View.VISIBLE }
-                notification_fragment_container_img?.let { notification_fragment_container_img.visibility = View.VISIBLE }
+                //notification_fragment_container_img?.let { notification_fragment_container_img.visibility = View.VISIBLE }
                 recyclerView.visibility = View.GONE
             }
         }
@@ -179,7 +179,7 @@ class NotificationFragment:
         notification_fragment_empty_list?.let { notification_fragment_empty_list.visibility = View.GONE }
         notification_fragment_recycler_view.let { notification_fragment_recycler_view.visibility = View.GONE }
 
-        notification_fragment_container_img?.let { notification_fragment_container_img.visibility = View.VISIBLE }
+        //notification_fragment_container_img?.let { notification_fragment_container_img.visibility = View.VISIBLE }
         notification_fragment_not_logged?.let { notification_fragment_not_logged.visibility = View.VISIBLE }
     }
 
