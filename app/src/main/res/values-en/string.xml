@@ -20,11 +20,11 @@
 
     <!-- login fragment -->
     <string name="login_fragment_empty_list">There are not channels !</string>
-    <string name="login_fragment_register">Save my toppics</string>
+    <string name="login_fragment_register">Save my topics</string>
     <string name="login_fragment_there_are_not_chosen">You have to choose a channel</string>
     <string name="login_fragment_text_loading_data">Loading data from server...</string>
     <string name="login_fragment_text_google_sign_in">Sign in with Google</string>
-    <string name="login_fragment_title_toppics">Toppics</string>
+    <string name="login_fragment_title_toppics">Topics</string>
     <string name="login_fragment_title_sign_in">Sign in</string>
 
     <!-- notification -->
@@ -36,7 +36,7 @@
 
     <!-- menu notification -->
     <string name="menu_notification_sign_out">Sign out</string>
-    <string name="menu_notification_channels">My toppics</string>
+    <string name="menu_notification_channels">My topics</string>
 
     <!-- not logged-->
     <string name="login_not_logged">You have to log in to see topics</string>

@@ -24,7 +24,7 @@
     <string name="login_fragment_there_are_not_chosen">Vous devez choisir au moins un toppic</string>
     <string name="login_fragment_text_loading_data">Chargement des données à partir du server...</string>
     <string name="login_fragment_text_google_sign_in">Connexion à Google</string>
-    <string name="login_fragment_title_toppics">Toppics</string>
+    <string name="login_fragment_title_toppics">Topics</string>
     <string name="login_fragment_title_sign_in">Connexion</string>
 
     <!-- notification -->
@@ -36,7 +36,7 @@
 
     <!-- menu notification -->
     <string name="menu_notification_sign_out">Déconnexion</string>
-    <string name="menu_notification_channels">Mes toppics</string>
+    <string name="menu_notification_channels">Mes topics</string>
 
     <!-- not logged-->
     <string name="login_not_logged">Vous devez vous connecter pour voir la liste des messages</string>
