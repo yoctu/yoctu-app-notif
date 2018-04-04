@@ -19,7 +19,7 @@
     <string name="app_txt_connection_disable">Your network state is poor!!</string>
 
     <!-- login fragment -->
-    <string name="login_fragment_empty_list">There are not channels !</string>
+    <string name="login_fragment_empty_list">There are not topics !</string>
     <string name="login_fragment_register">Save my topics</string>
     <string name="login_fragment_there_are_not_chosen">You have to choose a channel</string>
     <string name="login_fragment_text_loading_data">Loading data from server...</string>
