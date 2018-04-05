@@ -6,6 +6,7 @@ import android.util.Log
 import com.yoctu.notif.android.yoctulibrary.LibraryUtils
 import com.yoctu.notif.android.yoctulibrary.models.Notification
 import com.yoctu.notif.android.yoctulibrary.models.ViewType
+import com.yoctu.notif.android.yoctulibrary.realm.module.NotificationsModule
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.ObservableOnSubscribe
@@ -30,8 +31,6 @@ class LocalDB(context: Context) {
     var mContext: Context
     init {
         mContext = context
-        //val config = RealmConfiguration.Builder().schemaVersion(1).build()
-        //Realm.setDefaultConfiguration(config)
         yoctuRealm = Realm.getDefaultInstance()
         Log.d(LibraryUtils.TAG_DEBUG," ----- database created ----- ")
     }
