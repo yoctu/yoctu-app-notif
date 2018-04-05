@@ -19,9 +19,9 @@
     <string name="app_txt_connection_disable">L\'état de votre réseau est faible !</string>
 
     <!-- login fragment -->
-    <string name="login_fragment_empty_list">Il n\'y a pas encore de toppics !</string>
+    <string name="login_fragment_empty_list">Il n\'y a pas encore de topics !</string>
     <string name="login_fragment_register">Enregistrer mes topics</string>
-    <string name="login_fragment_there_are_not_chosen">Vous devez choisir au moins un toppic</string>
+    <string name="login_fragment_there_are_not_chosen">Vous devez choisir au moins un topic</string>
     <string name="login_fragment_text_loading_data">Chargement des données à partir du server...</string>
     <string name="login_fragment_text_google_sign_in">Connexion à Google</string>
     <string name="login_fragment_title_toppics">Topics</string>
