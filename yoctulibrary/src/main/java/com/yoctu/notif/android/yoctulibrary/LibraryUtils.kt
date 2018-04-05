@@ -28,16 +28,16 @@ object LibraryUtils {
      */
     fun configureRealm(context: Context) {
         if(BuildConfig.DEBUG)
-            realmFileName = "yoctuappdebug.realmRepo"
+            realmFileName = "yoctuappdebugV2.realmRepo"
         else
-            realmFileName = "yoctuapp.realmRepo"
+            realmFileName = "yoctuappV2.realmRepo"
 
         Realm.init(context)
         val configurationChallengeMe = RealmConfiguration
                 .Builder()
                 .name(realmFileName)
                 .encryptionKey(encryptKey.toByteArray())
-                .schemaVersion(1)
+                .schemaVersion(2)
                 .modules(NotificationsModule())
                 .build()
 
