@@ -31,6 +31,7 @@
     <string name="notif_fragment_text_loading">Chargement des messages...</string>
     <string name="notif_fragment_title_view">Notifications</string>
     <!-- notification item -->
+    <string name="notif_item_topic">Topic :</string>
     <string name="notif_item_title">Titre :</string>
     <string name="notif_item_text">Texte :</string>
 
