@@ -175,7 +175,7 @@ class NotificationFragment:
      */
     override fun getMessage(message: String) {
         val obj = YoctuUtils.getNotificationFromJson(message)
-        Log.d(YoctuUtils.TAG_DEBUG,"from fcm message is ".plus(obj.title).plus(" ").plus(obj.body))
+        Log.d(YoctuUtils.TAG_DEBUG,"from fcm message is ".plus(obj.title).plus(" ").plus(obj.body).plus(" ").plus(obj.topic))
         activity?.let {
             NotificationUtils.createNotification(activity!!,obj.title,obj.body)
             notificationPresenter?.let {
