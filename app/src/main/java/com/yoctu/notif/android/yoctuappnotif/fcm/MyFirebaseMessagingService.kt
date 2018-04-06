@@ -37,6 +37,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService(){
                     .plus(maps.get(KEY_MESSAGE)))
             noti.title = remoteMessage.notification!!.title!!
             noti.body =remoteMessage.notification!!.body!!
+            if (maps.containsKey(KEY_TOPIC))
+                noti.topic = maps.get(KEY_TOPIC)!!
         } else if(remoteMessage.notification!!.body != null) {
             Log.d(TAG,remoteMessage.notification!!.title.plus(" ").plus(remoteMessage.notification!!.body))
             noti.title = remoteMessage.notification!!.title!!
