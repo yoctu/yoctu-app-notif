@@ -8,6 +8,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
 import com.yoctu.notif.android.yoctuappnotif.repository.YoctuRepository
 import com.yoctu.notif.android.yoctuappnotif.ui.notification.NotificationActivity
+import com.yoctu.notif.android.yoctuappnotif.utils.BroadcastUtils
 import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
 import com.yoctu.notif.android.yoctulibrary.models.*
 import io.reactivex.Observer
@@ -134,8 +135,14 @@ class LoginPresenter(context: Context) :
                 mView!!.googleSignIn()
             }
         }
-        if (response is String)
-            Log.d(YoctuUtils.TAG_DEBUG,"save decive id ".plus(response))
+
+        if (response is ResponseDeviceId)
+            Log.d(YoctuUtils.TAG_DEBUG,"save device id ".plus(response.status))
+
+        if (response is String && response.endsWith("saved")) {
+            Log.d(YoctuUtils.TAG_DEBUG, " *** ".plus(response))
+            BroadcastUtils.reloadNotification(mContext)
+        }
 
     }
 
