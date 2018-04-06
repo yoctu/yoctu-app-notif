@@ -42,7 +42,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService(){
         } else if(remoteMessage.notification!!.body != null) {
             Log.d(TAG,remoteMessage.notification!!.title.plus(" ").plus(remoteMessage.notification!!.body))
             noti.title = remoteMessage.notification!!.title!!
-            noti.body =remoteMessage.notification!!.body!!
+            noti.body = remoteMessage.notification!!.body!!
         }
         BroadcastUtils.sendMessage(applicationContext,YoctuUtils.createJsonFromObject(noti))
     }
