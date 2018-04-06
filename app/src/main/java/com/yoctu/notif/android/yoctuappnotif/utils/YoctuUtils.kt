@@ -41,6 +41,7 @@ object YoctuUtils {
     val KEY_TOKEN_FCM = "token_fcm"
 
     val INTENT_FILTER_FCM = "com.yoctu.notif.android.yoctuappnotif.fcm"
+    val INTENT_FILTER_RELOAD = "com.yoctu.notif.reload.android.yoctuappnotif.fcm"
 
     val TYPE_GOOGLE = "com.google"
     val CODE_GET_ACCOUNTS = 98
