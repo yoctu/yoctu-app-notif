@@ -29,6 +29,7 @@ class LoginActivity :
         val KEY_NOTIFICATION_TEXT = "key_notif_text"
         val KEY_DATA_TITLE = "title"
         val KEY_DATA_BODY = "body"
+        val KEY_DATA_TOPIC = "topic"
 
         fun newIntent(context: Context) {
             var intent = Intent(context,LoginActivity::class.java)
@@ -76,7 +77,10 @@ class LoginActivity :
         //notification when app is in background
         if (intent != null && intent.hasExtra(KEY_DATA_TITLE) && intent.hasExtra(KEY_DATA_BODY)) {
             loginPresenter?.let {
-                loginPresenter!!.saveMessage(Notification(intent.getStringExtra(KEY_DATA_TITLE),intent.getStringExtra(KEY_DATA_BODY)))
+                var n = Notification(intent.getStringExtra(KEY_DATA_TITLE),intent.getStringExtra(KEY_DATA_BODY))
+                if (intent.hasExtra(KEY_DATA_TOPIC))
+                    n.topic = intent.getStringExtra(KEY_DATA_TOPIC)
+                loginPresenter!!.saveMessage(n)
             }
         }
 
