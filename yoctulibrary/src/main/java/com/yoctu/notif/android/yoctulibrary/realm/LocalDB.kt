@@ -78,9 +78,10 @@ class LocalDB(context: Context) {
                     noti.body = notification.body
                     noti.title = notification.title
                     noti.time = Date().time
+                    noti.topic = notification.topic
                     yoctuRealm.copyToRealm(noti)
                     yoctuRealm.commitTransaction()
-                    emitter.onNext(noti.title.plus(" ").plus(noti.body).plus(" saved"))
+                    emitter.onNext(noti.title.plus(" ").plus(noti.body).plus(" ").plus(noti.topic).plus(" saved"))
                     emitter.onComplete()
                 }catch (e : Throwable) {
                     e.printStackTrace()
