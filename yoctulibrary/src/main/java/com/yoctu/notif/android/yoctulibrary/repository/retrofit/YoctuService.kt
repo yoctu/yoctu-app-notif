@@ -3,6 +3,7 @@ package com.yoctu.notif.android.yoctulibrary.repository.retrofit
 import com.yoctu.notif.android.yoctulibrary.models.Channel
 import com.yoctu.notif.android.yoctulibrary.models.ParamBodyDeviceID
 import com.yoctu.notif.android.yoctulibrary.models.ResponseChannels
+import com.yoctu.notif.android.yoctulibrary.models.ResponseDeviceId
 import io.reactivex.Observable
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -22,5 +23,5 @@ interface YoctuService {
 
     @Headers("Content-Type: application/json")
     @POST("/api/device-appear")
-    fun sendDeviceId(@Body params : ParamBodyDeviceID): Observable<String>
+    fun sendDeviceId(@Body params : ParamBodyDeviceID): Observable<ResponseDeviceId>
 }
