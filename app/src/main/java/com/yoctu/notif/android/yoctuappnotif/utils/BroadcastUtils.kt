@@ -6,6 +6,7 @@ import android.content.Intent
 import android.support.v4.content.LocalBroadcastManager
 import android.util.Log
 import com.yoctu.notif.android.yoctuappnotif.callback.CallbackBroadcast
+import com.yoctu.notif.android.yoctuappnotif.callback.CallbackReloadNotification
 
 /**
  * This class allows to mange broad cast in the project
@@ -17,6 +18,7 @@ object BroadcastUtils {
     var callbackLoginFragment : CallbackBroadcast? = null
     var callbackNotifFragment : CallbackBroadcast? = null
     var callbackNotifLoginFragment : CallbackBroadcast? = null
+    var callbackReloadNotification: CallbackReloadNotification? = null
 
     /**
      * Local broad cats for FCM
@@ -38,7 +40,21 @@ object BroadcastUtils {
                 callbackLoginFragment?.getToken(token_fcm!!)
 
 
-            Log.d(YoctuUtils.TAG_DEBUG," --- local broadcast receiver ---")
+            Log.d(YoctuUtils.TAG_DEBUG," --- local broadcast receiver notification ---")
+        }
+    }
+
+    /**
+     * Called when app is in background and receives a notification
+     * and we save the notifications in database, it's necessary to relaod the list of notification
+     *
+     * send to notification fragment
+     */
+    val mReloadNotificationReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            callbackReloadNotification?.let { callbackReloadNotification -> callbackReloadNotification.reload() }
+
+            Log.d(YoctuUtils.TAG_DEBUG," --- local broadcast receiver reload notifications ---")
         }
     }
 
@@ -66,6 +82,10 @@ object BroadcastUtils {
         callbackNotifLoginFragment = callbackBroadcast
     }
 
+    fun registerCallbackReloadNotification(callbackReload : CallbackReloadNotification) {
+        callbackReloadNotification = callbackReload
+    }
+
 
     /**
      * This function allows to send notification to broad cast
@@ -88,6 +108,15 @@ object BroadcastUtils {
     fun sendToken(context: Context, token : String) {
         var intent = Intent(YoctuUtils.INTENT_FILTER_FCM)
         intent.putExtra(YoctuUtils.KEY_TOKEN_FCM,token)
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent)
+    }
+
+    /**
+     * This function allows to send a reload request of notification
+     * @param context
+     */
+    fun reloadNotification(context: Context) {
+        var intent = Intent(YoctuUtils.INTENT_FILTER_RELOAD)
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent)
     }
 
