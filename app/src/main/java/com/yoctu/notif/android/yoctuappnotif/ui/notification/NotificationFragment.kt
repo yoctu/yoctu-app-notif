@@ -19,6 +19,7 @@ import com.yoctu.notif.android.yoctuappnotif.R
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
 import com.yoctu.notif.android.yoctuappnotif.callback.CallbackBroadcast
 import com.yoctu.notif.android.yoctuappnotif.callback.CallbackNavBack
+import com.yoctu.notif.android.yoctuappnotif.callback.CallbackReloadNotification
 import com.yoctu.notif.android.yoctuappnotif.managers.ManageGoogleSignin
 import com.yoctu.notif.android.yoctuappnotif.ui.adapters.YoctuAdapter
 import com.yoctu.notif.android.yoctuappnotif.utils.BroadcastUtils
@@ -34,7 +35,8 @@ import kotlinx.android.synthetic.main.fragment_notification.*
 class NotificationFragment:
         Fragment(),
         NotificationContract.View,
-        CallbackBroadcast {
+        CallbackBroadcast,
+        CallbackReloadNotification {
 
     companion object {
         fun newInstance() = NotificationFragment()
@@ -119,7 +121,12 @@ class NotificationFragment:
                 .registerReceiver(BroadcastUtils.mNotificationReceiver,
                         IntentFilter(YoctuUtils.INTENT_FILTER_FCM))
 
+        LocalBroadcastManager.getInstance(activity!!)
+                .registerReceiver(BroadcastUtils.mReloadNotificationReceiver,
+                        IntentFilter(YoctuUtils.INTENT_FILTER_RELOAD))
+
         BroadcastUtils.registerNotifFragment(this)
+        BroadcastUtils.registerCallbackReloadNotification(this)
     }
 
     /**
@@ -156,6 +163,10 @@ class NotificationFragment:
                 recyclerView.visibility = View.GONE
             }
         }
+    }
+
+    override fun reload() {
+        populateRecyclerView()
     }
 
     /**
@@ -212,6 +223,9 @@ class NotificationFragment:
         super.onStop()
         LocalBroadcastManager.getInstance(activity!!)
                 .unregisterReceiver(BroadcastUtils.mNotificationReceiver)
+
+                        LocalBroadcastManager.getInstance(activity!!)
+                .unregisterReceiver(BroadcastUtils.mReloadNotificationReceiver)
 
     }*/
 
