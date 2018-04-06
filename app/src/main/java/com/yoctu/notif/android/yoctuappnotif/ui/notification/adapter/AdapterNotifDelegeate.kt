@@ -2,9 +2,11 @@ package com.yoctu.notif.android.yoctuappnotif.ui.notification.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.yoctu.notif.android.yoctuappnotif.R
 import com.yoctu.notif.android.yoctuappnotif.ui.adapters.ViewTypeDelegateAdapter
@@ -29,6 +31,12 @@ class AdapterNotifDelegeate (context: Context): ViewTypeDelegateAdapter {
         holder as NotificationViewHolder
         item as Notification
 
+        Log.d("debug","topic is ".plus(item.topic))
+        if (item.topic.isNullOrEmpty()) {
+            holder.layoutTopic.visibility = View.GONE
+        } else {
+            holder.viewTopic.text = item.topic
+        }
         holder.viewTime.text = item.formatTime()
         holder.viewTitle.text = item.title
         holder.viewText.text = item.body
@@ -38,10 +46,14 @@ class AdapterNotifDelegeate (context: Context): ViewTypeDelegateAdapter {
         var viewTime : TextView
         var viewTitle : TextView
         var viewText : TextView
+        var viewTopic: TextView
+        var layoutTopic: LinearLayout
         init {
             viewTime = view.findViewById(R.id.notification_item_time)
             viewTitle = view.findViewById(R.id.notification_item_title)
             viewText = view.findViewById(R.id.notification_item_text)
+            viewTopic = view.findViewById(R.id.notification_item_topic)
+            layoutTopic = view.findViewById(R.id.notification_item_layout_topic)
         }
     }
 }
