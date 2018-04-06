@@ -32,7 +32,7 @@ class AdapterNotifDelegeate (context: Context): ViewTypeDelegateAdapter {
         item as Notification
 
         Log.d("debug","topic is ".plus(item.topic))
-        if (item.topic.isNullOrEmpty()) {
+        if (item.topic.isEmpty()) {
             holder.layoutTopic.visibility = View.GONE
         } else {
             holder.viewTopic.text = item.topic
