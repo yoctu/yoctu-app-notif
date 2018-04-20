@@ -31,11 +31,11 @@ class AdapterNotifDelegeate (context: Context): ViewTypeDelegateAdapter {
         holder as NotificationViewHolder
         item as Notification
 
-        Log.d("debug","topic is ".plus(item.topic))
         if (item.topic.isEmpty()) {
             holder.layoutTopic.visibility = View.GONE
         } else {
             holder.viewTopic.text = item.topic
+            holder.layoutTopic.visibility = View.VISIBLE
         }
         holder.viewTime.text = item.formatTime()
         holder.viewTitle.text = item.title

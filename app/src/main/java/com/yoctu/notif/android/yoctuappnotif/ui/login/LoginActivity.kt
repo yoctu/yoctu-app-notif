@@ -74,6 +74,7 @@ class LoginActivity :
 
         loginPresenter = YoctuApplication.kodein.with(this).instance()
 
+
         //notification when app is in background
         if (intent != null && intent.hasExtra(KEY_DATA_TITLE) && intent.hasExtra(KEY_DATA_BODY)) {
             loginPresenter?.let {

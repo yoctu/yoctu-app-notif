@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.util.Log
 import android.view.*
 import com.github.salomonbrys.kodein.instance
@@ -140,6 +141,16 @@ class NotificationFragment:
             recyclerView.layoutManager = layoutManager
             adapter = YoctuAdapter(activity!!)
             recyclerView.adapter = adapter
+
+            /*val simpleItemTouchCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
+                    Log.d(YoctuUtils.TAG_DEBUG,"swipe on list here ...")
+                }
+
+                override fun onMove(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?, target: RecyclerView.ViewHolder?) = true
+            }
+            val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
+            itemTouchHelper.attachToRecyclerView(recyclerView)*/
 
             populateRecyclerView()
         }
