@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
 import com.yoctu.notif.android.yoctuappnotif.comparator.ComparatorNotification
 import com.yoctu.notif.android.yoctuappnotif.repository.YoctuRepository
+import com.yoctu.notif.android.yoctuappnotif.ui.add.AddTopicURLActivity
 import com.yoctu.notif.android.yoctuappnotif.ui.login.LoginActivity
 import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
 import com.yoctu.notif.android.yoctulibrary.models.Notification
@@ -70,7 +71,14 @@ class NotificationPresenter(context: Context):
      */
     override fun redirectToChannels() {
         repository.changeToppics(true)
-        LoginActivity.newIntent(mContext)
+        //LoginActivity.newIntent(mContext)
+    }
+
+    /**
+     * redirect to view to manage topic URL
+     */
+    override fun redirectToManageTopicURL() {
+        AddTopicURLActivity.newInten(mContext)
     }
 
     override fun dropView() {

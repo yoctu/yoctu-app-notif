@@ -20,6 +20,7 @@ interface NotificationContract {
         fun saveMessage(notification: Notification)
         fun googleSignOut()
         fun redirectToChannels()
+        fun redirectToManageTopicURL()
         fun logged()
     }
 }

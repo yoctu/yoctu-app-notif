@@ -224,7 +224,10 @@ class NotificationFragment:
                 }
             }
             R.id.menu_notif_channels -> {
-                notificationPresenter?.let { notificationPresenter!!.redirectToChannels() }
+                notificationPresenter?.let { presenter ->  presenter.redirectToChannels() }
+            }
+            R.id.menu_notif_manage_topic_url -> {
+                notificationPresenter?.let { presenter -> presenter.redirectToManageTopicURL() }
             }
         }
         return true
