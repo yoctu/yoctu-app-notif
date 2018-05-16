@@ -32,6 +32,18 @@
             android:theme="@style/AppNoActionBar"
             android:launchMode="singleInstance"/>
 
+        <activity
+            android:name=".ui.topic.TopicActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppNoActionBar"
+            android:launchMode="singleInstance"/>
+
+        <activity
+            android:name=".ui.add.AddTopicActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppNoActionBar"
+            android:launchMode="singleInstance"/>
+
         <!-- Firebase -->
         <service android:name=".fcm.MyFirebaseMessagingService">
             <intent-filter>
