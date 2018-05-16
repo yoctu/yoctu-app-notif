@@ -163,7 +163,8 @@ class LoginFragment :
         if (YoctuUtils.checkConnectivity(activity!!)) {
             if (deviceId != null) {
                 loginPresenter?.let {
-                    loginPresenter!!.askChannels()
+                    //loginPresenter!!.askChannels()
+                    googleSignIn()
                 }
             }
         } else {
@@ -322,7 +323,7 @@ class LoginFragment :
                     login_fragment_progress_bar?.let { login_fragment_progress_bar.visibility = View.GONE }
                     launchGoogleSignIn()
                 } else { //show channels
-                    loginPresenter!!.showChannels()
+                    //loginPresenter!!.showChannels()
                 }
             }
         }
