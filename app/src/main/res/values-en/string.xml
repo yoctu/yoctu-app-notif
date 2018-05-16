@@ -36,7 +36,11 @@
     <string name="notif_item_text">Text :</string>
 
     <!-- add topic URL -->
-    <string name="add_opic_url_view_title">Manage my URL</string>
+    <string name="add_topic_url_view_title">Manage my URL</string>
+    <string name="add_topic_url_current_url_text">My current url</string>
+    <string name="add_topic_url_current_url_save_new_url">Save</string>
+    <string name="add_topic_url_current_url_replace_url">Replace</string>
+    <string name="add_topic_url_current_url_text_url">URL</string>
 
     <!-- menu notification -->
     <string name="menu_notification_sign_out">Sign out</string>
