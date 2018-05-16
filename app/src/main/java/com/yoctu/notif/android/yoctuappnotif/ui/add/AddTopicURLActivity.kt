@@ -6,6 +6,6 @@ import android.support.v7.app.AppCompatActivity
  * Created by gael on 16.05.18.
  */
 
-class AddTopicActivity: AppCompatActivity() {
+class AddTopicURLActivity: AppCompatActivity() {
 
 }

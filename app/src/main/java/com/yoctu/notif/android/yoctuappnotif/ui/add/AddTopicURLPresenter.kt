@@ -6,14 +6,14 @@ import android.content.Context
  * Created by gael on 16.05.18.
  */
 
-class AddTopicPresenter(context: Context): AddTopicContract.Presenter {
+class AddTopicURLPresenter(context: Context): AddTopicURLContract.Presenter {
     private var mContext : Context
-    private var mView : AddTopicContract.View? = null
+    private var mView : AddTopicURLContract.View? = null
     init {
         mContext = context
     }
 
-    override fun takeView(view: AddTopicContract.View) {
+    override fun takeView(view: AddTopicURLContract.View) {
         this.mView = view
     }
 
