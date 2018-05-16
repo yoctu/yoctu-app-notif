@@ -35,6 +35,9 @@
     <string name="notif_item_title">Titre :</string>
     <string name="notif_item_text">Texte :</string>
 
+    <!-- add topic URL -->
+    <string name="add_opic_url_view_title">Gérer mon URL</string>
+
     <!-- menu notification -->
     <string name="menu_notification_sign_out">Déconnexion</string>
     <string name="menu_notification_channels">Mes topics</string>
