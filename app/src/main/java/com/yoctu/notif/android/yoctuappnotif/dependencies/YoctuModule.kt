@@ -7,6 +7,8 @@ import com.github.salomonbrys.kodein.multiton
 import com.github.salomonbrys.kodein.singleton
 import com.yoctu.notif.android.yoctuappnotif.managers.ManageGoogleSignin
 import com.yoctu.notif.android.yoctuappnotif.repository.YoctuRepository
+import com.yoctu.notif.android.yoctuappnotif.ui.add.AddTopicURLContract
+import com.yoctu.notif.android.yoctuappnotif.ui.add.AddTopicURLPresenter
 import com.yoctu.notif.android.yoctuappnotif.ui.login.LoginContract
 import com.yoctu.notif.android.yoctuappnotif.ui.login.LoginFragment
 import com.yoctu.notif.android.yoctuappnotif.ui.login.LoginPresenter
@@ -35,6 +37,8 @@ object YoctuModule {
         // ** notification **
         bind<NotificationContract.Presenter>() with multiton { context: Context -> NotificationPresenter(context) }
         bind<NotificationFragment>() with singleton { NotificationFragment() }
+        // ** add topic url **
+        bind<AddTopicURLContract.Presenter>() with multiton { context: Context -> AddTopicURLPresenter(context) }
 
         //managers
         bind<ManageGoogleSignin>() with multiton { context: Context -> ManageGoogleSignin(context) }
