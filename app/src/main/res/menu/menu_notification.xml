@@ -3,12 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_notif_sign_out"
-        android:icon="@drawable/ic_account_circle"
-        android:title="@string/menu_notification_sign_out" />
-
-    <item
         android:id="@+id/menu_notif_channels"
         android:icon="@drawable/ic_list_channels"
         android:title="@string/menu_notification_channels" />
+    <item
+        android:id="@+id/menu_notif_sign_out"
+        android:icon="@drawable/ic_account_circle"
+        android:title="@string/menu_notification_sign_out" />
 </menu>
