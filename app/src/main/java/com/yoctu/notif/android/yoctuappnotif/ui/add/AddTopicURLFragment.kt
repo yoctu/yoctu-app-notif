@@ -63,6 +63,7 @@ class AddTopicURLFragment:
         }
         manageToolbar()
         manageClickEvents()
+        //manageView()
     }
 
     private fun checkTopicURL(context: Context) {
