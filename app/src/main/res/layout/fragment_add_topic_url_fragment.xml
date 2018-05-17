@@ -16,12 +16,58 @@
         <include layout="@layout/default_toolbar" />
 
     </android.support.v7.widget.Toolbar>
-
     <LinearLayout
-        android:id="@+id/add_topic_url_linear_layout_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+        <LinearLayout
+            android:id="@+id/add_topic_url_linear_layout_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:textColor="@color/colorBlack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_topic_url_current_url_text"/>
+            <TextView
+                android:id="@+id/add_topic_url_fragment_current_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/add_topic_url_fragment_linear_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_topic_url_current_url_text_url"
+                    android:textColor="@color/colorBlack"
+                    android:gravity="center"/>
+                <EditText
+                    android:id="@+id/add_topic_url_fragment_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/add_topic_url_current_url_hint"/>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/add_topic_url_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/colorBlueOne"
+                android:background="@drawable/rounded_white_button"
+                android:text="@string/add_topic_url_current_url_save_new_url_btn"/>
+        </LinearLayout>
 
     </LinearLayout>
 

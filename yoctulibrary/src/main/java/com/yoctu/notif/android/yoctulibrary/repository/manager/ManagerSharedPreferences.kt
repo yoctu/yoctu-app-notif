@@ -29,6 +29,7 @@ class ManagerSharedPreferences(context: Context) {
     private val KEY_CHANNELS = "key_channels"
     private val KEY_EMAIL = "key_saved_email"
     private val KEY_WANT_CHANGE_TOPPICS = "key_change_toppics"
+    private val KEY_CURRENT_TOPIC_URL = "key_topic_url"
 
     /**
      * Write user in shared preferences
@@ -171,6 +172,26 @@ class ManagerSharedPreferences(context: Context) {
             return preferencesApplication.getBoolean(KEY_WANT_CHANGE_TOPPICS,false)
         }
         return false
+    }
+
+    /**
+     * Save the current topic url
+     * @param url
+     */
+    fun saveTopicURL(url: String) {
+        var editor = preferencesApplication.edit()
+        editor.putString(KEY_CURRENT_TOPIC_URL,url)
+        editor.commit()
+    }
+
+    /**
+     * @return Topic URL
+     */
+    fun getTopicURL(): String? {
+        if (preferencesApplication.contains(KEY_EMAIL)) {
+            return preferencesApplication.getString(KEY_CURRENT_TOPIC_URL,"")
+        }
+        return null
     }
 
 }

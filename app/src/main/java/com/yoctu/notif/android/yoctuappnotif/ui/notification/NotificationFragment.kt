@@ -142,7 +142,7 @@ class NotificationFragment:
             adapter = YoctuAdapter(activity!!)
             recyclerView.adapter = adapter
 
-            /*val simpleItemTouchCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            val simpleItemTouchCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
                     Log.d(YoctuUtils.TAG_DEBUG,"swipe on list here ...")
                 }
@@ -150,7 +150,7 @@ class NotificationFragment:
                 override fun onMove(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?, target: RecyclerView.ViewHolder?) = true
             }
             val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
-            itemTouchHelper.attachToRecyclerView(recyclerView)*/
+            itemTouchHelper.attachToRecyclerView(recyclerView)
 
             populateRecyclerView()
         }

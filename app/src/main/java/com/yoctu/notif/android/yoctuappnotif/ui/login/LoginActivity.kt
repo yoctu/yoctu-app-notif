@@ -4,13 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.with
 import com.yoctu.notif.android.yoctuappnotif.R
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
 import com.yoctu.notif.android.yoctuappnotif.callback.CallbackNavBack
 import com.yoctu.notif.android.yoctuappnotif.ui.notification.NotificationActivity
+import com.yoctu.notif.android.yoctuappnotif.ui.topic.TopicActivity
 import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
 import com.yoctu.notif.android.yoctulibrary.models.Notification
 
@@ -107,16 +107,19 @@ class LoginActivity :
             loginPresenter?.let {
                 val currentUser = loginPresenter!!.getUser()
                 val changeToppics = loginPresenter!!.changeToppics()
-                val listToppics = loginPresenter!!.getToppics()
+                //val listToppics = loginPresenter!!.getTopics()
 
-                if ( (currentUser == null) || (currentUser != null && (changeToppics || listToppics == null)) ) { //first time OR (want change toppics OR not yet chosen)
-                    if(changeToppics)
+                if ( (currentUser == null) /*|| (currentUser != null && (changeToppics || listToppics == null))*/ ) { //first time OR (want change toppics OR not yet chosen)
+                    /*if(changeToppics)
                         loginPresenter!!.setChangeToppics(false)
-
+                    */
                     displayLoginFragment()
-                } else if (currentUser != null && !changeToppics) {
+                } else if (currentUser != null /*&& !changeToppics*/) {
                     finish()
                     startActivity(NotificationActivity.newIntent(this))
+                } else if (changeToppics) {
+                    finish()
+                    TopicActivity.newIntent(this)
                 }
             }
         }

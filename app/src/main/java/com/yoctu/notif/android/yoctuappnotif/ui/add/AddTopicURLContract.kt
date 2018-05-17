@@ -7,6 +7,10 @@ import com.yoctu.notif.android.yoctuappnotif.BaseView
  * Created by gael on 16.05.18.
  */
 interface AddTopicURLContract {
-    interface View: BaseView<Presenter> {}
-    interface Presenter: BasePresenter<View> {}
+    interface View: BaseView<Presenter> {
+        fun showErrorMessage(message: String)
+    }
+    interface Presenter: BasePresenter<View> {
+        fun saveTopicURL(url: String)
+    }
 }

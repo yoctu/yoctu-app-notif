@@ -10,6 +10,7 @@ import com.yoctu.notif.android.yoctuappnotif.comparator.ComparatorNotification
 import com.yoctu.notif.android.yoctuappnotif.repository.YoctuRepository
 import com.yoctu.notif.android.yoctuappnotif.ui.add.AddTopicURLActivity
 import com.yoctu.notif.android.yoctuappnotif.ui.login.LoginActivity
+import com.yoctu.notif.android.yoctuappnotif.ui.topic.TopicActivity
 import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
 import com.yoctu.notif.android.yoctulibrary.models.Notification
 import com.yoctu.notif.android.yoctulibrary.models.ViewType
@@ -72,6 +73,7 @@ class NotificationPresenter(context: Context):
     override fun redirectToChannels() {
         repository.changeToppics(true)
         //LoginActivity.newIntent(mContext)
+        TopicActivity.newIntent(mContext)
     }
 
     /**

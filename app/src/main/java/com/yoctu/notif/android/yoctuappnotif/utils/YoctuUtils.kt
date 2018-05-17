@@ -46,6 +46,9 @@ object YoctuUtils {
     val TYPE_GOOGLE = "com.google"
     val CODE_GET_ACCOUNTS = 98
 
+    val TYPE_HTTP = "http://"
+    val TYPE_HTTPS = "https://"
+
     /**
      * @param supportManger
      * @param containerView
@@ -172,4 +175,18 @@ object YoctuUtils {
         return gson.fromJson(str,Notification::class.java)
     }
 
+    /**
+     * Indicates if URL has a good format
+     * Check if begins by http or https and contains the second part
+     *
+     * @return Boolean
+     */
+    fun isValidScheme(url: String): Boolean {
+        var goodFormat = url.startsWith(TYPE_HTTP) or(url.startsWith(TYPE_HTTPS))
+        if (goodFormat) {
+            var list = url.split("//")
+            goodFormat = list.size > 1 && !list.get(1).isEmpty()
+        }
+        return goodFormat
+    }
 }

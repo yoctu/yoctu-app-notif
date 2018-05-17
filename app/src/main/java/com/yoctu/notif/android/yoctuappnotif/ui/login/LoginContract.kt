@@ -15,17 +15,17 @@ interface LoginContract {
 
     interface View : BaseView<Presenter>{
         fun hideProgressBar()
-        fun getChannels(list : ArrayList<ViewType>)
+        //fun getChannels(list : ArrayList<ViewType>)
         fun googleSignIn()
     }
     interface Presenter : BasePresenter<View>{
-        fun askChannels()
-        fun saveChannels(chosen : ArrayList<ViewType>)
-        fun showChannels()
+        //fun askChannels()
+        //fun saveChannels(chosen : ArrayList<ViewType>)
+        //fun showChannels()
         fun saveUserInLocal(user: User)
         fun sendDeviceId()
         fun getUser(): User?
-        fun getToppics(): ArrayList<ViewType>?
+        fun getTopics(): ArrayList<ViewType>?
         fun gotoNotifications()
         fun changeToppics(): Boolean
         fun setChangeToppics(newValue: Boolean)
