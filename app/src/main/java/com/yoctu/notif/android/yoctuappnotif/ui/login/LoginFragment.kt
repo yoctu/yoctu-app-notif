@@ -162,10 +162,10 @@ class LoginFragment :
         //get channels
         if (YoctuUtils.checkConnectivity(activity!!)) {
             if (deviceId != null) {
-                loginPresenter?.let {
-                    //loginPresenter!!.askChannels()
-                    googleSignIn()
-                }
+                /*loginPresenter?.let {
+                    loginPresenter!!.askChannels()
+                }*/
+                googleSignIn()
             }
         } else {
             login_fragment_main_linear_layout?.let {
@@ -298,7 +298,7 @@ class LoginFragment :
     }*/
 
     override fun hideProgressBar() {
-        login_fragment_progress_bar?.let { login_fragment_progress_bar!!.visibility = View.GONE }
+        //login_fragment_progress_bar?.let { login_fragment_progress_bar!!.visibility = View.GONE }
     }
 
     /**
@@ -312,7 +312,7 @@ class LoginFragment :
         login_fragment_text_loading?.let { login_fragment_text_loading.visibility = View.GONE }
         login_fragment_sign_in_btn?.let { login_fragment_sign_in_btn.visibility = View.GONE }
         if (isSignout) {
-            login_fragment_progress_bar?.let { login_fragment_progress_bar.visibility = View.GONE }
+            //login_fragment_progress_bar?.let { login_fragment_progress_bar.visibility = View.GONE }
             login_fragment_sign_in_btn?.let { login_fragment_sign_in_btn.visibility = View.VISIBLE }
         } else {
             loginPresenter?.let {
@@ -321,11 +321,12 @@ class LoginFragment :
                     /*login_fragment_text_google_sign_in?.let {
                         login_fragment_text_google_sign_in.visibility = View.VISIBLE
                     }*/
-                    login_fragment_progress_bar?.let { login_fragment_progress_bar.visibility = View.GONE }
+                    //login_fragment_progress_bar?.let { login_fragment_progress_bar.visibility = View.GONE }
                     launchGoogleSignIn()
-                } /*else { //show channels
-                    //loginPresenter!!.showChannels()
-                }*/
+                } else {
+                    //loginPresenter!!.showChannels() //show channels
+                    loginPresenter?.let { presenter -> presenter.gotoNotifications() } //got to notification
+                }
             }
         }
     }

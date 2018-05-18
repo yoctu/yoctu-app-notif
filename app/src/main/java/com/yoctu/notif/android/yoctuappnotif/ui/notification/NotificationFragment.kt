@@ -76,6 +76,7 @@ class NotificationFragment:
         notificationPresenter = YoctuApplication.kodein.with(activity).instance()
         manageToolbar()
         //initializeRecyclerView()
+        //notificationPresenter?.let { it.deleteAll() }
     }
 
     override fun onStart() {

@@ -23,6 +23,14 @@ class AddTopicURLActivity: AppCompatActivity() {
 
         setContentView(R.layout.activity_add_topic_url)
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        onNewIntent(intent)
+    }
+
+    override fun onNewIntent(intent: Intent?) {
         var addTopicURLFragment : AddTopicURLFragment? = YoctuUtils.getFragment(supportFragmentManager, R.id.activity_add_topic_container_fragment) as? AddTopicURLFragment
         if (addTopicURLFragment == null) {
             addTopicURLFragment = AddTopicURLFragment.newInstance()

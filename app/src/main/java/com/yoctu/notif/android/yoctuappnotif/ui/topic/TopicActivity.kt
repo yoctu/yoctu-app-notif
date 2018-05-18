@@ -18,7 +18,17 @@ class TopicActivity: AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
 
+    private fun getLayoutResId() = R.layout.activity_topic
+
+    override fun onResume() {
+        super.onResume()
+        onNewIntent(intent)
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
         setContentView(getLayoutResId())
         var topicFragment : TopicFragment? = YoctuUtils.getFragment(supportFragmentManager, R.id.notification_container_fragment) as? TopicFragment
         if (topicFragment == null) {
@@ -29,7 +39,5 @@ class TopicActivity: AppCompatActivity() {
                     R.id.activity_topic_container)
         }
     }
-
-    private fun getLayoutResId() = R.layout.activity_topic
 
 }

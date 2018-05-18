@@ -13,5 +13,6 @@ interface AddTopicURLContract {
     interface Presenter: BasePresenter<View> {
         fun saveTopicURL(url: String)
         fun goToNotifications()
+        fun getTopicURL(): String?
     }
 }

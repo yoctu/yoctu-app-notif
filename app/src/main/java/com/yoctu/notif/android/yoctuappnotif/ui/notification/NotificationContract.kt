@@ -25,5 +25,6 @@ interface NotificationContract {
         fun redirectToManageTopicURL()
         fun deleteNotification(notification: Notification)
         fun logged()
+        fun deleteAll()
     }
 }

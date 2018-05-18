@@ -74,10 +74,8 @@ class AddTopicURLFragment:
     }
 
     private fun checkTopicURL(activity: Activity) {
-        managerSharedPreferences = YoctuApplication.kodein.with(activity.applicationContext).instance()
-        managerSharedPreferences?.let { shared ->
-            currentTopicURL = shared.getTopicURL()
-
+        addPresenter?.let { presenter ->
+            currentTopicURL = presenter.getTopicURL()
             if (currentTopicURL == null) {
                 add_topic_url_linear_layout_horizontal?.let { container ->
                     container.visibility = View.GONE
@@ -90,6 +88,13 @@ class AddTopicURLFragment:
                 }
                 add_topic_url_button?.let { button -> button.text = activity?.let { it.resources.getString(R.string.add_topic_url_current_url_replace_url_btn) } }
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activity?.let { act ->
+            checkTopicURL(act)
         }
     }
 

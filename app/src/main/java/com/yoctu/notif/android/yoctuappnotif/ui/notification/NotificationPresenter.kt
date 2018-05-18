@@ -98,6 +98,13 @@ class NotificationPresenter(context: Context):
         Log.e(YoctuUtils.TAG_ERROR,e.message)
     }
 
+    //clear db to test
+    override fun deleteAll() {
+        repository.deleteUser()
+        repository.deleteTopics()
+        repository.deleteChannels()
+        repository.removeTopicURL()
+    }
 
     override fun onNext(result: Any) {
         if (result is String) { //notify the adapter

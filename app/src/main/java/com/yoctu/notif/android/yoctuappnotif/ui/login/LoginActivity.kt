@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.with
 import com.yoctu.notif.android.yoctuappnotif.R
@@ -105,7 +106,7 @@ class LoginActivity :
                     R.id.login_container_fragment)
         } else {
             loginPresenter?.let {
-                val currentUser = loginPresenter!!.getUser()
+                var currentUser = loginPresenter!!.getUser()
                 val changeToppics = loginPresenter!!.changeToppics()
                 //val listToppics = loginPresenter!!.getTopics()
 
