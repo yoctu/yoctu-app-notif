@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/add_topic_url_fragment_principal_container"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
@@ -19,33 +20,39 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/dimen_5"
+        android:layout_marginRight="@dimen/dimen_5"
         android:orientation="vertical"
         android:gravity="center">
         <LinearLayout
             android:id="@+id/add_topic_url_linear_layout_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
             <TextView
                 android:textColor="@color/colorBlack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="@string/add_topic_url_current_url_text"/>
             <TextView
                 android:id="@+id/add_topic_url_fragment_current_url"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/add_topic_url_fragment_linear_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="match_parent"
@@ -60,12 +67,14 @@
                     android:hint="@string/add_topic_url_current_url_hint"/>
             </LinearLayout>
             <TextView
+                android:layout_marginTop="@dimen/dimen_10"
                 android:id="@+id/add_topic_url_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/colorBlueOne"
-                android:background="@drawable/rounded_white_button"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                android:background="@drawable/rounded_btn"
                 android:text="@string/add_topic_url_current_url_save_new_url_btn"/>
         </LinearLayout>
 
