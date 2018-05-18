@@ -14,6 +14,8 @@ interface NotificationContract {
     interface View : BaseView<Presenter> {
         fun populateRecyclerView()
         fun notLogged()
+        fun deletedWithSuccess()
+        fun deleteError()
     }
     interface Presenter : BasePresenter<View> {
         fun getMessages(): ArrayList<ViewType>
@@ -21,6 +23,7 @@ interface NotificationContract {
         fun googleSignOut()
         fun redirectToChannels()
         fun redirectToManageTopicURL()
+        fun deleteNotification(notification: Notification)
         fun logged()
     }
 }

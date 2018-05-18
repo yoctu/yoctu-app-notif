@@ -26,6 +26,7 @@ import com.yoctu.notif.android.yoctuappnotif.ui.adapters.YoctuAdapter
 import com.yoctu.notif.android.yoctuappnotif.utils.BroadcastUtils
 import com.yoctu.notif.android.yoctuappnotif.utils.NotificationUtils
 import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
+import com.yoctu.notif.android.yoctulibrary.models.Notification
 import kotlinx.android.synthetic.main.default_toolbar.*
 import kotlinx.android.synthetic.main.fragment_notification.*
 
@@ -144,7 +145,11 @@ class NotificationFragment:
 
             val simpleItemTouchCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
-                    Log.d(YoctuUtils.TAG_DEBUG,"swipe on list here ...")
+                    Log.d(YoctuUtils.TAG_DEBUG,"swipe on list here ... for ".plus(viewHolder!!.adapterPosition))
+                    notificationPresenter?.let { presenter ->
+                        val viewType = adapter?.let { current -> current.getItems()[viewHolder.adapterPosition] }
+                        presenter.deleteNotification(viewType as Notification)
+                    }
                 }
 
                 override fun onMove(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?, target: RecyclerView.ViewHolder?) = true
@@ -153,6 +158,22 @@ class NotificationFragment:
             itemTouchHelper.attachToRecyclerView(recyclerView)
 
             populateRecyclerView()
+        }
+    }
+
+    override fun deleteError() {
+        activity?.let { act ->
+            notification_fragment_recycler_view?.let { v ->
+                YoctuUtils.displaySnackBar(v,act.resources.getString(R.string.notif_fragment_delete_error))
+            }
+        }
+    }
+
+    override fun deletedWithSuccess() {
+        activity?.let { act ->
+            notification_fragment_recycler_view?.let { v ->
+                YoctuUtils.displaySnackBar(v,act.resources.getString(R.string.notif_fragment_delete_success))
+            }
         }
     }
 

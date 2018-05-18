@@ -87,6 +87,10 @@ class NotificationPresenter(context: Context):
         mView = null
     }
 
+    override fun deleteNotification(notification: Notification) {
+        repository.deleteNotification(notification,this)
+    }
+
     override fun onSubscribe(d: Disposable) {}
 
     override fun onError(e: Throwable) {
@@ -100,6 +104,14 @@ class NotificationPresenter(context: Context):
             Log.d(YoctuUtils.TAG_DEBUG," response from db is ".plus(result))
             mView?.let {
                 mView!!.populateRecyclerView()
+            }
+        }
+
+        if (result is Boolean) {
+            Log.d(YoctuUtils.TAG_DEBUG," result is ".plus(result))
+            when(result) {
+                false -> { mView?.let { v -> v.deleteError() } }
+                true -> { mView?.let { v -> v.deletedWithSuccess() } }
             }
         }
     }
