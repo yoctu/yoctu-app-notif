@@ -16,6 +16,8 @@ import com.yoctu.notif.android.yoctuappnotif.ui.notification.NotificationActivit
 import com.yoctu.notif.android.yoctuappnotif.ui.notification.NotificationContract
 import com.yoctu.notif.android.yoctuappnotif.ui.notification.NotificationFragment
 import com.yoctu.notif.android.yoctuappnotif.ui.notification.NotificationPresenter
+import com.yoctu.notif.android.yoctuappnotif.ui.topic.TopicContract
+import com.yoctu.notif.android.yoctuappnotif.ui.topic.TopicPresenter
 import com.yoctu.notif.android.yoctulibrary.realm.LocalDB
 import com.yoctu.notif.android.yoctulibrary.repository.manager.ManagerSharedPreferences
 import com.yoctu.notif.android.yoctulibrary.repository.retrofit.YoctuService
@@ -39,6 +41,8 @@ object YoctuModule {
         bind<NotificationFragment>() with singleton { NotificationFragment() }
         // ** add topic url **
         bind<AddTopicURLContract.Presenter>() with multiton { context: Context -> AddTopicURLPresenter(context) }
+        //** topic
+        bind<TopicContract.Presenter>() with multiton { context: Context -> TopicPresenter(context) }
 
         //managers
         bind<ManageGoogleSignin>() with multiton { context: Context -> ManageGoogleSignin(context) }
