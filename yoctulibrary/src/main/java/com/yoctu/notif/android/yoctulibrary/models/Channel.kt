@@ -23,5 +23,7 @@ class Channel() : ViewType{
         this.id = id
     }
 
+    override fun toString() = id.toString().plus(" ").plus(name)
+
     override fun getViewType() = ConstantsViewType.VIEW_TYPE_CHANNEL
 }
