@@ -120,4 +120,20 @@ interface Repository {
      * @param observer
      */
     fun deleteNotification(notification: Notification, observer: Observer<Any>)
+
+    /**
+     * save the topic url
+     * @param url
+     */
+    fun saveTopicURL(url: String)
+
+    /**
+     * remove topic url
+     */
+    fun removeTopicURL()
+
+    /**
+     * @return Topic URL
+     */
+    fun getTopicURL(): String?
 }
