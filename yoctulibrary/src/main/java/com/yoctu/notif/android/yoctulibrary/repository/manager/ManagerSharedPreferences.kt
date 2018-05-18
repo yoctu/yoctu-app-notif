@@ -194,4 +194,12 @@ class ManagerSharedPreferences(context: Context) {
         return null
     }
 
+    /**
+     * delete topic url
+     */
+    fun deleteTopicURL() {
+        var editor = preferencesApplication.edit()
+        editor.remove(KEY_CURRENT_TOPIC_URL).apply()
+    }
+
 }
