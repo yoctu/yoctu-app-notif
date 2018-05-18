@@ -30,6 +30,8 @@
     <!-- notification -->
     <string name="notif_fragment_text_loading">Loading messages...</string>
     <string name="notif_fragment_title_view">Notifications</string>
+    <string name="notif_fragment_delete_success">Delete notification with success!</string>
+    <string name="notif_fragment_delete_error">We can\'t remove the notification!</string>
     <!-- notification item -->
     <string name="notif_item_topic">Topic :</string>
     <string name="notif_item_title">Title :</string>
