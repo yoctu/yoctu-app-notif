@@ -15,6 +15,7 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
+import java.net.UnknownHostException
 
 /**
  * Created by gael on 18.05.18.
@@ -62,6 +63,11 @@ class ChannelsAsynctaskHTTP(val callback: CallbackChannelsResponse): AsyncTask<S
         } catch (e: MalformedURLException) {
             e.printStackTrace()
             Log.e(YoctuUtils.TAG_ERROR,e.message)
+            code = -5
+        }catch (e: UnknownHostException) {
+            code = -5
+            e.printStackTrace()
+            Log.d(YoctuUtils.TAG_DEBUG,e.message)
         }
         return ""
     }

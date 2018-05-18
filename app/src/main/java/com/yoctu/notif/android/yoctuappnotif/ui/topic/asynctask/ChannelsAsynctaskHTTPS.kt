@@ -12,6 +12,7 @@ import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
+import java.net.UnknownHostException
 import javax.net.ssl.HttpsURLConnection
 
 /**
@@ -27,6 +28,7 @@ class ChannelsAsynctaskHTTPS(val callback: CallbackChannelsResponse): AsyncTask<
         var httpsURLConnection: HttpsURLConnection? = null
         try {
             val myURL = URL(params.get(0))
+            Log.d(YoctuUtils.TAG_DEBUG,params[0])
             httpsURLConnection = myURL.openConnection() as HttpsURLConnection
 
             httpsURLConnection.requestMethod = "GET"
@@ -55,6 +57,12 @@ class ChannelsAsynctaskHTTPS(val callback: CallbackChannelsResponse): AsyncTask<
             }
 
         } catch (e: MalformedURLException) {
+            code = -5
+            e.printStackTrace()
+            Log.d(YoctuUtils.TAG_DEBUG,e.message)
+        }
+        catch (e: UnknownHostException) {
+            code = -5
             e.printStackTrace()
             Log.d(YoctuUtils.TAG_DEBUG,e.message)
         }
