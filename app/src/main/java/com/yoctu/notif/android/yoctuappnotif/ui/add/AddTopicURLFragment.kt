@@ -19,6 +19,7 @@ import com.github.salomonbrys.kodein.with
 import com.yoctu.notif.android.yoctuappnotif.R
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
 import com.yoctu.notif.android.yoctuappnotif.ui.adapters.YoctuAdapter
+import com.yoctu.notif.android.yoctuappnotif.utils.CopyPastUtils
 import com.yoctu.notif.android.yoctuappnotif.utils.KeyboardUtils
 import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
 import com.yoctu.notif.android.yoctulibrary.repository.manager.ManagerSharedPreferences
@@ -116,30 +117,51 @@ class AddTopicURLFragment:
             btn?.setOnClickListener { _ ->
                 addPresenter?.let { presenter ->
                     add_topic_url_fragment_edit_text?.let { url ->
-                        presenter.saveTopicURL(url.text.toString())
+                        if (!url.toString().isEmpty()) {
+                            add_topic_url_fragment_edit_text?.let { edit -> KeyboardUtils.hidesKeyboard(edit) }
+                            presenter.saveTopicURL(url.text.toString())
+                            url.setText("")
+                        } else {
+                            activity?.let { act ->
+                                add_topic_url_fragment_edit_text?.let { edit -> YoctuUtils.displaySnackBar(edit,act.resources.getString(R.string.add_topic_url_empty_url)) }
+                            }
+                        }
                     }
                 }
             }
         }
-    }
 
-    private fun manageView() {
+        //hide keyboard
         add_topic_url_fragment_principal_container?.let { v ->
             v.setOnTouchListener(object : View.OnTouchListener{
                 override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                     if (v !is EditText)
                         add_topic_url_fragment_edit_text?.let { edit -> KeyboardUtils.hidesKeyboard(edit) }
-
                     return false
+                }
+            })
+        }
+
+        //long press to copy text
+        add_topic_url_fragment_current_url?.let { url ->
+            url.setOnLongClickListener(object : View.OnLongClickListener {
+                override fun onLongClick(v: View?): Boolean {
+                    activity?.let { act ->
+                        CopyPastUtils.copyText("current url",url.text.toString(),act)
+                        YoctuUtils.displaySnackBar(url,act.resources.getString(R.string.add_topic_url_copy_current_url))
+                    }
+                    return true
                 }
             })
         }
     }
 
+    private fun manageView() {
+    }
+
     override fun showErrorMessage(message: String) {
         activity?.let { act ->
-            //Toast.makeText(act,message,Toast.LENGTH_SHORT).show()
-            YoctuUtils.displaySnackBar(add_topic_url_button, act.getString(R.string.login_fragment_there_are_not_chosen))
+            YoctuUtils.displaySnackBar(add_topic_url_button, message)
         }
     }
 
