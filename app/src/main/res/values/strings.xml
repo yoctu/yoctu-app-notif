@@ -45,9 +45,12 @@
     <string name="add_topic_url_current_url_text_url">NOUVEAU </string>
     <string name="add_topic_url_current_url_hint">"https://montopicurl.com/api/topics</string>
     <string name="add_topic_url_error_message_not_valid">URL NON VALIDE ! </string>
+    <string name="add_topic_url_empty_url">Le champ ne peut pas être vide!</string>
+    <string name="add_topic_url_copy_current_url">URL copié</string>
 
     <!-- Topic -->
     <string name="topic_view_title">Mes topics</string>
+    <string name="topic_view_bad_url">Nous ne pouvons pas récupérer la liste des topics</string>
 
     <!-- menu notification -->
     <string name="menu_notification_sign_out">Déconnexion</string>
