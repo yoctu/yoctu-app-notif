@@ -99,4 +99,14 @@ class YoctuRepository(context: Context) : Repository {
     override fun deleteNotification(notification: Notification, observer: Observer<Any>) {
         database.deleteNotification(notification,observer)
     }
+
+    override fun removeTopicURL() {
+        localManager.deleteTopicURL()
+    }
+
+    override fun saveTopicURL(url: String) {
+        localManager.saveTopicURL(url)
+    }
+
+    override fun getTopicURL() = localManager.getTopicURL()
 }
