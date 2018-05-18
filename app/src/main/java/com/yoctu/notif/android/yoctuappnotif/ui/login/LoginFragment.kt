@@ -309,18 +309,19 @@ class LoginFragment :
      * called after get channels and by google sign in button
      */
     override fun googleSignIn() {
-        login_fragment_text_loading?.let { login_fragment_text_loading.visibility = View.GONE }
+        //login_fragment_text_loading?.let { login_fragment_text_loading.visibility = View.GONE }
         login_fragment_sign_in_btn?.let { login_fragment_sign_in_btn.visibility = View.GONE }
         if (isSignout) {
             //login_fragment_progress_bar?.let { login_fragment_progress_bar.visibility = View.GONE }
             login_fragment_sign_in_btn?.let { login_fragment_sign_in_btn.visibility = View.VISIBLE }
         } else {
             loginPresenter?.let {
-                val currentUser = loginPresenter!!.getUser()
+                var currentUser = loginPresenter!!.getUser()
+
                 if (currentUser == null) {
-                    /*login_fragment_text_google_sign_in?.let {
+                    login_fragment_text_google_sign_in?.let {
                         login_fragment_text_google_sign_in.visibility = View.VISIBLE
-                    }*/
+                    }
                     //login_fragment_progress_bar?.let { login_fragment_progress_bar.visibility = View.GONE }
                     launchGoogleSignIn()
                 } else {

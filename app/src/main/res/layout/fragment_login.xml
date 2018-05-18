@@ -25,12 +25,14 @@
         android:layout_gravity="center_horizontal"
         android:indeterminate="true"/>
     -->
+    <!--
     <TextView
         android:id="@+id/login_fragment_text_loading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/login_fragment_text_loading_data"/>
+    -->
     <TextView
         android:id="@+id/login_fragment_text_google_sign_in"
         android:layout_width="match_parent"
