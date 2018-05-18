@@ -95,4 +95,8 @@ class YoctuRepository(context: Context) : Repository {
     override fun deleteTopics() {
         database.deleteTopics()
     }
+
+    override fun deleteNotification(notification: Notification, observer: Observer<Any>) {
+        database.deleteNotification(notification,observer)
+    }
 }

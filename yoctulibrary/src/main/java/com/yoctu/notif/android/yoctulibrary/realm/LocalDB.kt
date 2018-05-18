@@ -53,6 +53,36 @@ class LocalDB(context: Context) {
     }
 
     /**
+     * remove a specific notification
+     */
+    fun deleteNotification(notification: Notification,observer: Observer<Any>): Observable<Any> {
+        var obs = Observable.create { emitter: ObservableEmitter<Any> ->
+            val result = yoctuRealm
+                    .where<Notification>()
+                    .equalTo("title",notification.title)
+                    .equalTo("body",notification.body)
+                    .findFirst()
+            if (result != null) {
+                try {
+                    yoctuRealm.beginTransaction()
+                    result.deleteFromRealm()
+                    yoctuRealm.commitTransaction()
+                    emitter.onNext(true)
+                }catch (e: Throwable) {
+                    e.printStackTrace()
+                    emitter.onError(Throwable(e.message))
+                }
+            } else
+                emitter.onNext(false)
+
+            emitter.onComplete()
+        }
+        obs.subscribe(observer)
+        return obs
+
+    }
+
+    /**
      * This function check if the table has 100 elements to delete it
      *
      */

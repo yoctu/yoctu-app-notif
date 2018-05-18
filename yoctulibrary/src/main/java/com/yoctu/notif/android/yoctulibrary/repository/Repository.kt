@@ -112,4 +112,12 @@ interface Repository {
      * Delete all topics
      */
     fun deleteTopics()
+
+    /**
+     * detele notification
+     *
+     * @param notification
+     * @param observer
+     */
+    fun deleteNotification(notification: Notification, observer: Observer<Any>)
 }
