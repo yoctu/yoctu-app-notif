@@ -17,13 +17,14 @@
 
     </android.support.v7.widget.Toolbar>
 
-
+<!--
     <ProgressBar
         android:id="@+id/login_fragment_progress_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:indeterminate="true"/>
+    -->
     <TextView
         android:id="@+id/login_fragment_text_loading"
         android:layout_width="match_parent"
