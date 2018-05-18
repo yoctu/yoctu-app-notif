@@ -188,7 +188,7 @@ class ManagerSharedPreferences(context: Context) {
      * @return Topic URL
      */
     fun getTopicURL(): String? {
-        if (preferencesApplication.contains(KEY_EMAIL)) {
+        if (preferencesApplication.contains(KEY_CURRENT_TOPIC_URL)) {
             return preferencesApplication.getString(KEY_CURRENT_TOPIC_URL,"")
         }
         return null
