@@ -46,7 +46,7 @@
         android:layout_marginTop="@dimen/dimen_10"
         android:text="@string/login_fragment_empty_list"
         android:visibility="gone"/>
-
+<!--
     <android.support.v7.widget.RecyclerView
         android:id="@+id/login_fragment_recycler_view"
         android:layout_width="match_parent"
@@ -54,7 +54,9 @@
         android:layout_marginTop="@dimen/dimen_10"
         android:layout_marginLeft="@dimen/dimen_15"
         android:layout_marginRight="@dimen/dimen_15"/>
+    -->
 
+    <!--
     <TextView
         android:id="@+id/login_fragment_register"
         android:layout_width="wrap_content"
@@ -66,6 +68,7 @@
         android:textStyle="bold"
         android:visibility="gone"
         android:layout_marginTop="@dimen/dimen_20"/>
+    -->
 
     <!--
     <TextView

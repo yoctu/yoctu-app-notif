@@ -25,7 +25,7 @@ interface LoginContract {
         fun saveUserInLocal(user: User)
         fun sendDeviceId()
         fun getUser(): User?
-        fun getTopics(): ArrayList<ViewType>?
+        //fun getTopics(): ArrayList<ViewType>?
         fun gotoNotifications()
         fun changeToppics(): Boolean
         fun setChangeToppics(newValue: Boolean)

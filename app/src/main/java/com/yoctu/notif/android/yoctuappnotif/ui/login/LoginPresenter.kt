@@ -41,7 +41,7 @@ class LoginPresenter(context: Context) :
      *
      * @return list of toppics
      */
-    override fun getTopics() = repository.getToppics()
+    //override fun getTopics() = repository.getToppics()
 
     /**
      * check if there is an old list of toppics to unsubscribe and delete it
@@ -49,7 +49,7 @@ class LoginPresenter(context: Context) :
      *
      * @param chosen
      */
-    private fun manageChannels(chosen: ArrayList<ViewType>) {
+    /*private fun manageChannels(chosen: ArrayList<ViewType>) {
         //if if there is old list
         val olToppics = getTopics()
         if(olToppics != null) {
@@ -65,7 +65,7 @@ class LoginPresenter(context: Context) :
            // Log.d(YoctuUtils.TAG_DEBUG,"add channel ".plus(t.name))
             FirebaseMessaging.getInstance().subscribeToTopic(t.name)
         }
-    }
+    }*/
 
     override fun gotoNotifications() {
         mContext.startActivity(NotificationActivity.newIntent(mContext))
