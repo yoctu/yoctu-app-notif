@@ -6,6 +6,7 @@ import android.util.Log
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.with
 import com.google.firebase.messaging.FirebaseMessaging
+import com.yoctu.notif.android.yoctuappnotif.R
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
 import com.yoctu.notif.android.yoctuappnotif.callback.CallbackChannelsResponse
 import com.yoctu.notif.android.yoctuappnotif.repository.YoctuRepository
@@ -55,8 +56,7 @@ class TopicPresenter(context: Context):
 
     override fun getChannels(code: Int, response: ResponseChannels?, error: String?) {
         when(code) {
-            404 -> {
-            }
+            -5, 404 -> { mView?.let { v -> v.showError(mContext.resources.getString(R.string.topic_view_bad_url)) } }
             200 -> {
                 mView?.let { v -> v.getChannels(response?.data as ArrayList<ViewType>) }
             }

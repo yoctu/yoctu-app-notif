@@ -12,6 +12,7 @@ interface TopicContract {
 
     interface View: BaseView<Presenter> {
         fun getChannels(list : ArrayList<ViewType>)
+        fun showError(message: String)
     }
     interface Presenter: BasePresenter<View> {
         fun askChannels()

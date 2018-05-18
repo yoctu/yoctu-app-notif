@@ -125,9 +125,19 @@ class TopicFragment :
         mHandler?.let { h ->
             h.post(object : Runnable {
                 override fun run() {
+                    topic_fragment_register_button?.let { btn -> btn.visibility = View.VISIBLE }
                     recyclerView?.let { adapter?.let { current -> current.addItems(list) } }
                 }
             })
+        }
+    }
+
+    override fun showError(message: String) {
+        activity?.let { act ->
+            topic_fragment_register_button?.let { btn ->
+                YoctuUtils.displaySnackBar(btn,message)
+                btn.visibility = View.INVISIBLE
+            }
         }
     }
 
