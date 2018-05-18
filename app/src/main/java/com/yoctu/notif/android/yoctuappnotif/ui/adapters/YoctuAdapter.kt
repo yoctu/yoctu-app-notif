@@ -60,4 +60,6 @@ class YoctuAdapter(context : Context): RecyclerView.Adapter<RecyclerView.ViewHol
      */
     fun getChosenChannels() = adapterChannelListDelegate.getChosenChannels()
 
+    fun getItems() = this.items
+
 }
