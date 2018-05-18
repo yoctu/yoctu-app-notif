@@ -13,6 +13,7 @@ import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.view.Window
+import android.webkit.URLUtil
 import com.google.gson.Gson
 import com.yoctu.notif.android.yoctuappnotif.R
 import com.yoctu.notif.android.yoctulibrary.models.Channel
@@ -186,6 +187,8 @@ object YoctuUtils {
         if (goodFormat) {
             var list = url.split("//")
             goodFormat = list.size > 1 && !list.get(1).isEmpty()
+            if (goodFormat)
+                goodFormat = URLUtil.isValidUrl(url)
         }
         return goodFormat
     }
