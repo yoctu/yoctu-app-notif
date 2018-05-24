@@ -207,9 +207,10 @@ class LoginFragment :
                 user.firebaseToken = token
                 loginPresenter!!.saveUserInLocal(user)
                 loginPresenter!!.sendDeviceId()
-            } /*else { //first time
-                loginPresenter!!.askChannels()
-            }*/
+            } else { //first time
+                //loginPresenter!!.askChannels()
+                googleSignIn()
+            }
         }
     }
 

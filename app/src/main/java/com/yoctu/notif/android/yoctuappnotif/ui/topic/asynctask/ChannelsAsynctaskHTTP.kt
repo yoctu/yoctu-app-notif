@@ -41,7 +41,7 @@ class ChannelsAsynctaskHTTP(val callback: CallbackChannelsResponse): AsyncTask<S
             code = httpURLConnection.responseCode
             var inputStream: InputStream? = null
             when(code){
-                200 -> {
+                HttpURLConnection.HTTP_OK -> {
                     inputStream = httpURLConnection.inputStream
                     var response = inputStream!!.bufferedReader().use(BufferedReader::readText)
                     try {
@@ -53,7 +53,7 @@ class ChannelsAsynctaskHTTP(val callback: CallbackChannelsResponse): AsyncTask<S
                         Log.d(YoctuUtils.TAG_DEBUG," error is ".plus(e.message))
                     }
                 }
-                404 -> {
+                HttpURLConnection.HTTP_NOT_FOUND -> {
                     inputStream = httpURLConnection.errorStream
                     error = inputStream!!.bufferedReader().use(BufferedReader::readText)
                     Log.d(YoctuUtils.TAG_DEBUG,"error is ".plus(error))
@@ -68,6 +68,8 @@ class ChannelsAsynctaskHTTP(val callback: CallbackChannelsResponse): AsyncTask<S
             code = -5
             e.printStackTrace()
             Log.d(YoctuUtils.TAG_DEBUG,e.message)
+        }finally {
+            httpURLConnection?.let { conn -> conn.disconnect() }
         }
         return ""
     }

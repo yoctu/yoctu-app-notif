@@ -71,7 +71,17 @@ class TopicFragment :
         }
         manageToolbar()
         manageRecyclerView()
+        disableViews()
         manageClickEvents()
+    }
+
+    private fun disableViews() {
+        topic_fragment_register_button?.let { btn -> btn.isEnabled = false }
+    }
+
+
+    private fun enableViews() {
+        topic_fragment_register_button?.let { btn -> btn.isEnabled = true }
     }
 
 
@@ -127,6 +137,7 @@ class TopicFragment :
                 override fun run() {
                     topic_fragment_register_button?.let { btn -> btn.visibility = View.VISIBLE }
                     recyclerView?.let { adapter?.let { current -> current.addItems(list) } }
+                    enableViews()
                 }
             })
         }

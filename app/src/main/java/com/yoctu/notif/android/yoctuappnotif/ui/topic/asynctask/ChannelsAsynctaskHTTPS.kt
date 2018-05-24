@@ -10,6 +10,8 @@ import org.json.JSONException
 import java.io.BufferedReader
 import java.io.InputStream
 import java.net.HttpURLConnection
+import java.net.HttpURLConnection.HTTP_NOT_FOUND
+import java.net.HttpURLConnection.HTTP_OK
 import java.net.MalformedURLException
 import java.net.URL
 import java.net.UnknownHostException
@@ -37,7 +39,7 @@ class ChannelsAsynctaskHTTPS(val callback: CallbackChannelsResponse): AsyncTask<
             code = httpsURLConnection.responseCode
             var inputStream: InputStream? = null
             when(code){
-                200 -> {
+                HTTP_OK -> {
                     inputStream = httpsURLConnection.inputStream
                     var response = inputStream!!.bufferedReader().use(BufferedReader::readText)
                     try {
@@ -49,7 +51,7 @@ class ChannelsAsynctaskHTTPS(val callback: CallbackChannelsResponse): AsyncTask<
                         Log.d(YoctuUtils.TAG_DEBUG," error is ".plus(e.message))
                     }
                 }
-                404 -> {
+                HTTP_NOT_FOUND -> {
                     inputStream = httpsURLConnection.errorStream
                     error = inputStream!!.bufferedReader().use(BufferedReader::readText)
                     Log.d(YoctuUtils.TAG_DEBUG,"error is ".plus(error))
@@ -65,6 +67,8 @@ class ChannelsAsynctaskHTTPS(val callback: CallbackChannelsResponse): AsyncTask<
             code = -5
             e.printStackTrace()
             Log.d(YoctuUtils.TAG_DEBUG,e.message)
+        }finally {
+            httpsURLConnection?.let { conns -> conns.disconnect() }
         }
         return ""
     }
