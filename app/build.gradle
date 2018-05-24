@@ -2,6 +2,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+def keystorePropertiesFile = rootProject.file("./app/yoctu.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -16,10 +20,15 @@ android {
 
     signingConfigs {
         release {
-            storeFile file ("yoctu.keystore")
+            /*storeFile file ("yoctu.keystore")
             storePassword "yoTu12897PuW"
             keyAlias "yoctuAlias"
             keyPassword "keyPass"
+            */
+            storeFile file ("yoctu.jks")
+            storePassword "HtYOhcIJeB"
+            keyAlias "key0"
+            keyPassword "nt3WkX7y8U"
         }
     }
     buildTypes {
