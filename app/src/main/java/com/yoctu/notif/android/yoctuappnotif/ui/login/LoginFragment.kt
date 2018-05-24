@@ -48,8 +48,6 @@ class LoginFragment :
 
     private var loginPresenter: LoginContract.Presenter? = null
     private var dialog: Dialog? = null
-    //private lateinit var recyclerView: RecyclerView
-    //private lateinit var adapter: YoctuAdapter
     private var managerGoogleSignIn: ManageGoogleSignin? = null
     private var deviceId: String? = null
     private lateinit var toolbar: Toolbar
@@ -159,12 +157,9 @@ class LoginFragment :
      * check if device_id exists to get channels (case: not he first time)
      */
     private fun manageConnectivity() {
-        //get channels
+        //log in
         if (YoctuUtils.checkConnectivity(activity!!)) {
             if (deviceId != null) {
-                /*loginPresenter?.let {
-                    loginPresenter!!.askChannels()
-                }*/
                 googleSignIn()
             }
         } else {
@@ -208,7 +203,6 @@ class LoginFragment :
                 loginPresenter!!.saveUserInLocal(user)
                 loginPresenter!!.sendDeviceId()
             } else { //first time
-                //loginPresenter!!.askChannels()
                 googleSignIn()
             }
         }
@@ -221,7 +215,6 @@ class LoginFragment :
         managerGoogleSignIn = YoctuApplication.kodein.with(activity).instance()
         deviceId = FirebaseInstanceId.getInstance().token
         manageViews()
-        //manageRecyclerView()
     }
 
     /**
@@ -229,17 +222,6 @@ class LoginFragment :
      * manage button google sign in
      */
     private fun manageViews() {
-        /*login_fragment_register?.let {
-            login_fragment_register.setOnClickListener { _ ->
-                adapter.let {
-                    // register channels
-                    if (adapter.getChosenChannels().size == 0)
-                        YoctuUtils.displaySnackBar(login_fragment_register, activity!!.getString(R.string.login_fragment_there_are_not_chosen))
-                    else
-                        loginPresenter?.let { loginPresenter!!.saveChannels(adapter.getChosenChannels()) }
-                }
-            }
-        }*/
 
         login_sign_in_button?.let {
             login_sign_in_button.setOnClickListener { _ ->
@@ -250,17 +232,6 @@ class LoginFragment :
         }
 
     }
-
-    /*private fun manageRecyclerView() {
-        recyclerView = login_fragment_recycler_view
-        recyclerView?.let {
-            adapter = YoctuAdapter(activity!!)
-            var layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(activity!!)
-            recyclerView.layoutManager = layoutManager
-            recyclerView.adapter = adapter
-        }
-    }
-    */
 
     /**
      * Manage events on views into the dialog
@@ -279,24 +250,6 @@ class LoginFragment :
         }
     }
 
-
-    /**
-     * populate the list here
-     * show or hide button and progress bar
-     */
-    /*override fun getChannels(list: ArrayList<ViewType>) {
-
-        recyclerView?.let {
-            if (list.size == 0) {
-                login_fragment_empty_list?.let { login_fragment_empty_list.visibility = View.VISIBLE }
-                login_fragment_register?.let { login_fragment_register.visibility = View.GONE }
-            } else {
-                login_fragment_empty_list?.let { login_fragment_empty_list.visibility = View.GONE }
-                adapter?.let { adapter.addItems(list) }
-                login_fragment_register?.let { login_fragment_register.visibility = View.VISIBLE }
-            }
-        }
-    }*/
 
     override fun hideProgressBar() {
         //login_fragment_progress_bar?.let { login_fragment_progress_bar!!.visibility = View.GONE }
@@ -326,7 +279,6 @@ class LoginFragment :
                     //login_fragment_progress_bar?.let { login_fragment_progress_bar.visibility = View.GONE }
                     launchGoogleSignIn()
                 } else {
-                    //loginPresenter!!.showChannels() //show channels
                     loginPresenter?.let { presenter -> presenter.gotoNotifications() } //got to notification
                 }
             }
@@ -365,9 +317,7 @@ class LoginFragment :
                     mustRedirectToNoti = false
                     loginPresenter!!.gotoNotifications()
                     login_sign_in_button?.let { login_sign_in_button.visibility = View.VISIBLE }
-                } /*else {
-                    loginPresenter!!.showChannels()
-                }*/
+                }
             }
 
         }

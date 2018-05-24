@@ -28,70 +28,12 @@ class LoginPresenter(context: Context) :
     }
 
     private var mView : LoginContract.View? = null
-    private var toppics: ArrayList<ViewType>? = null
 
     private var repository : YoctuRepository = YoctuApplication.kodein.with(mContext).instance()
-
-    /*override fun askChannels() {
-        repository.getChannels(this)
-    }*/
-
-    /**
-     * Channels saved in shared preferences
-     *
-     * @return list of toppics
-     */
-    //override fun getTopics() = repository.getToppics()
-
-    /**
-     * check if there is an old list of toppics to unsubscribe and delete it
-     * save the new list
-     *
-     * @param chosen
-     */
-    /*private fun manageChannels(chosen: ArrayList<ViewType>) {
-        //if if there is old list
-        val olToppics = getTopics()
-        if(olToppics != null) {
-            olToppics.forEach { olToppic ->
-                olToppic as Channel
-                FirebaseMessaging.getInstance().unsubscribeFromTopic(olToppic.name)
-                //Log.d(YoctuUtils.TAG_DEBUG,"remove channel ".plus(olToppic.name))
-            }
-            repository.deleteChannels()
-        }
-        chosen.forEach { t: ViewType? ->
-            t as Channel
-           // Log.d(YoctuUtils.TAG_DEBUG,"add channel ".plus(t.name))
-            FirebaseMessaging.getInstance().subscribeToTopic(t.name)
-        }
-    }*/
 
     override fun gotoNotifications() {
         mContext.startActivity(NotificationActivity.newIntent(mContext))
     }
-
-    /**
-     * subscribe to toppic(s) and save in local the list
-     * redirect user to notification view
-     */
-    /*override fun saveChannels(chosen: ArrayList<ViewType>) {
-        manageChannels(chosen)
-        repository.saveToppics(chosen)
-        Log.d(YoctuUtils.TAG_DEBUG,"**** register channels(".plus(chosen.size).plus(") ").plus("got to notif *** "))
-        gotoNotifications()
-    }*/
-
-    /**
-     * Show list and button to register the chosen
-     */
-    /*override fun showChannels() {
-        mView?.let {
-            mView!!.hideProgressBar()
-            //mView!!.getChannels(YoctuUtils.fakeChannels())
-            mView!!.getChannels(toppics!!)
-        }
-    }*/
 
     override fun saveUserInLocal(user: User) {
         repository.saveUser(user)
@@ -128,21 +70,8 @@ class LoginPresenter(context: Context) :
     }
 
     override fun onNext(response: Any) {
-        /*if(response is ResponseChannels) { // ask google sign in
-            Log.d(YoctuUtils.TAG_DEBUG, " response channel is ".plus(response.data == null).plus(" ").plus(response.data!!.size))
-            toppics = ArrayList<ViewType>(response.data)
-            mView?.let {
-                mView!!.googleSignIn()
-            }
-        }*/
-
         if (response is ResponseDeviceId)
             Log.d(YoctuUtils.TAG_DEBUG,"save device id ".plus(response.status))
-
-        /*if (response is String && response.endsWith("saved")) {
-            Log.d(YoctuUtils.TAG_DEBUG, " *** ".plus(response))
-            BroadcastUtils.reloadNotification(mContext)
-        }*/
 
     }
 
