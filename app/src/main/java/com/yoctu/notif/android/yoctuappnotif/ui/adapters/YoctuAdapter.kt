@@ -60,6 +60,19 @@ class YoctuAdapter(context : Context): RecyclerView.Adapter<RecyclerView.ViewHol
      */
     fun getChosenChannels() = adapterChannelListDelegate.getChosenChannels()
 
+    /**
+     * @return list of items
+     */
     fun getItems() = this.items
+
+    /**
+     * remove an item from a position
+     * @param position
+     */
+    fun removeItem(position: Int) {
+        if (items != null && items.size > 0)
+            items.removeAt(position)
+        notifyDataSetChanged()
+    }
 
 }

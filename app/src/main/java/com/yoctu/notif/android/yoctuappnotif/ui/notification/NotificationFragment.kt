@@ -150,6 +150,7 @@ class NotificationFragment:
                     notificationPresenter?.let { presenter ->
                         val viewType = adapter?.let { current -> current.getItems()[viewHolder.adapterPosition] }
                         presenter.deleteNotification(viewType as Notification)
+                        adapter?.let { a -> a.removeItem(viewHolder.adapterPosition) }
                     }
                 }
 
