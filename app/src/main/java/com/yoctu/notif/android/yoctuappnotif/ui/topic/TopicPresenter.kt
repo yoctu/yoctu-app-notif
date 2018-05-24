@@ -52,6 +52,8 @@ class TopicPresenter(context: Context):
 
             asynctask?.execute(u)
         }
+        if (url == null)
+            mView?.let { v -> v.showError(mContext.resources.getString(R.string.topic_view_bad_url)) }
     }
 
     override fun getChannels(code: Int, response: ResponseChannels?, error: String?) {

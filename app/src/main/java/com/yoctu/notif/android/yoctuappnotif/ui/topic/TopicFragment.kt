@@ -76,12 +76,18 @@ class TopicFragment :
     }
 
     private fun disableViews() {
-        topic_fragment_register_button?.let { btn -> btn.isEnabled = false }
+        topic_fragment_register_button?.let { btn ->
+            btn.isEnabled = false
+            btn.visibility = View.GONE
+        }
     }
 
 
     private fun enableViews() {
-        topic_fragment_register_button?.let { btn -> btn.isEnabled = true }
+        topic_fragment_register_button?.let { btn ->
+            btn.isEnabled = true
+            btn.visibility = View.VISIBLE
+        }
     }
 
 
@@ -137,7 +143,10 @@ class TopicFragment :
                 override fun run() {
                     topic_fragment_register_button?.let { btn -> btn.visibility = View.VISIBLE }
                     recyclerView?.let { adapter?.let { current -> current.addItems(list) } }
-                    enableViews()
+                    if (list != null && list.size > 0)
+                        enableViews()
+                    else
+                        activity?.let { act -> showError(act.resources.getString(R.string.topic_view_bad_url)) }
                 }
             })
         }
