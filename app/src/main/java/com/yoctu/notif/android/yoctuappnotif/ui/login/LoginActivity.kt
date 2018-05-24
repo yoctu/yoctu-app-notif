@@ -108,14 +108,10 @@ class LoginActivity :
             loginPresenter?.let {
                 var currentUser = loginPresenter!!.getUser()
                 val changeToppics = loginPresenter!!.changeToppics()
-                //val listToppics = loginPresenter!!.getTopics()
 
-                if ( (currentUser == null) /*|| (currentUser != null && (changeToppics || listToppics == null))*/ ) { //first time OR (want change toppics OR not yet chosen)
-                    /*if(changeToppics)
-                        loginPresenter!!.setChangeToppics(false)
-                    */
+                if ( (currentUser == null)) { //first time OR (want change topics OR not yet chosen)
                     displayLoginFragment()
-                } else if (currentUser != null /*&& !changeToppics*/) {
+                } else if (currentUser != null) {
                     finish()
                     startActivity(NotificationActivity.newIntent(this))
                 } else if (changeToppics) {
