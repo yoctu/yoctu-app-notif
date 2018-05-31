@@ -34,4 +34,18 @@ public class YoctuUtilsUnitTest {
         assertEquals(result,false);
     }
 
+    @Test
+    public void testAddSecondURLWithoutSeparation() {
+        String baseURL = "http://test.com";
+        String result = baseURL+"/api/channels";
+        assertEquals(result,YoctuUtils.INSTANCE.addSecondPartURL(baseURL));
+    }
+
+    @Test
+    public void testAddSecondURLWithSeparation() {
+        String baseURL = "http://test.com/";
+        String result = baseURL+"api/channels";
+        assertEquals(result,YoctuUtils.INSTANCE.addSecondPartURL(baseURL));
+    }
+
 }
