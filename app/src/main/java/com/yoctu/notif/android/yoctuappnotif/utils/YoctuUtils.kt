@@ -50,6 +50,9 @@ object YoctuUtils {
     val TYPE_HTTP = "http://"
     val TYPE_HTTPS = "https://"
 
+    val SECOND_PART_WITH_SEP = "/api/channels"
+    val SECOND_PART = "api/channels"
+
     /**
      * @param supportManger
      * @param containerView
@@ -192,4 +195,18 @@ object YoctuUtils {
         }
         return goodFormat
     }
+
+    /**
+     * Allows to add : /api/channels
+     * @return the complete UR with endpoint
+     */
+    fun addSecondPartURL(base: String): String {
+        var newURL = base
+        if (base.endsWith("/"))
+            newURL = newURL.plus(SECOND_PART)
+        else
+            newURL = newURL.plus(SECOND_PART_WITH_SEP)
+        return newURL
+    }
+
 }
