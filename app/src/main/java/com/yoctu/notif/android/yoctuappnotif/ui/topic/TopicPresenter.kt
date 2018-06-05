@@ -16,10 +16,9 @@ import com.yoctu.notif.android.yoctuappnotif.ui.topic.asynctask.ChannelsAsynctas
 import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
 import com.yoctu.notif.android.yoctulibrary.models.Channel
 import com.yoctu.notif.android.yoctulibrary.models.ResponseChannels
+import com.yoctu.notif.android.yoctulibrary.models.TopicURL
 import com.yoctu.notif.android.yoctulibrary.models.ViewType
 import com.yoctu.notif.android.yoctulibrary.repository.manager.ManagerSharedPreferences
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
 
 /**
  * Created by gael on 16.05.18.
@@ -34,7 +33,7 @@ class TopicPresenter(context: Context):
     init {
         mContext = context
     }
-    private var managerSharedPreferences: ManagerSharedPreferences = YoctuApplication.kodein.with(mContext).instance()
+    //private var managerSharedPreferences: ManagerSharedPreferences = YoctuApplication.kodein.with(mContext).instance()
     private var repository : YoctuRepository = YoctuApplication.kodein.with(mContext).instance()
 
     override fun takeView(view: TopicContract.View) {
@@ -42,13 +41,14 @@ class TopicPresenter(context: Context):
     }
 
     override fun askChannels() {
-        val url = managerSharedPreferences.getTopicURL()
+        val url = repository.getTopicURL()
+        val apiKey = repository.getApiKey()
         var asynctask: AsyncTask<String,Void,String>? = null
         url?.let { u ->
             if (u.startsWith(YoctuUtils.TYPE_HTTPS))
-                asynctask = ChannelsAsynctaskHTTPS(this)
+                asynctask = ChannelsAsynctaskHTTPS(this, TopicURL(apiKey,u))//asynctask = ChannelsAsynctaskHTTPS(this)
             else
-                asynctask = ChannelsAsynctaskHTTP(this)
+                asynctask = ChannelsAsynctaskHTTP(this, TopicURL(apiKey,u)) //asynctask = ChannelsAsynctaskHTTP(this)
 
             asynctask?.execute(u)
         }
