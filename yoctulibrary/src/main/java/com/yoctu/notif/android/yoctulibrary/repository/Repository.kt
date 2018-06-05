@@ -136,4 +136,15 @@ interface Repository {
      * @return Topic URL
      */
     fun getTopicURL(): String?
+
+    /**
+     * save the api key for topics
+     * @param apiKey
+     */
+    fun saveApiKey(apiKey: String)
+
+    /**
+     * @return the Api Key
+     */
+    fun getApiKey(): String?
 }
