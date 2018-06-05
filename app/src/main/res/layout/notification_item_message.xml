@@ -31,6 +31,7 @@
             android:gravity="right"
             android:layout_marginRight="@dimen/dimen_10"
             android:text="time here ..."
+            android:textColor="@color/colorBlack"
             android:textSize="@dimen/dimen_10"/>
 
     </LinearLayout>
@@ -48,11 +49,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/notif_item_topic"
+            android:textColor="@color/colorBlack"
             android:textStyle="bold"/>
         <TextView
             android:id="@+id/notification_item_topic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
             android:layout_marginLeft="@dimen/dimen_3"
             android:text="title here"/>
     </LinearLayout>
@@ -68,12 +71,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/notif_item_title"
+            android:textColor="@color/colorBlack"
             android:textStyle="bold"/>
         <TextView
             android:id="@+id/notification_item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimen_3"
+            android:textColor="@color/colorBlack"
             android:text="title here"/>
     </LinearLayout>
 
@@ -89,11 +94,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/notif_item_text"
+            android:textColor="@color/colorBlack"
             android:textStyle="bold"/>
         <TextView
             android:id="@+id/notification_item_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
             android:layout_marginLeft="@dimen/dimen_3"
             android:text="text here"/>
     </LinearLayout>
