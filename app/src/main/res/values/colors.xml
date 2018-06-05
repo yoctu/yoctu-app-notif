@@ -14,4 +14,7 @@
     <color name="colorBlueOne">#1A237E</color>
     <color name="colorGrey">#F5F5F5</color>
     <color name="colorGreyTwo">#9E9E9E</color>
+
+    <!-- url -->
+    <color name="colorURL">#1976d2</color>
 </resources>

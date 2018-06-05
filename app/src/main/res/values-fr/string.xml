@@ -40,10 +40,12 @@
     <!-- add topic URL -->
     <string name="add_topic_url_view_title">Gérer mon URL</string>
     <string name="add_topic_url_current_url_text">URL ACTUEL</string>
+    <string name="add_topic_url_api_key_text">MON API KEY</string>
     <string name="add_topic_url_current_url_save_new_url_btn">Enregistrer</string>
     <string name="add_topic_url_current_url_replace_url_btn">Remplacer</string>
     <string name="add_topic_url_current_url_text_url">NOUVEAU </string>
-    <string name="add_topic_url_current_url_hint">"https://montopicurl.com/api/topics</string>
+    <string name="add_topic_url_current_url_hint">https://montopicurl.com/api/topics</string>
+    <string name="add_topic_url_api_key_hint">45855JKHKJJlk,</string>
     <string name="add_topic_url_error_message_not_valid">URL NON VALIDE ! </string>
     <string name="add_topic_url_empty_url">Le champ ne peut pas être vide!</string>
     <string name="add_topic_url_copy_current_url">URL copié</string>
