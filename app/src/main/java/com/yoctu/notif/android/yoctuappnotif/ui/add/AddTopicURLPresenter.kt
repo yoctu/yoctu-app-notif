@@ -31,10 +31,11 @@ class AddTopicURLPresenter(context: Context): AddTopicURLContract.Presenter {
         mContext.startActivity(NotificationActivity.newIntent(mContext))
     }
 
-    override fun saveTopicURL(url: String) {
+    override fun saveTopicURL(url: String, apiKey: String?) {
         if (!url.isEmpty() && YoctuUtils.isValidScheme(url)) {
             Log.d(YoctuUtils.TAG_DEBUG," VALID ")
             yoctuRepository.saveTopicURL(YoctuUtils.addSecondPartURL(url))
+            apiKey?.let { key -> yoctuRepository.saveApiKey(key) }
             goToNotifications()
         } else {
             Log.d(YoctuUtils.TAG_DEBUG," UNVALID ")
@@ -43,6 +44,8 @@ class AddTopicURLPresenter(context: Context): AddTopicURLContract.Presenter {
     }
 
     override fun getTopicURL() = yoctuRepository.getTopicURL()
+
+    override fun getApiKey() = yoctuRepository.getApiKey()
 
     override fun dropView() {
         this.mView = null
