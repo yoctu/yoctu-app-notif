@@ -1,6 +1,7 @@
 package com.yoctu.notif.android.yoctuappnotif.ui.notification.adapter
 
 import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,8 @@ import android.widget.TextView
 import com.yoctu.notif.android.yoctuappnotif.R
 import com.yoctu.notif.android.yoctuappnotif.ui.adapters.ViewTypeDelegateAdapter
 import com.yoctu.notif.android.yoctuappnotif.ui.login.adapter.ChannelsListDelegate
+import com.yoctu.notif.android.yoctuappnotif.ui.webview.WebViewActivity
+import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
 import com.yoctu.notif.android.yoctulibrary.models.Notification
 import com.yoctu.notif.android.yoctulibrary.models.ViewType
 
@@ -40,6 +43,16 @@ class AdapterNotifDelegeate (context: Context): ViewTypeDelegateAdapter {
         holder.viewTime.text = item.formatTime()
         holder.viewTitle.text = item.title
         holder.viewText.text = item.body
+        //format if url
+        if (YoctuUtils.startWithHTTPORHTTPS(item.body))
+            holder.viewText.setTextColor(ContextCompat.getColor(mContext,R.color.colorURL))
+        else
+            holder.viewText.setTextColor(ContextCompat.getColor(mContext,R.color.colorBlack))
+
+        holder.viewText.setOnClickListener { _ ->
+            if (YoctuUtils.startWithHTTPORHTTPS(item.body))
+                mContext.startActivity(WebViewActivity.newIntent(mContext,item.body))
+        }
     }
 
     class NotificationViewHolder (view : View): RecyclerView.ViewHolder(view) {
