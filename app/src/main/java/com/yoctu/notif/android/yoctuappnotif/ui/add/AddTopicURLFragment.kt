@@ -67,7 +67,7 @@ class AddTopicURLFragment:
     private fun checkTopicURL(activity: Activity) {
         addPresenter?.let { presenter ->
             currentTopicURL = presenter.getTopicURL()
-            if (currentTopicURL == null) {
+            /*if (currentTopicURL == null) {
                 add_topic_url_linear_layout_horizontal?.let { container ->
                     container.visibility = View.GONE
                 }
@@ -79,6 +79,13 @@ class AddTopicURLFragment:
                 }
                 add_topic_url_button?.let { button -> button.text = activity?.let { it.resources.getString(R.string.add_topic_url_current_url_replace_url_btn) } }
             }
+            */
+            if (currentTopicURL == null)
+                add_topic_url_fragment_current_url?.let { v -> v.text = YoctuUtils.DEFAULT_TOPIC_URL_BASIC }
+            else
+                add_topic_url_fragment_current_url?.let { v -> v.text = currentTopicURL }
+
+            add_topic_url_button?.let { button -> button.text = activity?.let { it.resources.getString(R.string.add_topic_url_current_url_replace_url_btn) } }
         }
     }
 
