@@ -30,6 +30,7 @@ class ManagerSharedPreferences(context: Context) {
     private val KEY_EMAIL = "key_saved_email"
     private val KEY_WANT_CHANGE_TOPPICS = "key_change_toppics"
     private val KEY_CURRENT_TOPIC_URL = "key_topic_url"
+    private val KEY_API_KEY = "api_key"
 
     /**
      * Write user in shared preferences
@@ -202,4 +203,31 @@ class ManagerSharedPreferences(context: Context) {
         editor.remove(KEY_CURRENT_TOPIC_URL).apply()
     }
 
+    /**
+     * save the API KEY in Shared preferences
+     * @param apiKey
+     */
+    fun saveApiKey(apiKey: String) {
+        var editor = preferencesApplication.edit()
+        editor.putString(KEY_API_KEY,apiKey)
+        editor.commit()
+    }
+
+    /**
+     * @return the API KEY
+     */
+    fun getApiKey(): String? {
+        if (preferencesApplication.contains(KEY_API_KEY)) {
+            return preferencesApplication.getString(KEY_API_KEY,"")
+        }
+        return null
+    }
+
+    /**
+     * delete the API KEY
+     */
+    fun deleteApiKey() {
+        var editor = preferencesApplication.edit()
+        editor.remove(KEY_API_KEY).apply()
+    }
 }
