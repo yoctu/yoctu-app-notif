@@ -1,17 +1,15 @@
 package com.yoctu.notif.android.yoctuappnotif.ui.topic.asynctask
 
 import android.os.AsyncTask
-import android.os.ProxyFileDescriptorCallback
 import android.util.Log
 import com.yoctu.notif.android.yoctuappnotif.callback.CallbackChannelsResponse
 import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
 import com.yoctu.notif.android.yoctulibrary.mapper.YoctuMapper
 import com.yoctu.notif.android.yoctulibrary.models.ResponseChannels
+import com.yoctu.notif.android.yoctulibrary.models.TopicURL
 import org.json.JSONException
-import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStream
-import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
@@ -26,17 +24,30 @@ class ChannelsAsynctaskHTTP(val callback: CallbackChannelsResponse): AsyncTask<S
     private var code: Int = 200
     private var error: String? = null
     private var data: ResponseChannels? = null
+    private var topiCURL: TopicURL? = null
+
+    constructor(callback: CallbackChannelsResponse, obj: TopicURL): this(callback) {
+        this.topiCURL = obj
+        Log.d(YoctuUtils.TAG_DEBUG," obj is $obj")
+    }
 
     override fun doInBackground(vararg params: String?): String {
         var httpURLConnection: HttpURLConnection? = null
+        val currentURL = topiCURL?.url ?: params[0]
         try {
-            Log.d(YoctuUtils.TAG_DEBUG,params[0])
-            val myURL = URL(params.get(0))
+            Log.d(YoctuUtils.TAG_DEBUG,params[0].plus(" - ").plus(currentURL))
+            val myURL = URL(currentURL)
             httpURLConnection = myURL.openConnection() as HttpURLConnection
 
             httpURLConnection.requestMethod = "GET"
             httpURLConnection.setRequestProperty("Content-Type", "application/json")
             httpURLConnection.doInput = true
+            topiCURL?.let { tu ->
+                tu.apiKey?.let { key ->
+                    if (!key.isEmpty())
+                        httpURLConnection.setRequestProperty("Authorization",key)
+                }
+            }
 
             code = httpURLConnection.responseCode
             var inputStream: InputStream? = null

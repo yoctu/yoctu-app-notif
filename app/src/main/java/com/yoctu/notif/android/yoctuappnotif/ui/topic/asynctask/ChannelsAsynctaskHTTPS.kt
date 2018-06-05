@@ -6,10 +6,10 @@ import com.yoctu.notif.android.yoctuappnotif.callback.CallbackChannelsResponse
 import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
 import com.yoctu.notif.android.yoctulibrary.mapper.YoctuMapper
 import com.yoctu.notif.android.yoctulibrary.models.ResponseChannels
+import com.yoctu.notif.android.yoctulibrary.models.TopicURL
 import org.json.JSONException
 import java.io.BufferedReader
 import java.io.InputStream
-import java.net.HttpURLConnection
 import java.net.HttpURLConnection.HTTP_NOT_FOUND
 import java.net.HttpURLConnection.HTTP_OK
 import java.net.MalformedURLException
@@ -25,16 +25,29 @@ class ChannelsAsynctaskHTTPS(val callback: CallbackChannelsResponse): AsyncTask<
     private var code: Int = 200
     private var error: String? = null
     private var data: ResponseChannels? = null
+    private var topiCURL: TopicURL? = null
+
+    constructor(callback: CallbackChannelsResponse, obj: TopicURL): this(callback) {
+        this.topiCURL = obj
+    }
 
     override fun doInBackground(vararg params: String?): String {
         var httpsURLConnection: HttpsURLConnection? = null
+        val currentURL = topiCURL?.url ?: params[0]
         try {
             val myURL = URL(params.get(0))
-            Log.d(YoctuUtils.TAG_DEBUG,params[0])
+            Log.d(YoctuUtils.TAG_DEBUG,"${params[0]}")
             httpsURLConnection = myURL.openConnection() as HttpsURLConnection
 
             httpsURLConnection.requestMethod = "GET"
+            httpsURLConnection.setRequestProperty("Content-Type", "application/json")
             httpsURLConnection.doInput = true
+            topiCURL?.let { tu ->
+                tu.apiKey?.let { key ->
+                    if (!key.isEmpty())
+                        httpsURLConnection.setRequestProperty("Authorization",key)
+                }
+            }
 
             code = httpsURLConnection.responseCode
             var inputStream: InputStream? = null
