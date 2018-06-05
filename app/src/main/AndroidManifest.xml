@@ -44,6 +44,11 @@
             android:theme="@style/AppNoActionBar"
             android:launchMode="singleInstance"/>
 
+        <activity android:name=".ui.webview.WebViewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppNoActionBar"
+            android:launchMode="singleInstance"/>
+
         <!-- Firebase -->
         <service android:name=".fcm.MyFirebaseMessagingService">
             <intent-filter>
