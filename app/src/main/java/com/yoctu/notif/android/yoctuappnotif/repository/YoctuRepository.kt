@@ -109,4 +109,10 @@ class YoctuRepository(context: Context) : Repository {
     }
 
     override fun getTopicURL() = localManager.getTopicURL()
+
+    override fun saveApiKey(apiKey: String) {
+        localManager.saveApiKey(apiKey)
+    }
+
+    override fun getApiKey() = localManager.getApiKey()
 }
