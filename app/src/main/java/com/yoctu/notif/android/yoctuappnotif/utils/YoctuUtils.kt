@@ -183,6 +183,13 @@ object YoctuUtils {
     }
 
     /**
+     * Indicates if it's an URL
+     * @param url
+     * @return Boolean
+     */
+    fun startWithHTTPORHTTPS(url: String) = url.startsWith(TYPE_HTTP) or(url.startsWith(TYPE_HTTPS))
+
+    /**
      * Indicates if URL has a good format
      * Check if begins by http or https and contains the second part
      *
@@ -205,10 +212,12 @@ object YoctuUtils {
      */
     fun addSecondPartURL(base: String): String {
         var newURL = base
-        if (base.endsWith("/"))
-            newURL = newURL.plus(SECOND_PART)
-        else
-            newURL = newURL.plus(SECOND_PART_WITH_SEP)
+        if (!base.endsWith(SECOND_PART_WITH_SEP)) {
+            if (base.endsWith("/"))
+                newURL = newURL.plus(SECOND_PART)
+            else
+                newURL = newURL.plus(SECOND_PART_WITH_SEP)
+        }
         return newURL
     }
 
