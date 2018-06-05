@@ -11,8 +11,9 @@ interface AddTopicURLContract {
         fun showErrorMessage(message: String)
     }
     interface Presenter: BasePresenter<View> {
-        fun saveTopicURL(url: String)
+        fun saveTopicURL(url: String, apiKey: String?)
         fun goToNotifications()
         fun getTopicURL(): String?
+        fun getApiKey(): String?
     }
 }
