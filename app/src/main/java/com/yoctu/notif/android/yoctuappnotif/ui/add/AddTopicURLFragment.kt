@@ -80,6 +80,7 @@ class AddTopicURLFragment:
                 add_topic_url_button?.let { button -> button.text = activity?.let { it.resources.getString(R.string.add_topic_url_current_url_replace_url_btn) } }
             }
             */
+            presenter.getApiKey()?.let { key -> add_topic_url_fragment_api_key.setText(key) }
             if (currentTopicURL == null)
                 add_topic_url_fragment_current_url?.let { v -> v.text = YoctuUtils.DEFAULT_TOPIC_URL_BASIC }
             else
@@ -122,7 +123,7 @@ class AddTopicURLFragment:
                     add_topic_url_fragment_edit_text?.let { url ->
                         if (!url.toString().isEmpty()) {
                             add_topic_url_fragment_edit_text?.let { edit -> KeyboardUtils.hidesKeyboard(edit) }
-                            presenter.saveTopicURL(url.text.toString())
+                            presenter.saveTopicURL(url.text.toString(), add_topic_url_fragment_api_key?.text.toString())
                             url.setText("")
                         } else {
                             activity?.let { act ->
