@@ -53,6 +53,9 @@ object YoctuUtils {
     val SECOND_PART_WITH_SEP = "/api/channels"
     val SECOND_PART = "api/channels"
 
+    //url demo
+    val DEFAULT_TOPIC_URL_BASIC = "https://notification.demo.yoctu.com"
+
     /**
      * @param supportManger
      * @param containerView
