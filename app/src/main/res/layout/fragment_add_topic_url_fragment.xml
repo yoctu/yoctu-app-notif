@@ -24,6 +24,7 @@
         android:layout_marginRight="@dimen/dimen_5"
         android:orientation="vertical"
         android:gravity="center">
+        <!-- actual -->
         <LinearLayout
             android:id="@+id/add_topic_url_linear_layout_horizontal"
             android:layout_width="match_parent"
@@ -42,6 +43,28 @@
                 android:gravity="center"/>
         </LinearLayout>
 
+        <!-- api key -->
+        <LinearLayout
+            android:id="@+id/add_topic_url_linear_layout_horizontal_api_key"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5"
+            android:orientation="vertical">
+            <TextView
+                android:textColor="@color/colorBlack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/add_topic_url_api_key_text"/>
+            <EditText
+                android:id="@+id/add_topic_url_fragment_api_key"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:hint="@string/add_topic_url_api_key_hint" />
+        </LinearLayout>
+
+        <!-- NEW -->
         <LinearLayout
             android:id="@+id/add_topic_url_fragment_linear_vertical"
             android:layout_width="match_parent"
