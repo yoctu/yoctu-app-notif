@@ -1,9 +1,17 @@
 package com.yoctu.notif.android.yoctuappnotif
 
 import android.app.Application
+import android.app.job.JobInfo
+import android.app.job.JobScheduler
+import android.content.ComponentName
+import android.content.Context
+import android.content.pm.PackageManager
+import android.os.PersistableBundle
 import com.github.salomonbrys.kodein.Kodein
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.yoctu.notif.android.yoctuappnotif.dependencies.YoctuModule
+import com.yoctu.notif.android.yoctuappnotif.fcm.receiver.FirebaseBackgroundService
+import com.yoctu.notif.android.yoctuappnotif.schedulers.FCMBackgroundJobService
 import com.yoctu.notif.android.yoctulibrary.BuildConfig
 import com.yoctu.notif.android.yoctulibrary.LibraryUtils
 import com.yoctu.notif.android.yoctulibrary.repository.interceptor.YoctuInterceptor
@@ -28,6 +36,7 @@ class YoctuApplication : Application() {
         super.onCreate()
         initialiseRepository()
         LibraryUtils.configureRealm(applicationContext)
+        launchJobSCheduler()
     }
 
     /**
@@ -55,4 +64,23 @@ class YoctuApplication : Application() {
             .addInterceptor(YoctuInterceptor())
             .build()
 
+    /**
+     * Launch services
+     * check if Android version is 23 to set Jobscheduler
+     * else enable broadcast receiver
+     */
+    private fun launchJobSCheduler() {
+        val component = ComponentName(this, FirebaseBackgroundService::class.java)
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            //disable
+            applicationContext.packageManager.setComponentEnabledSetting(component, PackageManager.COMPONENT_ENABLED_STATE_DISABLED , PackageManager.DONT_KILL_APP)
+            val serviceComponentName = ComponentName(applicationContext, FCMBackgroundJobService::class.java)
+            var builder : JobInfo.Builder = JobInfo.Builder(0,serviceComponentName)
+            builder.setMinimumLatency(200)
+            builder.setOverrideDeadline(500)
+            val jobScheduler : JobScheduler = applicationContext.getSystemService(JobScheduler::class.java)
+            jobScheduler.schedule(builder.build())
+        } else //enable
+            applicationContext.packageManager.setComponentEnabledSetting(component, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP)
+    }
 }
