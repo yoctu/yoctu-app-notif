@@ -9,6 +9,7 @@ import android.content.IntentFilter
 import android.util.Log
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.with
+import com.yoctu.notif.android.yoctuappnotif.GlobalPresenter
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
 import com.yoctu.notif.android.yoctuappnotif.fcm.MyFirebaseMessagingService
 import com.yoctu.notif.android.yoctuappnotif.repository.YoctuRepository
@@ -29,7 +30,7 @@ class FCMBackgroundJobService:
     /**
      * Broadcast receiver to get intent
      */
-    private lateinit var fcmReceiver: BroadcastReceiver
+    private var fcmReceiver: BroadcastReceiver? = null
 
     /**
      * The job starts
@@ -101,7 +102,7 @@ class FCMBackgroundJobService:
 
     override fun onDestroy() {
         super.onDestroy()
-        unregisterReceiver(fcmReceiver)
+        fcmReceiver?.let { receiver -> unregisterReceiver(receiver) }
     }
 
 }

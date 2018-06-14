@@ -6,8 +6,10 @@ import android.app.job.JobScheduler
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Bundle
 import android.os.PersistableBundle
 import com.github.salomonbrys.kodein.Kodein
+import com.github.salomonbrys.kodein.instance
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.yoctu.notif.android.yoctuappnotif.dependencies.YoctuModule
 import com.yoctu.notif.android.yoctuappnotif.fcm.receiver.FirebaseBackgroundService
@@ -70,17 +72,17 @@ class YoctuApplication : Application() {
      * else enable broadcast receiver
      */
     private fun launchJobSCheduler() {
+        val presenter = kodein.instance() as GlobalPresenterContract.Presenter
+        presenter.setBroadcastReceiver(false)
         val component = ComponentName(this, FirebaseBackgroundService::class.java)
+        applicationContext.packageManager.setComponentEnabledSetting(component, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP)
         if (android.os.Build.VERSION.SDK_INT >= 23) {
-            //disable
-            applicationContext.packageManager.setComponentEnabledSetting(component, PackageManager.COMPONENT_ENABLED_STATE_DISABLED , PackageManager.DONT_KILL_APP)
+            presenter.setJobSCheduler(true)
             val serviceComponentName = ComponentName(applicationContext, FCMBackgroundJobService::class.java)
             var builder : JobInfo.Builder = JobInfo.Builder(0,serviceComponentName)
-            builder.setMinimumLatency(200)
-            builder.setOverrideDeadline(500)
+            builder.setMinimumLatency(100)
             val jobScheduler : JobScheduler = applicationContext.getSystemService(JobScheduler::class.java)
             jobScheduler.schedule(builder.build())
-        } else //enable
-            applicationContext.packageManager.setComponentEnabledSetting(component, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP)
+        }
     }
 }

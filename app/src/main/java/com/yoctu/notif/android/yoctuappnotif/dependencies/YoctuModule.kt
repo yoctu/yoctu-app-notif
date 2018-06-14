@@ -5,6 +5,8 @@ import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.multiton
 import com.github.salomonbrys.kodein.singleton
+import com.yoctu.notif.android.yoctuappnotif.GlobalPresenter
+import com.yoctu.notif.android.yoctuappnotif.GlobalPresenterContract
 import com.yoctu.notif.android.yoctuappnotif.managers.ManageGoogleSignin
 import com.yoctu.notif.android.yoctuappnotif.repository.YoctuRepository
 import com.yoctu.notif.android.yoctuappnotif.ui.add.AddTopicURLContract
@@ -56,5 +58,8 @@ object YoctuModule {
 
         //database
         bind<LocalDB>() with  multiton { context: Context -> LocalDB(context) }
+
+        //global state
+        bind<GlobalPresenterContract.Presenter>() with singleton { GlobalPresenter() }
     }
 }
