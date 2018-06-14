@@ -60,6 +60,17 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
+        <!-- fcm for state background and killed -->
+        <receiver android:name=".fcm.receiver.FirebaseBackgroundService"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".schedulers.FCMBackgroundJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
         <!-- for Android 8 or higher-->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
