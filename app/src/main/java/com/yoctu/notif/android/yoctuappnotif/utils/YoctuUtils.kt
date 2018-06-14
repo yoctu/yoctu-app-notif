@@ -1,9 +1,11 @@
 package com.yoctu.notif.android.yoctuappnotif.utils
 
 import android.accounts.AccountManager
+import android.app.ActivityManager
 import android.app.Dialog
 import android.content.Context
 import android.net.ConnectivityManager
+import android.os.AsyncTask
 import android.os.Build
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
@@ -219,6 +221,37 @@ object YoctuUtils {
                 newURL = newURL.plus(SECOND_PART_WITH_SEP)
         }
         return newURL
+    }
+
+    /**
+     * Check if the app is in Foreground
+     */
+    class ForegroundCheck: AsyncTask<Context, Void, Boolean>() {
+
+        override fun doInBackground(vararg params: Context?): Boolean {
+            if (params[0] == null)
+                return false
+            return appIsForeground(params[0]!!.applicationContext)
+        }
+
+        /**
+         * Loop on current process to check if the application is in FOREGROUND
+         * @param context
+         * @return Boolean
+         */
+        fun appIsForeground(context: Context): Boolean {
+            val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+            val appProcess = activityManager.runningAppProcesses
+            appProcess?.let { app ->
+                val packageName = context.packageName
+                app.forEach { runningAppProcessInfo: ActivityManager.RunningAppProcessInfo? ->
+                    if ( runningAppProcessInfo?.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND
+                    && runningAppProcessInfo?.processName.equals(packageName))
+                        return true
+                }
+            }
+            return  false
+        }
     }
 
 }
