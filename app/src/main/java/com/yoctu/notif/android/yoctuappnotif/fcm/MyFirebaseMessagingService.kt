@@ -1,6 +1,7 @@
 package com.yoctu.notif.android.yoctuappnotif.fcm
 
 import android.app.Notification
+import android.content.Intent
 import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -15,11 +16,13 @@ import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
 
 class MyFirebaseMessagingService : FirebaseMessagingService(){
 
-
+    companion object {
+        val KEY_TITLE = "title"
+        val KEY_MESSAGE = "body"
+        val KEY_TOPIC = "topic"
+    }
     private val TAG = "Firebase"
-    private val KEY_TITLE = "title"
-    private val KEY_MESSAGE = "body"
-    private val KEY_TOPIC = "topic"
+
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         super.onMessageReceived(remoteMessage)
@@ -46,4 +49,5 @@ class MyFirebaseMessagingService : FirebaseMessagingService(){
         }
         BroadcastUtils.sendMessage(applicationContext,YoctuUtils.createJsonFromObject(noti))
     }
+
 }
