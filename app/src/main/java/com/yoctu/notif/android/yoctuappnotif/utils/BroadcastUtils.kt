@@ -21,7 +21,7 @@ object BroadcastUtils {
     var callbackReloadNotification: CallbackReloadNotification? = null
 
     /**
-     * Local broad cats for FCM
+     * Local broad cast for FCM
      * send token to login view
      * send message to notification view
      */
@@ -46,7 +46,7 @@ object BroadcastUtils {
 
     /**
      * Called when app is in background and receives a notification
-     * and we save the notifications in database, it's necessary to relaod the list of notification
+     * and we save the notifications in database, it's necessary to reload the list of notification
      *
      * send to notification fragment
      */
