@@ -26,6 +26,8 @@ class LoginPresenter(context: Context) :
     init {
         mContext = context
     }
+    //indicates if we have to reload notifications
+    private var haveToReloadNotifications = false
 
     private var mView : LoginContract.View? = null
 
@@ -55,6 +57,10 @@ class LoginPresenter(context: Context) :
         repository.saveNotification(notification,this)
     }
 
+    override fun haveToReloadNotifications(value: Boolean) {
+        this.haveToReloadNotifications = value
+    }
+
     override fun takeView(view: LoginContract.View) {
         mView = view
     }
@@ -70,9 +76,14 @@ class LoginPresenter(context: Context) :
     }
 
     override fun onNext(response: Any) {
+        Log.d(YoctuUtils.TAG_DEBUG," --- ".plus(response).plus(" --- "))
+        if (response is String && haveToReloadNotifications) {
+            haveToReloadNotifications = false
+            Log.d(YoctuUtils.TAG_DEBUG," ---  have to reload !!!! ")
+            BroadcastUtils.reloadNotification(mContext)
+        }
         if (response is ResponseDeviceId)
             Log.d(YoctuUtils.TAG_DEBUG,"save device id ".plus(response.status))
-
     }
 
     override fun onComplete() {}

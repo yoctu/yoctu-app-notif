@@ -186,6 +186,7 @@ class NotificationFragment:
     override fun populateRecyclerView() {
         notificationPresenter?.let {
             val list = notificationPresenter!!.getMessages()
+            Log.d(YoctuUtils.TAG_DEBUG,"set recycler view ")
             if(list.size > 0) {
                 //notification_fragment_container_img?.let { notification_fragment_container_img.visibility = View.GONE }
                 notification_fragment_empty_list?.let { notification_fragment_empty_list.visibility = View.GONE }
@@ -200,6 +201,7 @@ class NotificationFragment:
     }
 
     override fun reload() {
+        Log.d(YoctuUtils.TAG_DEBUG," -- reload data -- ")
         populateRecyclerView()
     }
 

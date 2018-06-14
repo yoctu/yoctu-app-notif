@@ -1,15 +1,20 @@
 package com.yoctu.notif.android.yoctuappnotif.ui.login
 
+import android.app.job.JobInfo
+import android.app.job.JobScheduler
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.with
 import com.yoctu.notif.android.yoctuappnotif.R
 import com.yoctu.notif.android.yoctuappnotif.YoctuApplication
 import com.yoctu.notif.android.yoctuappnotif.callback.CallbackNavBack
+import com.yoctu.notif.android.yoctuappnotif.fcm.receiver.FirebaseBackgroundService
+import com.yoctu.notif.android.yoctuappnotif.schedulers.FCMBackgroundJobService
 import com.yoctu.notif.android.yoctuappnotif.ui.notification.NotificationActivity
 import com.yoctu.notif.android.yoctuappnotif.ui.topic.TopicActivity
 import com.yoctu.notif.android.yoctuappnotif.utils.YoctuUtils
@@ -75,14 +80,16 @@ class LoginActivity :
 
         loginPresenter = YoctuApplication.kodein.with(this).instance()
 
-
         //notification when app is in background
         if (intent != null && intent.hasExtra(KEY_DATA_TITLE) && intent.hasExtra(KEY_DATA_BODY)) {
             loginPresenter?.let {
                 var n = Notification(intent.getStringExtra(KEY_DATA_TITLE),intent.getStringExtra(KEY_DATA_BODY))
                 if (intent.hasExtra(KEY_DATA_TOPIC))
                     n.topic = intent.getStringExtra(KEY_DATA_TOPIC)
-                loginPresenter!!.saveMessage(n)
+                loginPresenter?.let { presenter ->
+                    presenter.haveToReloadNotifications(true)
+                    presenter.saveMessage(n)
+                }
             }
         }
 

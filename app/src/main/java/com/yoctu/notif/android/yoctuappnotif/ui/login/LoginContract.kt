@@ -25,5 +25,6 @@ interface LoginContract {
         fun changeToppics(): Boolean
         fun setChangeToppics(newValue: Boolean)
         fun saveMessage(notification: Notification)
+        fun haveToReloadNotifications(value: Boolean)
     }
 }

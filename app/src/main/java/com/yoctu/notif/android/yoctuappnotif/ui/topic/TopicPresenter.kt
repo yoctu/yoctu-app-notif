@@ -33,7 +33,6 @@ class TopicPresenter(context: Context):
     init {
         mContext = context
     }
-    //private var managerSharedPreferences: ManagerSharedPreferences = YoctuApplication.kodein.with(mContext).instance()
     private var repository : YoctuRepository = YoctuApplication.kodein.with(mContext).instance()
 
     override fun takeView(view: TopicContract.View) {
@@ -46,9 +45,9 @@ class TopicPresenter(context: Context):
         var asynctask: AsyncTask<String,Void,String>? = null
         url?.let { u ->
             if (u.startsWith(YoctuUtils.TYPE_HTTPS))
-                asynctask = ChannelsAsynctaskHTTPS(this, TopicURL(apiKey,u))//asynctask = ChannelsAsynctaskHTTPS(this)
+                asynctask = ChannelsAsynctaskHTTPS(this, TopicURL(apiKey,u))
             else
-                asynctask = ChannelsAsynctaskHTTP(this, TopicURL(apiKey,u)) //asynctask = ChannelsAsynctaskHTTP(this)
+                asynctask = ChannelsAsynctaskHTTP(this, TopicURL(apiKey,u))
 
             asynctask?.execute(u)
         }
